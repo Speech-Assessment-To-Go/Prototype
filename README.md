@@ -1,4 +1,4 @@
---How to run
+# How to run
 Install npm stable
 Install Yarn 	(windows) https://classic.yarnpkg.com/en/docs/install/#windows-stable
 
