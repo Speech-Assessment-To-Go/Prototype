@@ -1,3 +1,4 @@
+//------------ * IMPORT LIBS * ------------------------
 import React from 'react';
 
 import { 
@@ -13,11 +14,12 @@ import {
 } from 'react-native';
 
 
-  
+  //------------ * FUNCTIONS/VAR * ------------------------  
   const ScreenContainer = ({ children }) => (
     <View style={styles.container}>{children}</View>
   );
   
+  //------------ * RENDER * ------------------------
   export const TemplateScreen = ({ navigation }) => (
     <ScreenContainer>
       <Text>Template Screen</Text>
