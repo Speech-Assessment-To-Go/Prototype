@@ -31,11 +31,9 @@ export default function App() {
   return (
 
     <NavigationContainer>
-      <Nav.Navigator initialRouteName="SchoolScreen">
+      <Nav.Navigator initialRouteName="TemplateScreen">
 
-        <Nav.Screen name="SchoolScreen" component = {SchoolScreen} />
         <Nav.Screen name="TemplateScreen" component = {TemplateScreen} />
-
 
       </Nav.Navigator>
     </NavigationContainer>
