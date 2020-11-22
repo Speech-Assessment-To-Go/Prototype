@@ -21,7 +21,6 @@ let schools = [];
 for (var i = 0; i < 100; i++)
   schools[i] = "School " + (i+1);
 
-import { SchoolScreen } from './screens/SchoolScreen';
 import { TemplateScreen } from './screens/TemplateScreen';
 
 const Nav = createStackNavigator();
