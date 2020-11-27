@@ -30,7 +30,7 @@ import { TemplateScreen } from './screens/TemplateScreen';
 const Nav = createStackNavigator();
 
 //Force Screen Orientation to Landscape
-ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+// ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
 
 export default function App() {
