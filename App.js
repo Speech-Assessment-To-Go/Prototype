@@ -30,21 +30,38 @@ import { TemplateScreen } from './screens/TemplateScreen';
 const Nav = createStackNavigator();
 
 //Force Screen Orientation to Landscape
-// ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
 
 export default function App() {
   return (
 
     <NavigationContainer>
-      <Nav.Navigator initialRouteName="SchoolScreen">
+      <Nav.Navigator initialRouteName="SchoolScreen" >
 
-        <Nav.Screen name="SchoolScreen" component = {SchoolScreen} />
-        <Nav.Screen name="TemplateScreen" component = {TemplateScreen} />
+        <Nav.Screen name="SchoolScreen" component = {SchoolScreen} options= {optionStyle}/>
+        <Nav.Screen name="TemplateScreen" component = {TemplateScreen} options= {optionStyle}/>
 
       </Nav.Navigator>
     </NavigationContainer>
   );
+}
+
+const optionStyle = {
+
+  title:"Speech Assessment To-Go", 
+
+  headerStyle: 
+  {
+    backgroundColor: '#00bcd4',
+  },
+
+  headerTitleStyle: 
+  {
+    fontWeight: 'bold',
+    color: 'white',
+    marginLeft: 25
+  }
 }
 
 const styles = StyleSheet.create({
