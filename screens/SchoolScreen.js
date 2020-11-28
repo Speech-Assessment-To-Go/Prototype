@@ -32,9 +32,9 @@ export class SchoolScreen extends Component
     schools:['Adams', 'Allen', 'Allison', 'Alvin', 'Anderson',
      'Beech', 'Benton', 'Black', 'Bostic', 'Brooks', 'Byrant',
       'Buckner', 'Caldwell', 'Cessna', 'Chester', 'Chisholm', 'Christa', 'Clark',
-       'Cleaveland', 'Cloud', 'Coleman', 'College Hill', 'Colvin', 'Crtis', 'Dodge'],
+       'Cleaveland', 'Cloud', 'Coleman', 'College Hill', 'Colvin', 'Curtis', 'Dodge'],
 
-      students:['Student1', 'Student2', 'Student3', 'Student4', 'Student5', 'Student6']
+      students:['Adrin Anna', 'Allas Kong', 'Elyot Knives', 'Luigi Mario', 'Ramen Henshnop', 'Vinny Mayor', 'Punny Name', "Mark Ritaherta"]
 
 
   }
@@ -105,6 +105,9 @@ export class SchoolScreen extends Component
 
 
         {/* Right */}
+
+        <View style={styles.column}> 
+
         <ScrollView style={styles.studentsPanel}>
 
         {
@@ -122,7 +125,7 @@ export class SchoolScreen extends Component
 
                 <View style={globalStyles.flexCol}>              
                   <Text style={styles.h2}>{student}</Text>
-                  <Text>USD 259</Text>
+                  <Text>5th Grader</Text>
                 </View>
 
               </View>
@@ -135,6 +138,22 @@ export class SchoolScreen extends Component
 
         </ScrollView>
 
+        <View style={globalStyles.flexRow}>
+            <TouchableOpacity
+              style={styles.bottomButton}
+              onPress={() => alert("Bottom!")}>
+              <Text style={styles.buttonText}>Add Student</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.bottomButton, globalStyles.danger]}
+              onPress={() => alert("Bottom!")}>
+              <Text style={styles.buttonText}>Remove Student</Text>
+            </TouchableOpacity>
+
+          </View>   
+
+        </View>
 
         </View>
 
