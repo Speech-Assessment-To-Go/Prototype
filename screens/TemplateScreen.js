@@ -37,6 +37,7 @@ export class TemplateScreen extends Component
       return(
         <View style={styles.container}>
           <Text>Template Screen</Text>
+          
           <Button
             title="Go Back"
             onPress={() => navigation.goBack()} 
