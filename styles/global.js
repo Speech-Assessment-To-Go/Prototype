@@ -53,5 +53,7 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: "#ff6666"
       }
 
+         
+
 
 });

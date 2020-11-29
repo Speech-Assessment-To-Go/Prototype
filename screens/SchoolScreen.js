@@ -14,12 +14,19 @@ import { globalStyles } from '../styles/global';
 import { Button, Avatar, Divider  } from 'react-native-paper';
 import { TemplateScreen } from './TemplateScreen';
 
+import { RoundedText } from '../components/RoundedText';
+
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
 {
   alert(msg);
 }
 
+//FOR ROUNDED TEXT BUTTON
+const size = 43;
+const fontSize = 18;
+const borderWidth = 0;
+const title = 'A';
 
 
 var schools = []
@@ -67,7 +74,16 @@ export class SchoolScreen extends Component
 
               <View style={globalStyles.flexRow}>
 
-              <Avatar.Icon size={42} icon="folder" style={styles.icon} />
+              {/* <Avatar.Icon size={42} icon="folder" style={styles.icon} /> */}
+              
+              <RoundedText
+                    title = {school[0]}
+                    color = "black"
+                    backgroundColor = "#cccccc"
+                    fontSize={18}
+                    size={43}
+                />
+
 
                 <View style={globalStyles.flexCol}>              
                   <Text style={styles.h2}>{school} Elementary School</Text>
@@ -121,7 +137,13 @@ export class SchoolScreen extends Component
 
               <View style={globalStyles.flexRow}>
 
-              <Avatar.Icon size={42} icon="folder" style={styles.icon} />
+              <RoundedText
+                    title = {student[0]}
+                    color = "black"
+                    backgroundColor = "#cccccc"
+                    fontSize={18}
+                    size={43}
+                />
 
                 <View style={globalStyles.flexCol}>              
                   <Text style={styles.h2}>{student}</Text>
@@ -231,15 +253,17 @@ const styles = StyleSheet.create({
     flex:1,
     // backgroundColor: "red",
     height: "100%",
-    borderRightColor: 'black',
-    borderRightWidth: 1,
+    borderRightColor: '#00bcd4',
+    borderRightWidth: 3,
 
   },
 
   studentsPanel:{
     flex:2,
     // backgroundColor: "blue",
-    height: "100%"
+    height: "100%",
+    // borderLeftColor: '#00bcd4',
+    // borderLeftWidth: 1,
 
   }
 
