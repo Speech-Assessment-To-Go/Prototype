@@ -1,12 +1,13 @@
 export class Student
 {
-    constructor(name)
+    constructor(firstName, lastName, ethnicity, school, birth, language, grade = 5)
     {
-        this.name = name;
-    }
-
-    print()
-    {
-        console.log('Hello, this is ' + this.name);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.ethnicity = ethnicity;
+        this.school = school;
+        this.birth = birth;
+        this.language = language;
+        this.grade = grade;
     }
 }

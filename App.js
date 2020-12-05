@@ -15,6 +15,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import * as ScreenOrientation from 'expo-screen-orientation';
 
+import { Provider  } from 'react-native-paper';
 
 import { Card, Button, Appbar } from 'react-native-paper';
 
@@ -25,25 +26,34 @@ for (var i = 0; i < 100; i++)
   schools[i] = "School " + (i+1);
 
 import { SchoolScreen } from './screens/SchoolScreen';
+import { StudentScreen } from './screens/StudentScreen';
+import { TopicScreen } from './screens/TopicScreen';
+import { AssessmentScreen } from './screens/AssessmentScreen';
 import { TemplateScreen } from './screens/TemplateScreen';
+import { ResultScreen } from './screens/ResultScreen';
 
 const Nav = createStackNavigator();
 
 //Force Screen Orientation to Landscape
-// ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
 
 export default function App() {
   return (
-
+  // <Provider>
     <NavigationContainer>
       <Nav.Navigator initialRouteName="SchoolScreen" >
 
         <Nav.Screen name="SchoolScreen" component = {SchoolScreen} options= {optionStyle}/>
+        <Nav.Screen name="StudentScreen" component = {StudentScreen} options= {optionStyle}/>
+        <Nav.Screen name="TopicScreen" component = {TopicScreen} options= {optionStyle}/>
+        <Nav.Screen name="AssessmentScreen" component = {AssessmentScreen} options= {optionStyle}/>
         <Nav.Screen name="TemplateScreen" component = {TemplateScreen} options= {optionStyle}/>
+        <Nav.Screen name="ResultScreen" component = {ResultScreen} options= {optionStyle}/>
 
       </Nav.Navigator>
     </NavigationContainer>
+    // </Provider>
   );
 }
 

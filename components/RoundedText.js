@@ -22,7 +22,7 @@ export class RoundedText extends React.Component {
             }}>
                 <Text style = {{
                     textAlign: 'center',
-                    backgroundColor:'none',
+                    backgroundColor: backgroundColor,
                     fontSize:fontSize - 2 * borderWidth,
                     fontWeight: 'bold',
                     lineHeight:fontSize - (Platform.OS === 'ios' ? 2 * borderWidth : borderWidth),
