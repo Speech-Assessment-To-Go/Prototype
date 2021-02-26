@@ -1,4 +1,4 @@
-import { Student } from './Student.js'
+import { Student } from './Student.js';
 
 // var students = [];
 
@@ -14,6 +14,13 @@ export class School
 
     AddStudent(name)
     {
+        if (this.students.length >= MAX)
+        {
+            console.log("Maximum Students reached: " + MAX)
+            return false;
+        }
+
         students.push( new Student(name));
+        return true;
     }
 }

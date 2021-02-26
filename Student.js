@@ -1,6 +1,6 @@
 export class Student
 {
-    constructor(firstName, lastName, ethnicity, school, birth, language, grade = 5)
+    constructor(firstName = 'NULL', lastName = 'NULL', ethnicity = 'NULL', school = 'NULL', birth = 'NULL', language = 'NULL', grade = 5)
     {
         this.firstName = firstName;
         this.lastName = lastName;

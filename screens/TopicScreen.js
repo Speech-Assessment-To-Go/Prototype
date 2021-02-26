@@ -86,7 +86,7 @@ export class TopicScreen extends Component
 
         {
           this.state.topics.map((topic,index) => (
-            <View>
+            <View key={"topic"+index}>
             
             <TouchableOpacity
               style={[styles.mainButton, (index == this.state.selectedTopic)? styles.selectedBG: styles.unselectedBG]}
@@ -127,7 +127,7 @@ export class TopicScreen extends Component
 
         {
           this.state.topics[this.state.selectedTopic].assessments.map( (assessment,index) => (
-            <View>
+            <View key={"assessment"+index}>
 
             
             <TouchableOpacity

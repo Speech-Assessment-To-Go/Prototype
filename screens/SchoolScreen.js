@@ -61,7 +61,7 @@ export class SchoolScreen extends Component
 
   }
 
-  toggleModal(visible) {
+  toggleModalStudent(visible) {
     this.setState({ modalVisible: visible });
     this.clearInputs();
   }
@@ -93,7 +93,7 @@ export class SchoolScreen extends Component
       );
 
     //this.state.studentsObj.push(new Student(text));
-    this.toggleModal(false);
+    this.toggleModalStudent(false);
   }
 
   selectSchool(index){
@@ -136,7 +136,7 @@ export class SchoolScreen extends Component
 
         {
           this.state.schoolsObj.map((school,index) => (
-            <View>
+            <View key={"school"+index}>
             
             <TouchableOpacity
               style={[styles.mainButton, (index == this.state.selectedSchool)? styles.selectedBG: styles.unselectedBG]}
@@ -197,7 +197,7 @@ export class SchoolScreen extends Component
 
         {
           this.state.schoolsObj[this.state.selectedSchool].students.map( (student,index) => (
-            <View>
+            <View key={"student"+index}>
 
             
             <TouchableOpacity
@@ -232,7 +232,7 @@ export class SchoolScreen extends Component
         <View style={globalStyles.flexRow}>
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={() => this.toggleModal(true)}>
+              onPress={() => this.toggleModalStudent(true)}>
               <Text style={styles.buttonText}>Add Student</Text>
             </TouchableOpacity>
 
@@ -283,7 +283,7 @@ export class SchoolScreen extends Component
 
             <TouchableOpacity
               style={[styles.bottomButton, styles.modalButton]}
-              onPress={() => this.toggleModal(false)}>
+              onPress={() => this.toggleModalStudent(false)}>
               <Text style={styles.modalText}>Cancel</Text>
             </TouchableOpacity>
           </View>   
