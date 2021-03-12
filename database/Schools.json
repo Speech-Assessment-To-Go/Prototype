@@ -2,8 +2,22 @@
     {
         "name": "Adams",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -11,8 +25,22 @@
     {
         "name": "Allen",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -20,8 +48,22 @@
     {
         "name": "Allison",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -29,8 +71,22 @@
     {
         "name": "Alvin",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -38,8 +94,22 @@
     {
         "name": "Anderson",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -47,8 +117,22 @@
     {
         "name": "Beech",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -56,8 +140,22 @@
     {
         "name": "Benton",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -65,8 +163,22 @@
     {
         "name": "Black",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -74,8 +186,22 @@
     {
         "name": "Bostic",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -83,8 +209,22 @@
     {
         "name": "Brooks",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -92,8 +232,22 @@
     {
         "name": "Byrant",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -101,8 +255,22 @@
     {
         "name": "Buckner",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -110,8 +278,22 @@
     {
         "name": "Caldwell",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -119,8 +301,22 @@
     {
         "name": "Cessna",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -128,8 +324,22 @@
     {
         "name": "Chester",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"
@@ -137,8 +347,22 @@
     {
         "name": "Chisholm",
         "students": [
-            "John Smith",
-            "Bob Jones"
+            {
+                "firstName": "John Smith",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            },
+            {
+                "firstName": "Bob Jones",
+                "ethnicity": "NULL",
+                "school": "NULL",
+                "birth": "NULL",
+                "language": "NULL",
+                "grade": 5
+            }
         ],
         "id": 259,
         "type": " Elementary School"

@@ -62,22 +62,22 @@ rl.question('Select a school:  ', (answer) => {
 //*********** STUDENT SCREEN ***************
 
 
-// //Lists Students
-// for (var i = 0; i < schools[schoolSelected].students.length; i++)
-// {
-//     var student = schools[schoolSelected].students[i];
-//     console.log(i + '\t ' + student);
-// }
+//Lists Students
+for (var i = 0; i < schools[schoolSelected].students.length; i++)
+{
+    var student = schools[schoolSelected].students[i];
+    console.log(i + '\t ' + student);
+}
 
-// //User Input
-// rl.question('Select a Student:  ', (answer) => {
-//     var studentSelected =  parseInt(answer); 
+//User Input
+rl.question('Select a Student:  ', (answer) => {
+    var studentSelected =  parseInt(answer); 
 
-//     var studentName = schools[selection].students[studentSelected];
+    var studentName = schools[selection].students[studentSelected];
 
-//     console.log(`Selected: ${studentName}`);
+    console.log(`Selected: ${studentName}`);
   
-//     rl.close();
-//   });
+    rl.close();
+  });
 
 
