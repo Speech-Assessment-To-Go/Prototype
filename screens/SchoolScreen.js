@@ -18,6 +18,7 @@ import { TemplateScreen } from './TemplateScreen';
 import { RoundedText } from '../components/RoundedText';
 import { School } from '../School'
 import { Student } from '../Student'
+import Database from '../Database.js';
 
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
@@ -38,7 +39,7 @@ export class SchoolScreen extends Component
 
   state = {
 
-      studentsObj:[ new Student('Adrin Anna'), new Student('Allas Kong'), new Student('Elyot Knives'), new Student('Luigi Mario'), new Student('Ramen Henshnop'), new Student('Vinny Mayor'), new Student('Punny Name'), new Student("Mark Ritaherta")],
+      // studentsObj:[ new Student('Adrin Anna'), new Student('Allas Kong'), new Student('Elyot Knives'), new Student('Luigi Mario'), new Student('Ramen Henshnop'), new Student('Vinny Mayor'), new Student('Punny Name'), new Student("Mark Ritaherta")],
 
       schoolsObj:[ new School('Adams'), new School('Allen'), new School('Allison'), new School('Alvin'), new School('Anderson'),
        new School('Beech'), new School('Benton'),new School('Black'), new School('Bostic'),new School('Brooks'), new School('Byrant'),
@@ -60,6 +61,13 @@ export class SchoolScreen extends Component
       selectedSchool:0,
 
   }
+
+  //Initialize
+  // componentWillMount()
+  // {
+  //   var schools = Database.LoadSchools();
+  //   this.setState({schoolsObj : schools});
+  // }
 
   toggleModalStudent(visible) {
     this.setState({ modalVisible: visible });

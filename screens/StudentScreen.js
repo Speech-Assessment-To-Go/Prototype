@@ -104,6 +104,10 @@ export class StudentScreen extends Component
 
           <View style={styles.box}>
             <Text style={[globalStyles.flexAlignCenter]}>No recent assessments</Text>
+
+
+
+
           </View>
 
         </View>
