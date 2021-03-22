@@ -38,6 +38,54 @@ export class StudentScreen extends Component
 
   }
 
+  sendEmail()
+  {
+    var Email = 
+    { 
+      send: function (a) 
+      { 
+          return new Promise(function (n, e) 
+          { a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send"; var t = JSON.stringify(a); Email.ajaxPost("https://smtpjs.com/v3/smtpjs.aspx?", t, function (e) 
+              { 
+                  n(e) 
+              }) 
+          }) 
+      }, ajaxPost: function (e, n, t) 
+      { 
+          var a = Email.createCORSRequest("POST", e); a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () 
+          { 
+              var e = a.responseText; null != t && t(e) 
+          }, a.send(n) 
+      }, ajax: function (e, n) 
+      { 
+          var t = Email.createCORSRequest("GET", e); t.onload = function () 
+          { 
+              var e = t.responseText; null != n && n(e) 
+          }, t.send() 
+      }, createCORSRequest: function (e, n) 
+      { 
+          var t = new XMLHttpRequest; return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof XDomainRequest ? (t = new XDomainRequest).open(e, n) : t = null, t 
+      } 
+};
+    Email.send({
+    Host: "smtp.gmail.com",
+    Username: "stackunderflow2021@gmail.com",
+    Password: "password",
+    To: "example@gmail.com",
+    From: "stackunderflow2021@gmail.com",
+    Subject: "results",
+    Body: "This is the file sent for the speech assessment. Please do not respond to this email.",
+    //use when we have the pdf/attachment
+    // Attachments:[
+    // {
+    //     Name: studentname.pdf,
+    //     Data: studentdata
+    // }]
+  }).then(
+        alert("Email sent successfully")
+    );
+  }
+
 // ------------ * RENDER * ------------------------
   render(){
   const { route, navigation } = this.props;
@@ -119,6 +167,11 @@ export class StudentScreen extends Component
               <Text style={styles.buttonText}>Take Assessment</Text>
             </TouchableOpacity>
 
+            <TouchableOpacity
+              style={[styles.bottomButton]}
+              onPress={() => this.sendEmail()}>
+              <Text style={styles.buttonText}>Email Student Profile</Text>
+            </TouchableOpacity>
 
           </View>   
 
