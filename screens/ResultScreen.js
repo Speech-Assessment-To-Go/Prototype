@@ -84,10 +84,11 @@ export class ResultScreen extends Component
     Email.send({
     Host: "smtp.gmail.com",
     Username: "stackunderflow2021@gmail.com",
+      //will be changed once private
     Password: "password",
     To: "example@gmail.com",
     From: "stackunderflow2021@gmail.com",
-    Subject: "results",
+    Subject: "Results",
     Body: "This is the file sent for the speech assessment. Please do not respond to this email.",
     //use when we have the pdf/attachment
     // Attachments:[
