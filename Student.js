@@ -14,7 +14,9 @@ export class Student
         
     }
     get fullName(){
-        return this.firstName + " " + this.lastName;
+        var name = this.firstName + " " + this.lastName;
+        var lowerString = name.toLowerCase();
+        return lowerString;
     }
 }
 
@@ -29,22 +31,29 @@ var student8 = new Student("Kanye", "West");
 var student9 = new Student("Allen", "Iverson");
 
 var studentArray = [student1, student2, student3, student4, student5, student6, student7, student8, student9];
-
 function studentSearch(str){
 
     var results = [];
     var j = 0;
 
+    str = str.trim();
+
+    if(str == "" || str == 'NULL'){
+        return results;
+    }
+
+    str = str.toLowerCase();
+
     for(var i = 0; i < studentArray.length; i++){
-        if(studentArray[i].fullName.includes(str)){
-            results[j] = studentArray[i].fullName;
+        if(studentArray[i].fullName.includes(str) == true){
+            results[j] = studentArray[i];
             j++;
     }
 }
     return results;
 }
 
-var found = studentSearch("H");
+var found = studentSearch("Iv");
 
 for(var i = 0; i < found.length; i++){
     console.log(found[i]);
