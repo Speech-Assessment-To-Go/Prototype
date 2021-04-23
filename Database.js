@@ -13,13 +13,21 @@ class Database {
 
     LoadSchools()
     {
-        // console.log("TEST PARSE!");
-        // console.log(schoolsDB);
-
         var jsonString = JSON.stringify(schoolsDB);
         var schools = JSON.parse(jsonString);
 
         return schools;
+    }
+
+    LoadStudents(schoolIndex)
+    {
+        var schools = this.LoadSchools();
+        var school = schools[schoolIndex];
+
+        var jsonString = JSON.stringify(school.students);
+        var students = JSON.parse(jsonString);
+
+        return students;
     }
 
     LoadAssessments()

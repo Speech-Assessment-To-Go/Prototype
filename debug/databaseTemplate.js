@@ -1,4 +1,4 @@
-//MUST BE RAN AS "node --experimental-json-modules .\nogui.js" in terminal for this to work!
+//MUST BE RAN AS "node --experimental-json-modules .\databaseTemplate.js" in terminal for this to work!
 
 import Database from '../Database.js';
 

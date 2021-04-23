@@ -1,6 +1,7 @@
 //------------ * IMPORT LIBS * ------------------------
 import React from 'react';
 import { Component } from 'react';
+// var fs = require('fs');
 
 import { 
   Text,
@@ -39,11 +40,14 @@ export class SchoolScreen extends Component
 
   state = {
 
-      // studentsObj:[ new Student('Adrin Anna'), new Student('Allas Kong'), new Student('Elyot Knives'), new Student('Luigi Mario'), new Student('Ramen Henshnop'), new Student('Vinny Mayor'), new Student('Punny Name'), new Student("Mark Ritaherta")],
+      studentsObj:[ new Student('Adrin Anna'), new Student('Allas Kong'), new Student('Elyot Knives'), new Student('Luigi Mario'), new Student('Ramen Henshnop'), new Student('Vinny Mayor'), new Student('Punny Name'), new Student("Mark Ritaherta")],
 
       schoolsObj:[ new School('Adams'), new School('Allen'), new School('Allison'), new School('Alvin'), new School('Anderson'),
        new School('Beech'), new School('Benton'),new School('Black'), new School('Bostic'),new School('Brooks'), new School('Byrant'),
         new School('Buckner'),new School('Caldwell'), new School('Cessna'),new School('Chester'), new School('Chisholm')],
+
+      //schoolsObj: LoadSchools(),
+      //Recreate the class by parsing here!
 
 
       modalVisible:false,
