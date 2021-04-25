@@ -7,14 +7,18 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  TextInput,
+  Modal
 } from 'react-native';
 
 import { globalStyles } from '../styles/global';
-import { Button, Avatar, Chip  } from 'react-native-paper';
+import { Button, Avatar, Chip ,Provider } from 'react-native-paper';
 import { TemplateScreen } from './TemplateScreen';
+import { AssessmentScreen } from './AssessmentScreen';
 
 import { RoundedText } from '../components/RoundedText';
+import {StudentScreen} from './StudentScreen'
 
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
@@ -53,7 +57,69 @@ export class ResultScreen extends Component
     var rounded = Math.round(ratio * 10) / 10; //Rounded to 1 decimal place
     return rounded;
   }
+  
+  state = {
+    modalVisible:true,        
+        //Email MODAL
+        textEAddress:'',
+  }
+  
+  toggleModalEmail(visible) {
+    this.setState({ modalVisible: visible });
+    this.clearInput();
+  }
+  sendEmail()
+  {
+    var Email = 
+    { 
+      send: function (a) 
+      { 
+          return new Promise(function (n, e) 
+          { a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send"; var t = JSON.stringify(a); Email.ajaxPost("https://smtpjs.com/v3/smtpjs.aspx?", t, function (e) 
+              { 
+                  n(e) 
+              }) 
+          }) 
+      }, ajaxPost: function (e, n, t) 
+      { 
+          var a = Email.createCORSRequest("POST", e); a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () 
+          { 
+              var e = a.responseText; null != t && t(e) 
+          }, a.send(n) 
+      }, ajax: function (e, n) 
+      { 
+          var t = Email.createCORSRequest("GET", e); t.onload = function () 
+          { 
+              var e = t.responseText; null != n && n(e) 
+          }, t.send() 
+      }, createCORSRequest: function (e, n) 
+      { 
+          var t = new XMLHttpRequest; return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof XDomainRequest ? (t = new XDomainRequest).open(e, n) : t = null, t 
+      } 
+};
+    Email.send({
+    Host: "smtp.elasticemail.com",
+    Username: "stackunderflow2021@gmail.com",
+    Password: "7637EF12FF54E310A2824C17E3D6F629342D",
+    To: this.state.textEAddress,
+    From: "stackunderflow2021@gmail.com",
+    Subject: "Results",
+    Body: "These are the results of the assessment. Please do not respond to this email.",
+    //use when we have the pdf/attachment
+    // Attachments:[
+    // {
+    //     Name: studentname.pdf,
+    //     Data: studentdata
+    // }]
+  }).then(
+        alert("Email sent successfully")
+    );
+    this.toggleModalEmail(false)
+  }
 
+  clearInput(){
+    this.state.textEAddress = '';
+  }
 
 // ------------ * RENDER * ------------------------
   render(){
@@ -61,6 +127,8 @@ export class ResultScreen extends Component
     const { grading } = route.params;
 
       return(      
+        <Provider>
+
         <View style={styles.container}>
 
  
@@ -101,20 +169,55 @@ export class ResultScreen extends Component
 
             <TouchableOpacity
               style={[styles.bottomButton]}
-              onPress={() => navigation.goBack()}>
+              onPress={() => navigation.push('AssessmentScreen')}>
               <Text style={styles.buttonText}>Review</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+              style={[styles.bottomButton]}
+              onPress={() => this.toggleModalEmail(true)}>
+              <Text style={styles.buttonText}>Email Results</Text>
             </TouchableOpacity>
 
           </View>
 
           </View>
 
+      {/* ********************** | EMAIL MODAL | ********************* */}
+      <Modal animationType="slide"  transparent={true} visible={this.state.modalVisible}  >
 
+        <View style={styles.container}>
+
+          <View style={styles.modalView}>
+
+            <Text style={styles.modalHeader}>Email Assessment Results</Text> 
+            
+            <View style={globalStyles.flexRow}>
+              <TextInput style={[styles.textInput, styles.emailAddress]} label="Email Address" value={this.state.textEAddress} onChangeText={text => this.setState( {textEAddress: text})}placeholder={"Email Address"}/>
+              
+            </View>
+
+
+            <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
+            <TouchableOpacity
+              style={[styles.bottomButton, styles.modalButton]}
+              onPress={() => this.sendEmail(this.state.textEAddress)}>
+              <Text style={styles.modalText}>Submit</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.bottomButton, styles.modalButton]}
+              onPress={() => this.toggleModalEmail(false)}>
+              <Text style={styles.modalText}>Cancel</Text>
+            </TouchableOpacity>
+          </View> 
+          </View>
+        </View>
+      </Modal>
 
 
       </View>
-
-
+      </Provider>
     );
   }
 }
@@ -201,9 +304,76 @@ const styles = StyleSheet.create({
 
   chipIncorrect:{
     backgroundColor: '#ff6f6b',
+  },
+
+  ////// MODAL STUFF 
+  
+  modalView: {
+    margin: 35,
+    backgroundColor: "white",
+    borderRadius: 7,
+    paddingVertical: 15,
+    paddingHorizontal: 55,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    maxWidth: "80%",
+    maxHeight:"80%",
+  },
+  
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  
+  modalHeader: {
+    alignSelf: 'flex-start',
+    marginBottom: 50,
+    marginTop: 35,
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: "left"
+  },
+  
+  textInput:{
+    flex:1,
+    height: 50,
+    marginHorizontal: 10,
+    marginVertical: 20,
+    maxWidth: 350
+  },
+  
+  emailAddress:{
+    maxWidth: 300,
+  },
+  
+  textBox: {
+    marginVertical: 10,
+    borderLeftWidth: 10,
+    borderRightWidth: 10,
+    borderTopWidth: 10,
+    borderBottomWidth: 10,
+    borderColor: '#00bcd4',
+    height: 180,
+    width: '100%',
+    padding: 15
+  },
+  
+  modalButton:{
+    backgroundColor: 'white',
+    marginTop: 35
+  },
+  
+  modalText:{
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: "#00bcd4"
   }
-
-
-
-
-});
+  });
