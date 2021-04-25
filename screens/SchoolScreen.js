@@ -21,6 +21,8 @@ import { School } from '../School'
 import { Student } from '../Student'
 import Database from '../Database.js';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
 {
@@ -33,45 +35,121 @@ const fontSize = 18;
 const borderWidth = 0;
 const title = 'A';
 
+const saveValue = async (key, data) =>{
+  if (data){
+    AsyncStorage.setItem(key, data);
+    alert('Data Saved');
+  }
+  else{
+    alert('Please fill data')
+  }
+}
 
+// const saveSchools = async () =>{
+//   if (true){
+//     await AsyncStorage.setItem('schools', JSON.stringify(this.state.schoolsObj));
+//     alert('Data Saved');
+//   }
+//   else{
+//     alert('Please fill data')
+//   }
+// }
+
+// const getSchools = async () =>{
+//   AsyncStorage.getItem('schools').then(
+//     (value) => {
+//     //setvalue(value)
+//     //this.setState({ schoolsObj: value });
+//     this.state.schoolsObj = value
+//   })
+// }
 
 export class SchoolScreen extends Component
 {
+  // LoadSchoolsandStudents()
+  // {
+  //   let data = [ new School('Adams'), new School('Allen'), new School('Allison'), new School('Alvin'), new School('Anderson'),
+  //   new School('Beech'), new School('Benton'),new School('Black'), new School('Bostic'),new School('Brooks'), new School('Byrant'),
+  //    new School('Buckner'),new School('Caldwell'), new School('Cessna'),new School('Chester'), new School('Chisholm')];
 
-  state = {
+  //    return data;
+  // }
 
-      studentsObj:[ new Student('Adrin Anna'), new Student('Allas Kong'), new Student('Elyot Knives'), new Student('Luigi Mario'), new Student('Ramen Henshnop'), new Student('Vinny Mayor'), new Student('Punny Name'), new Student("Mark Ritaherta")],
+  // constructor(props)
+  // {
+  //   super(props); 
+      constructor(props){
+        super(props);
+      }
 
-      schoolsObj:[ new School('Adams'), new School('Allen'), new School('Allison'), new School('Alvin'), new School('Anderson'),
-       new School('Beech'), new School('Benton'),new School('Black'), new School('Bostic'),new School('Brooks'), new School('Byrant'),
-        new School('Buckner'),new School('Caldwell'), new School('Cessna'),new School('Chester'), new School('Chisholm')],
+      state = {
 
-      //schoolsObj: LoadSchools(),
-      //Recreate the class by parsing here!
+        //studentsObj:[ new Student('Adrin Anna'), new Student('Allas Kong'), new Student('Elyot Knives'), new Student('Luigi Mario'), new Student('Ramen Henshnop'), new Student('Vinny Mayor'), new Student('Punny Name'), new Student("Mark Ritaherta")],
+
+        // schoolsObj:[ new School('Adams'), new School('Allen'), new School('Allison'), new School('Alvin'), new School('Anderson'),
+        //  new School('Beech'), new School('Benton'),new School('Black'), new School('Bostic'),new School('Brooks'), new School('Byrant'),
+        //   new School('Buckner'),new School('Caldwell'), new School('Cessna'),new School('Chester'), new School('Chisholm')],
+
+        schoolsObj:[new School("TEST", 12) ],
+        //Recreate the class by parsing here!
 
 
-      modalVisible:false,
-      modalSchoolVisible:false,
-      menuVisable:true,
-      
-      //Student MODAL
-      textFName:'',
-      textLName:'',
-      textEthnicity:'',
-      textGrade:'',
-      textBirth:'',
-      textLanguage:'',
+        modalVisible:false,
+        modalSchoolVisible:false,
+        menuVisable:true,
+        
+        //Student MODAL
+        textFName:'',
+        textLName:'',
+        textEthnicity:'',
+        textGrade:'',
+        textBirth:'',
+        textLanguage:'',
 
-      selectedSchool:0,
+        selectedSchool:0,
 
-  }
+    }
+  // }
+
+  // saveSchools = async () =>{
+  //   try{
+
+  //   } 
+  //   catch(err){
+  //     console.log(err)
+  //   }
+  // }
+  
+  // getSchools = async () =>{
+  //   AsyncStorage.getItem('schools').then(
+  //     (value) => {
+  //     //setvalue(value)
+  //     //this.setState({ schoolsObj: value });
+  //     this.state.schoolsObj = value
+  //   })
+  // }
+
 
   //Initialize
-  // componentWillMount()
-  // {
-  //   var schools = Database.LoadSchools();
-  //   this.setState({schoolsObj : schools});
-  // }
+  componentDidMount ()
+  {
+    //var schools = Database.LoadSchools();
+    //this.setState({schoolsObj : schools});
+    console.log('BURP INIT')
+
+    //this.setState.schoolsObj = [];
+    // [ new School('Adams'), new School('Allen'), new School('Allison'), new School('Alvin'), new School('Anderson'),
+    //    new School('Beech'), new School('Benton'),new School('Black'), new School('Bostic'),new School('Brooks'), new School('Byrant'),
+    //     new School('Buckner'),new School('Caldwell'), new School('Cessna'),new School('Chester'), new School('Chisholm')];
+
+    //this.state.schoolsObj.push(new School("TEST", 12));
+    //var schoolsJson = AsyncStorage.getItem('schools');
+    //var schoolsJson = getValue('schools');
+    //getSchools();
+
+    //console.log(schoolsJson);
+    //schoolsObj = JSON.parse(schoolsJson);
+  }
 
   toggleModalStudent(visible) {
     this.setState({ modalVisible: visible });
@@ -87,9 +165,14 @@ export class SchoolScreen extends Component
     this.state.schoolsObj.push(new School(name, id));
     this.toggleModalSchool(false);
 
+    //Add school to the storage
+    //saveValue('schools', JSON.stringify(this.state.schoolsObj));
+    //AsyncStorage.setItem('schools', JSON.stringify(this.state.schoolsObj));
+    //saveSchools();
+    console.log(this.state.schoolsObj);
   }
 
-  
+ 
   toggleMenu(val)
   {
     this.state.menuVisable = !this.state.menuVisable;

@@ -49,7 +49,9 @@ export class ResultScreen extends Component
         correct++;
     }
 
-    return (correct / array.length) * 100;
+    var ratio = (correct / array.length) * 100; 
+    var rounded = Math.round(ratio * 10) / 10; //Rounded to 1 decimal place
+    return rounded;
   }
 
 

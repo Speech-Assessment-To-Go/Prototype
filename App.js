@@ -42,7 +42,7 @@ export default function App() {
   return (
   // <Provider>
     <NavigationContainer>
-      <Nav.Navigator initialRouteName="SchoolScreen" >
+      <Nav.Navigator initialRouteName="StudentScreen" >
 
         <Nav.Screen name="SchoolScreen" component = {SchoolScreen} options= {optionStyle}/>
         <Nav.Screen name="StudentScreen" component = {StudentScreen} options= {optionStyle}/>

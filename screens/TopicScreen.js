@@ -11,6 +11,8 @@ import {
   Modal
 } from 'react-native';
 
+import {  TextInput, Checkbox  } from 'react-native-paper';
+
 import { globalStyles } from '../styles/global';
 import { Button, Divider,   } from 'react-native-paper';
 import { TemplateScreen } from './TemplateScreen';
@@ -46,7 +48,15 @@ export class TopicScreen extends Component
       topics:[ new Topic('WH Questions'), new Topic('Repeat After Me'), new Topic('Audiotoruim Memory'), new Topic('Repeating Utterances'),
        new Topic('Creating Utterances'), new Topic('Following Directions'), new Topic('Phonemes'), new Topic('Articulation')],
 
-      selectedTopic:0,
+      content:["General Knowledge", "Personal Experience"],
+
+      structureChecks:[false, false, false, false, false, false, false, false], //HARDCODED :)
+      contentChecks:[false, false, false, false, false, false, false, false],
+
+      numQuestions:'',
+
+
+      selectedStructure:0,
     };
 
     this.init();
@@ -63,7 +73,20 @@ export class TopicScreen extends Component
   }
 
   selectTopic(index){
-    this.state.selectedTopic = index;
+    this.state.selectedStructure = index;
+    this.setStructureCheck(index);
+    //this.forceUpdate();
+  }
+
+  setStructureCheck(index)
+  {
+    this.state.structureChecks[index] = !this.state.structureChecks[index];
+    this.forceUpdate();
+  }
+
+  setContentCheck(index)
+  {
+    this.state.contentChecks[index] = !this.state.contentChecks[index];
     this.forceUpdate();
   }
 
@@ -75,32 +98,36 @@ export class TopicScreen extends Component
       return(      
 
 
-        <View style={[styles.container, globalStyles.flexRow]}>
-        
+        <View style={[styles.container, globalStyles.flexRow]}>       
 
-        {/* LEFT | TOPIC PANEL */}      
+        {/* LEFT | STRUCTURE */}      
       <View style={styles.column}>
+ 
+        <View style={[styles.header]}>
+        <Text style={[styles.h1]}>Structure</Text> 
+        </View>
 
-
-        <ScrollView style={styles.topicsPanel}>
-
+        <ScrollView style={styles.structurePanel}>
         {
           this.state.topics.map((topic,index) => (
             <View key={"topic"+index}>
             
             <TouchableOpacity
-              style={[styles.mainButton, (index == this.state.selectedTopic)? styles.selectedBG: styles.unselectedBG]}
+              // style={[styles.mainButton, (index == this.state.selectedTopic)? styles.selectedBG: styles.unselectedBG]}
+              style={[styles.mainButton, styles.unselectedBG]}
               onPress={() => this.selectTopic(index)}>
 
               <View style={globalStyles.flexRow}>
               
-              <RoundedText
-                    title = "+"
-                    color = "black"
-                    backgroundColor = "#cccccc"
-                    fontSize={18}
-                    size={43}
-                />
+
+              <View style={styles.checkboxBlock}>
+                <Checkbox
+                status={this.state.structureChecks[index] ? 'checked' : 'unchecked'}
+                onPress={() => {
+                  this.setStructureCheck(index);
+                }}
+                  />
+              </View>
 
 
                 <View style={globalStyles.flexCol}>              
@@ -113,20 +140,79 @@ export class TopicScreen extends Component
             <Divider/>
             </View>
           ) )
-        }               
-
-
+        }             
         </ScrollView>
+        <View style={[styles.footer]}></View>
+
+        {/* CONTENT */}
+        <View style={[styles.header]}>
+          <Text style={[styles.h1]}>Content</Text> 
         </View>
+
+        <ScrollView style={styles.contentPanel}>
+        {
+          this.state.content.map((content,index) => (
+            <View key={"topic"+index}>
+            
+            <TouchableOpacity
+              // style={[styles.mainButton, (index == this.state.selectedTopic)? styles.selectedBG: styles.unselectedBG]}
+              style={[styles.mainButton, styles.unselectedBG]}
+              onPress={() => this.setContentCheck(index)}>
+
+              <View style={globalStyles.flexRow}>
+              
+
+              <View style={styles.checkboxBlock}>
+                <Checkbox
+                status={this.state.contentChecks[index] ? 'checked' : 'unchecked'}
+                onPress={() => {
+                  this.setContentCheck(index);
+                }}
+                  />
+              </View>
+
+
+                <View style={globalStyles.flexCol}>              
+                  <Text style={styles.h2}>{content}</Text>
+                </View>
+
+              </View>
+
+            </TouchableOpacity>     
+            <Divider/>
+            </View>
+          ) )
+        }             
+        </ScrollView>
+
+        <View style={[globalStyles.flexRowReverse, globalStyles.flexHoriCenter]}>
+
+            <TouchableOpacity
+              style={styles.bottomButton}
+              onPress={() => this.toggleModal(true)}>
+              <Text style={styles.buttonText}>Add</Text>
+            </TouchableOpacity>
+
+            {/* <View style={[globalStyles.flexRow]}> */}
+            <TextInput style={[styles.textInput]} keyboardType="number-pad" value={this.state.numQuestions} onChangeText={text => this.setState( {numQuestions: text})} />      
+              <Text style={styles.textBottom}>Number: </Text>
+            {/* </View> */}
+
+        </View>   
+
+        {/* END OF COLUMN */}
+        </View> 
 
 
         {/* Right | ASSESSMENTS PANEL*/}
         <View style={styles.column}> 
-
+        <View style={[styles.header]}>
+        <Text style={[styles.h1]}>Questions</Text> 
+        </View>
         <ScrollView style={styles.assessmentsPanel}>
 
         {
-          this.state.topics[this.state.selectedTopic].assessments.map( (assessment,index) => (
+          this.state.topics[this.state.selectedStructure].assessments.map( (assessment,index) => (
             <View key={"assessment"+index}>
 
             
@@ -163,10 +249,9 @@ export class TopicScreen extends Component
             <TouchableOpacity
               style={styles.bottomButton}
               onPress={() => this.toggleModal(true)}>
-              <Text style={styles.buttonText}>Take Assessment</Text>
+              <Text style={styles.buttonText}>Start</Text>
             </TouchableOpacity>
-
-          </View>   
+        </View>   
 
         </View>
 
@@ -220,9 +305,51 @@ const styles = StyleSheet.create({
     width: "50%"
   },
 
+  h1:{
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: "white"
+  },
+
   h2:{
     fontSize: 18,
     fontWeight: 'bold'
+  },
+
+  textBottom:{
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginRight: 5
+  },
+
+  header:{
+    backgroundColor: '#00bcd4',
+    width:'100%',
+    height:36,
+    paddingVertical: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    //marginTop: 24
+  },
+
+  footer:{
+    // backgroundColor: '#00bcd4',
+    // width:'100%',
+    // height:3,
+  },
+
+  textInput:{
+    textAlignVertical: "top",
+    flex:1,
+    height: 45,
+    marginHorizontal: 10,
+    marginVertical: 20,
+    maxWidth: 45,
+    fontSize: 15,
+    marginRight: 35,
+    justifyContent: 'center',
+    textAlign: 'center'
+    // alignItems: 'center'
   },
 
   buttonText:{
@@ -235,13 +362,27 @@ const styles = StyleSheet.create({
     margin: 25,
   },
 
+  checkboxBlock:{
+    marginRight: 25
+  },
 
-  topicsPanel:{
+
+  structurePanel:{
     flex:1,
     // backgroundColor: "red",
     height: "100%",
     borderRightColor: '#00bcd4',
     borderRightWidth: 3,
+
+  },
+
+  contentPanel:{
+    flex:1,
+    // backgroundColor: "red",
+    height: "100%",
+    borderRightColor: '#00bcd4',
+    borderRightWidth: 3,
+
 
   },
 
