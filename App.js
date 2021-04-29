@@ -32,6 +32,8 @@ import { AssessmentScreen } from './screens/AssessmentScreen';
 import { TemplateScreen } from './screens/TemplateScreen';
 import { ResultScreen } from './screens/ResultScreen';
 
+import './global'
+
 const Nav = createStackNavigator();
 
 //Force Screen Orientation to Landscape

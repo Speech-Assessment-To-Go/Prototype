@@ -8,10 +8,13 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
+  Modal,
 } from 'react-native';
 
-import { globalStyles } from '../styles/global';
+import {  TextInput  } from 'react-native-paper';
+
+import { globalStyles } from '../globalStyles';
 import { Button, Avatar, Divider  } from 'react-native-paper';
 import { TemplateScreen } from './TemplateScreen';
 import { Question } from '../Question.js'
@@ -43,8 +46,44 @@ export class AssessmentScreen extends Component
 
       grading:[],
 
+      scaffolding: 0,
+
+      notes:'',
+
+      modalNotesVisible:false
+
 
     };
+
+    this.init();
+  }
+
+  init()
+  {
+    // this.setState({maxQuestions: global.questions.length})
+    //this.state.maxQuestions = globa
+  }
+
+  componentDidMount()
+  {
+    //this.setState({maxQuestions: global.questions.length})
+  }
+
+  modifyScaffolding(val){
+
+    var num = this.state.scaffolding+val;
+
+    if (num < 0)
+      num = 0;
+
+    this.setState( {scaffolding: num})
+    console.log("TEST");
+
+
+  }
+
+  toggleModalNotes(visible) {
+    this.setState({ modalNotesVisible: visible });
   }
 
   grade(val)
@@ -55,32 +94,86 @@ export class AssessmentScreen extends Component
 
 
     if ((this.state.currentQuestion+1) >= this.state.maxQuestions)
-      this.props.navigation.navigate('ResultScreen', {grading});
-    else
     {
-      this.state.currentQuestion++;
-      this.forceUpdate();
+      this.props.navigation.navigate('ResultScreen', {grading});
     }
 
-  }
+    else
+    {
+      // this.state.currentQuestion++;
+      // this.state.scaffolding = 0;
+      // this.state.notes = '';
 
+
+      this.setState({currentQuestion: this.state.currentQuestion+1});
+      this.setState({scaffolding: 0});
+      this.setState({notes: ''});
+
+      // this.forceUpdate();
+    }
+  }
 
 // ------------ * RENDER * ------------------------
   render(){
-  const { navigation } = this.props;
+    const { route, navigation } = this.props;
+    const { questions } = route.params;
+
+    this.state.maxQuestions = questions.length;
 
       return(      
-        <View style={styles.container}>
+      <View style={[styles.container]}>
+
+          {/* NOTES BUTTON */}
+          <View style={globalStyles.flexRow}>
+            <TouchableOpacity
+              style={styles.topButton}
+              onPress={() => this.toggleModalNotes(true)}>
+              <Text style={styles.buttonText}>Notes</Text>
+            </TouchableOpacity>
+
+          </View>     
 
  
-        {/* QUESTIONS IMG & TEXT */}
-        <View style={[styles.container, globalStyles.flex8]}>
+        {/* QUESTIONS IMG & TEXT & SIDES*/}
+        <View style={[globalStyles.flexRow, globalStyles.flex8]}>
 
-          <Text style={styles.question}>{this.state.questionsObj[this.state.currentQuestion].question}</Text>
-          <Image style={styles.img}  source={this.state.questionsObj[this.state.currentQuestion].img} />
+            {/* LEFT SIDE */}
+          <View style={[styles.flexCol, globalStyles.flex1]}>
+              <View style={[globalStyles.test]}>
 
+              </View>
+          </View>
+          
+          {/* MIDDLE! */}
+          <View style={[styles.container, globalStyles.flex8]}>
+
+            <Text style={styles.question}>{ global.parsedQuestions[ questions[this.state.currentQuestion] ].text }</Text>
+            <Image style={styles.img}  source={this.state.questionsObj[this.state.currentQuestion].img} />
+
+          </View>
+
+          {/* Right SIDE */}
+          <View style={[globalStyles.flexCol, globalStyles.flex1, globalStyles.center]}>
+
+            <TouchableOpacity
+                style={[styles.sideButton]}
+                onPress={() => this.modifyScaffolding(1)}>
+                <Text style={styles.buttonText}>+</Text>
+            </TouchableOpacity>
+
+            <Text style={styles.number}>{this.state.scaffolding}</Text>
+
+            <TouchableOpacity
+                style={[styles.sideButton]}
+                onPress={() => this.modifyScaffolding(-1)}>
+                <Text style={styles.buttonText}>-</Text>
+            </TouchableOpacity>
+
+          </View>
 
         </View>
+
+
 
        {/* Bottom Buttons */}
         <View style={[globalStyles.flexVertEnd, globalStyles.flex1]}>        
@@ -101,7 +194,45 @@ export class AssessmentScreen extends Component
 
           </View>
 
+        </View>
+
+        {/* <View style={styles.side}>
+          <Text>Centered text</Text>
+        </View> */}
+
+
+      {/* ********************** | NOTES MODAL | ********************* */}
+      <Modal animationType="slide"  transparent={true} visible={this.state.modalNotesVisible}  >
+
+        <View style={styles.container}>
+
+          <View style={styles.modalView}>
+
+            <Text style={styles.modalHeader}>Notes</Text> 
+            
+            <View style={globalStyles.flexRow}>
+              <TextInput style={[styles.textInput]} label="" multiline={true} numberOfLines={5} value={this.state.notes} onChangeText={text => this.setState( {notes: text})} />        
+            </View>
+
+
+            <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
+            <TouchableOpacity
+              style={[styles.bottomButton, styles.modalButton]}
+              onPress={() => this.toggleModalNotes(false)}>
+              <Text style={styles.modalText}>Submit</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.bottomButton, styles.modalButton]}
+              onPress={() => this.toggleModalNotes(false)}>
+              <Text style={styles.modalText}>Cancel</Text>
+            </TouchableOpacity>
+
+          </View>   
           </View>
+        </View>
+      </Modal>
+
 
       </View>
 
@@ -132,6 +263,18 @@ const styles = StyleSheet.create({
     marginVertical: 12,
     height: 25,
     backgroundColor: "#00bcd4"
+
+  },
+
+  topButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 44,
+    paddingVertical: 30,
+    marginHorizontal: 140,
+    marginVertical: 12,
+    height: 25,
+    backgroundColor: "#ffbcd4"
 
   },
 
@@ -166,7 +309,15 @@ const styles = StyleSheet.create({
     // fontFamily: 'tahoma'
   },
 
-  
+  sideButton:{
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: "#6600cc",
+    width: 60,
+    height: 60,
+    padding: 14,
+    marginVertical: 10
+  },
 
   img:{
     maxWidth: 256*scale,
@@ -176,7 +327,97 @@ const styles = StyleSheet.create({
     height: 192*scale
   },
 
+  side:{
+    position: 'absolute', 
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'flex-end'
+  },
 
+  test:{
+    backgroundColor: "red",
+    height: "100%",
+
+  },
+
+  number:{
+    fontSize: 36,
+    fontWeight: "bold",
+    margin: 10
+  },
+
+ ////// MODAL STUFF : ToDo: Seperate component
+
+ modalView: {
+  margin: 35,
+  backgroundColor: "white",
+  borderRadius: 7,
+  paddingVertical: 0,
+  paddingHorizontal: 55,
+  alignItems: "center",
+  shadowColor: "#000",
+  shadowOffset: {
+    width: 0,
+    height: 2
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 3.84,
+  elevation: 5,
+  maxWidth: "80%",
+  maxHeight:"80%",
+},
+
+textStyle: {
+  color: "white",
+  fontWeight: "bold",
+  textAlign: "center"
+},
+
+modalHeader: {
+  alignSelf: 'flex-start',
+  marginBottom: 50,
+  marginTop: 35,
+  fontSize: 22,
+  fontWeight: 'bold',
+  textAlign: "left"
+},
+
+textInput:{
+  textAlignVertical: "top",
+  flex:1,
+  height: 220,
+  marginHorizontal: 10,
+  marginVertical: 20,
+  maxWidth: "90%",
+  fontSize: 25
+},
+
+schoolID:{
+  maxWidth: 100,
+},
+
+textBox: {
+  marginVertical: 10,
+  borderLeftWidth: 4,
+  borderRightWidth: 4,
+  borderTopWidth: 4,
+  borderBottomWidth: 4,
+  borderColor: '#00bcd4',
+  height: 180,
+  width: '100%',
+  padding: 15
+},
+
+modalButton:{
+  backgroundColor: 'white',
+  marginTop: 19
+},
+
+modalText:{
+  fontSize: 18,
+  fontWeight: 'bold',
+  color: "#00bcd4"
+}
 
 
 });

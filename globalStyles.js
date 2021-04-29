@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+// export const hello = "Hello World!";
+
 export const globalStyles = StyleSheet.create({
 
     container: {
