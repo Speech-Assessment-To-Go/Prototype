@@ -1,11 +1,13 @@
 # How to run
 - Install npm stable
 - Install Yarn 	(windows) https://classic.yarnpkg.com/en/docs/install/#windows-stable
+- Git clone this project
+- npm install
 - Run 'expo start' in folder
 
 
 
-# Dependencies that should be included, if not install
+# Dependencies that should be included, if not installed (ignore)
 
 - yarn add react-native-paper
 - yarn add react-native-vector-icons
