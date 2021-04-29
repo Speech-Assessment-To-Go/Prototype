@@ -14,7 +14,7 @@ import {
 
 import {  TextInput  } from 'react-native-paper';
 
-import { globalStyles } from '../styles/global';
+import { globalStyles } from '../globalStyles';
 import { Button, Avatar, Divider  } from 'react-native-paper';
 import { TemplateScreen } from './TemplateScreen';
 import { Question } from '../Question.js'
@@ -54,6 +54,19 @@ export class AssessmentScreen extends Component
 
 
     };
+
+    this.init();
+  }
+
+  init()
+  {
+    // this.setState({maxQuestions: global.questions.length})
+    //this.state.maxQuestions = globa
+  }
+
+  componentDidMount()
+  {
+    //this.setState({maxQuestions: global.questions.length})
   }
 
   modifyScaffolding(val){
@@ -81,21 +94,31 @@ export class AssessmentScreen extends Component
 
 
     if ((this.state.currentQuestion+1) >= this.state.maxQuestions)
-      this.props.navigation.navigate('ResultScreen', {grading});
-    else
     {
-      this.state.currentQuestion++;
-      this.state.scaffolding = 0;
-      this.state.notes = '';
-      this.forceUpdate();
+      this.props.navigation.navigate('ResultScreen', {grading});
     }
 
-  }
+    else
+    {
+      // this.state.currentQuestion++;
+      // this.state.scaffolding = 0;
+      // this.state.notes = '';
 
+
+      this.setState({currentQuestion: this.state.currentQuestion+1});
+      this.setState({scaffolding: 0});
+      this.setState({notes: ''});
+
+      // this.forceUpdate();
+    }
+  }
 
 // ------------ * RENDER * ------------------------
   render(){
-  const { navigation } = this.props;
+    const { route, navigation } = this.props;
+    const { questions } = route.params;
+
+    this.state.maxQuestions = questions.length;
 
       return(      
       <View style={[styles.container]}>
@@ -107,12 +130,6 @@ export class AssessmentScreen extends Component
               onPress={() => this.toggleModalNotes(true)}>
               <Text style={styles.buttonText}>Notes</Text>
             </TouchableOpacity>
-
-            {/* <TouchableOpacity
-              style={[styles.bottomButton, globalStyles.danger]}
-              onPress={() => alert("Bottom!")}>
-              <Text style={styles.buttonText}>Remove School</Text>
-            </TouchableOpacity> */}
 
           </View>     
 
@@ -130,7 +147,7 @@ export class AssessmentScreen extends Component
           {/* MIDDLE! */}
           <View style={[styles.container, globalStyles.flex8]}>
 
-            <Text style={styles.question}>{this.state.questionsObj[this.state.currentQuestion].question}</Text>
+            <Text style={styles.question}>{ global.parsedQuestions[ questions[this.state.currentQuestion] ].text }</Text>
             <Image style={styles.img}  source={this.state.questionsObj[this.state.currentQuestion].img} />
 
           </View>
@@ -217,12 +234,7 @@ export class AssessmentScreen extends Component
       </Modal>
 
 
-
-
       </View>
-
-           
-
 
 
     );

@@ -12,7 +12,7 @@ import {
   Modal
 } from 'react-native';
 
-import { globalStyles } from '../styles/global';
+import { globalStyles } from '../globalStyles';
 import { Button, Avatar, Divider, Provider } from 'react-native-paper';
 import { TemplateScreen } from './TemplateScreen';
 

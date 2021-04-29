@@ -13,7 +13,7 @@ import {
 
 import {  TextInput, Checkbox  } from 'react-native-paper';
 
-import { globalStyles } from '../styles/global';
+import { globalStyles } from '../globalStyles';
 import { Button, Divider,   } from 'react-native-paper';
 import { TemplateScreen } from './TemplateScreen';
 
@@ -21,6 +21,9 @@ import { RoundedText } from '../components/RoundedText';
 import { Assessment } from '../Assessment'
 import { Topic } from '../Topic'
 import { Question } from '../Question'
+
+import Database from '../Database.js';
+import { cos } from 'react-native-reanimated';
 
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
@@ -34,6 +37,7 @@ const fontSize = 18;
 const borderWidth = 0;
 const title = 'A';
 
+// const questions = Database.LoadQuestions();
 
 
 export class TopicScreen extends Component
@@ -45,20 +49,25 @@ export class TopicScreen extends Component
 
     this.state = {
 
-      topics:[ new Topic('WH Questions'), new Topic('Repeat After Me'), new Topic('Audiotoruim Memory'), new Topic('Repeating Utterances'),
-       new Topic('Creating Utterances'), new Topic('Following Directions'), new Topic('Phonemes'), new Topic('Articulation')],
+      // topics:[ new Topic('WH Questions'), new Topic('Repeat After Me'), new Topic('Audiotoruim Memory'), new Topic('Repeating Utterances'),
+      //  new Topic('Creating Utterances'), new Topic('Following Directions'), new Topic('Phonemes'), new Topic('Articulation')],
+
+      assessments:[ new Assessment('Assessment 1z', [0,1,2,3,4,5]), new Assessment('Assessment 2',[6,7,8,9,10]), new Assessment('Assessment 3',[22,13,15,12,14])],
 
       content:["General Knowledge", "Personal Experience"],
 
       structureChecks:[false, false, false, false, false, false, false, false], //HARDCODED :)
-      contentChecks:[false, false, false, false, false, false, false, false],
+      contentChecks:[false, false, false, false, false, false, false, false], //Also HARDCODED :D
 
       numQuestions:'',
 
+      questions:[],//Question IDS
 
-      selectedStructure:0,
+
+      selectedAssessment:0,
     };
 
+    
     this.init();
   }
 
@@ -66,28 +75,49 @@ export class TopicScreen extends Component
   //HARDCODED
   init()
   {
-    this.state.topics[0].assessments.push(new Assessment("SH- Prefix"));
-    this.state.topics[1].assessments.push(new Assessment("Colors & Shapes"));
-    this.state.topics[2].assessments.push(new Assessment("Single Syllable"));
-    this.state.topics[2].assessments.push(new Assessment("Double Syllables"));
+    // this.state.topics[0].assessments.push(new Assessment("SH- Prefix"));
+    // this.state.topics[1].assessments.push(new Assessment("Colors & Shapes"));
+    // this.state.topics[2].assessments.push(new Assessment("Single Syllable"));
+    // this.state.topics[2].assessments.push(new Assessment("Double Syllables"));
+    global.parsedQuestions = Database.LoadQuestions();
+    //console.log(questions[ this.state.assessments[0].questions[0] ].text);
+
+    global.questionIndex = 0;
+
+    console.log("LOADED!");
+
   }
 
   selectTopic(index){
-    this.state.selectedStructure = index;
-    this.setStructureCheck(index);
+    this.state.selectedAssessment = index;
+    this.setStructureCheckbox(index);
     //this.forceUpdate();
   }
 
-  setStructureCheck(index)
+  setStructureCheckbox(index)
   {
     this.state.structureChecks[index] = !this.state.structureChecks[index];
     this.forceUpdate();
   }
 
-  setContentCheck(index)
+  setContentCheckbox(index)
   {
     this.state.contentChecks[index] = !this.state.contentChecks[index];
     this.forceUpdate();
+  }
+
+  startAssessment(props)
+  {
+    // var questions = this.state.assessments[this.state.selectedStructure].questions;
+
+    //console.log(this.state.assessments[this.state.selectedAssessment]);
+
+    global.questions = this.state.assessments[this.state.selectedAssessment];
+
+    //console.log(global.questions);
+    console.log(global.parsedQuestions[1].text);
+    // props.navigation.navigate('AssessmentScreen');
+    props.navigation.navigate('AssessmentScreen', questions);
   }
 
 
@@ -100,17 +130,17 @@ export class TopicScreen extends Component
 
         <View style={[styles.container, globalStyles.flexRow]}>       
 
-        {/* LEFT | STRUCTURE */}      
+        {/* LEFT | ASSESSMENTS */}      
       <View style={styles.column}>
  
         <View style={[styles.header]}>
         <Text style={[styles.h1]}>Structure</Text> 
         </View>
 
-        <ScrollView style={styles.structurePanel}>
+        <ScrollView style={[styles.structurePanel, globalStyles.flex3]}>
         {
-          this.state.topics.map((topic,index) => (
-            <View key={"topic"+index}>
+          this.state.assessments.map((assessment,index) => (
+            <View key={"assessment"+index}>
             
             <TouchableOpacity
               // style={[styles.mainButton, (index == this.state.selectedTopic)? styles.selectedBG: styles.unselectedBG]}
@@ -124,14 +154,14 @@ export class TopicScreen extends Component
                 <Checkbox
                 status={this.state.structureChecks[index] ? 'checked' : 'unchecked'}
                 onPress={() => {
-                  this.setStructureCheck(index);
+                  this.setStructureCheckbox(index);
                 }}
                   />
               </View>
 
 
                 <View style={globalStyles.flexCol}>              
-                  <Text style={styles.h2}>{topic.name}</Text>
+                  <Text style={styles.h2}>{assessment.name}</Text>
                 </View>
 
               </View>
@@ -145,11 +175,11 @@ export class TopicScreen extends Component
         <View style={[styles.footer]}></View>
 
         {/* CONTENT */}
-        <View style={[styles.header]}>
+        {/* <View style={[styles.header]}>
           <Text style={[styles.h1]}>Content</Text> 
         </View>
 
-        <ScrollView style={styles.contentPanel}>
+        <ScrollView style={[styles.contentPanel,globalStyles.flex1]}>
         {
           this.state.content.map((content,index) => (
             <View key={"topic"+index}>
@@ -183,13 +213,13 @@ export class TopicScreen extends Component
             </View>
           ) )
         }             
-        </ScrollView>
+        </ScrollView> */}
 
         <View style={[globalStyles.flexRowReverse, globalStyles.flexHoriCenter]}>
 
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={() => this.toggleModal(true)}>
+              onPress={ () => navigation.navigate('AssessmentScreen', {assessment} )}>
               <Text style={styles.buttonText}>Add</Text>
             </TouchableOpacity>
 
@@ -209,16 +239,20 @@ export class TopicScreen extends Component
         <View style={[styles.header]}>
         <Text style={[styles.h1]}>Questions</Text> 
         </View>
+        
         <ScrollView style={styles.assessmentsPanel}>
 
         {
-          this.state.topics[this.state.selectedStructure].assessments.map( (assessment,index) => (
+
+
+          this.state.assessments[this.state.selectedAssessment].questions.map( (questionID,index) => (
             <View key={"assessment"+index}>
 
             
             <TouchableOpacity
               style={styles.mainButton}
-              onPress={ () => navigation.navigate('AssessmentScreen', {assessment} )}>
+              // onPress={ () => navigation.navigate('AssessmentScreen', {assessment} )}>
+              onPress={ () => this.startAssessment(this.props) }>
 
               <View style={globalStyles.flexRow}>
 
@@ -229,11 +263,8 @@ export class TopicScreen extends Component
                     fontSize={18}
                     size={43}
                 />
-
      
-                  <Text style={styles.h2}>{assessment.name}</Text>
-
-
+                  <Text style={styles.h2}>{global.parsedQuestions[questionID].text}</Text>
 
               </View>
 
@@ -248,7 +279,7 @@ export class TopicScreen extends Component
         <View style={globalStyles.flexRowReverse}>
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={() => this.toggleModal(true)}>
+              onPress={ () => navigation.navigate('AssessmentScreen', {assessment} )}>
               <Text style={styles.buttonText}>Start</Text>
             </TouchableOpacity>
         </View>   

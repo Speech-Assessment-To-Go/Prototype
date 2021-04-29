@@ -12,7 +12,7 @@ import {
   Modal
 } from 'react-native';
 
-import { globalStyles } from '../styles/global';
+import { globalStyles } from '../globalStyles';
 import { Button, Avatar, Divider, TextInput, Badge, Provider, Menu  } from 'react-native-paper';
 import { TemplateScreen } from './TemplateScreen';
 
@@ -22,6 +22,8 @@ import { Student } from '../Student'
 import Database from '../Database.js';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
@@ -35,120 +37,46 @@ const fontSize = 18;
 const borderWidth = 0;
 const title = 'A';
 
-const saveValue = async (key, data) =>{
-  if (data){
-    AsyncStorage.setItem(key, data);
-    alert('Data Saved');
-  }
-  else{
-    alert('Please fill data')
-  }
-}
-
-// const saveSchools = async () =>{
-//   if (true){
-//     await AsyncStorage.setItem('schools', JSON.stringify(this.state.schoolsObj));
-//     alert('Data Saved');
-//   }
-//   else{
-//     alert('Please fill data')
-//   }
-// }
-
-// const getSchools = async () =>{
-//   AsyncStorage.getItem('schools').then(
-//     (value) => {
-//     //setvalue(value)
-//     //this.setState({ schoolsObj: value });
-//     this.state.schoolsObj = value
-//   })
-// }
 
 export class SchoolScreen extends Component
 {
-  // LoadSchoolsandStudents()
-  // {
-  //   let data = [ new School('Adams'), new School('Allen'), new School('Allison'), new School('Alvin'), new School('Anderson'),
-  //   new School('Beech'), new School('Benton'),new School('Black'), new School('Bostic'),new School('Brooks'), new School('Byrant'),
-  //    new School('Buckner'),new School('Caldwell'), new School('Cessna'),new School('Chester'), new School('Chisholm')];
 
-  //    return data;
-  // }
-
-  // constructor(props)
-  // {
-  //   super(props); 
       constructor(props){
         super(props);
+
+          this.state = {
+
+            schoolsObj:[  ],
+    
+            modalVisible:false,
+            modalSchoolVisible:false,
+            menuVisable:true,
+            
+            //Student MODAL
+            textFName:'',
+            textLName:'',
+            textEthnicity:'',
+            textGrade:'',
+            textBirth:'',
+            textLanguage:'',
+    
+            selectedSchool:0,
+    
+        }
+
+        this.init();
+
       }
-
-      state = {
-
-        //studentsObj:[ new Student('Adrin Anna'), new Student('Allas Kong'), new Student('Elyot Knives'), new Student('Luigi Mario'), new Student('Ramen Henshnop'), new Student('Vinny Mayor'), new Student('Punny Name'), new Student("Mark Ritaherta")],
-
-        // schoolsObj:[ new School('Adams'), new School('Allen'), new School('Allison'), new School('Alvin'), new School('Anderson'),
-        //  new School('Beech'), new School('Benton'),new School('Black'), new School('Bostic'),new School('Brooks'), new School('Byrant'),
-        //   new School('Buckner'),new School('Caldwell'), new School('Cessna'),new School('Chester'), new School('Chisholm')],
-
-        schoolsObj:[new School("TEST", 12) ],
-        //Recreate the class by parsing here!
-
-
-        modalVisible:false,
-        modalSchoolVisible:false,
-        menuVisable:true,
-        
-        //Student MODAL
-        textFName:'',
-        textLName:'',
-        textEthnicity:'',
-        textGrade:'',
-        textBirth:'',
-        textLanguage:'',
-
-        selectedSchool:0,
-
-    }
-  // }
-
-  // saveSchools = async () =>{
-  //   try{
-
-  //   } 
-  //   catch(err){
-  //     console.log(err)
-  //   }
-  // }
-  
-  // getSchools = async () =>{
-  //   AsyncStorage.getItem('schools').then(
-  //     (value) => {
-  //     //setvalue(value)
-  //     //this.setState({ schoolsObj: value });
-  //     this.state.schoolsObj = value
-  //   })
-  // }
 
 
   //Initialize
-  componentDidMount ()
+  init ()
   {
-    //var schools = Database.LoadSchools();
-    //this.setState({schoolsObj : schools});
-    console.log('BURP INIT')
 
-    //this.setState.schoolsObj = [];
-    // [ new School('Adams'), new School('Allen'), new School('Allison'), new School('Alvin'), new School('Anderson'),
-    //    new School('Beech'), new School('Benton'),new School('Black'), new School('Bostic'),new School('Brooks'), new School('Byrant'),
-    //     new School('Buckner'),new School('Caldwell'), new School('Cessna'),new School('Chester'), new School('Chisholm')];
-
-    //this.state.schoolsObj.push(new School("TEST", 12));
-    //var schoolsJson = AsyncStorage.getItem('schools');
-    //var schoolsJson = getValue('schools');
-    //getSchools();
-
-    //console.log(schoolsJson);
-    //schoolsObj = JSON.parse(schoolsJson);
+    //console.log('BURP INIT');
+    //console.log(globalStyles.hello);
+    //console.log(global.hello);
+    this.loadSchools();
   }
 
   toggleModalStudent(visible) {
@@ -162,38 +90,70 @@ export class SchoolScreen extends Component
   }
 
   addSchool(name = "NULL", id = 259){
-    this.state.schoolsObj.push(new School(name, id));
-    this.toggleModalSchool(false);
 
-    //Add school to the storage
-    //saveValue('schools', JSON.stringify(this.state.schoolsObj));
-    //AsyncStorage.setItem('schools', JSON.stringify(this.state.schoolsObj));
-    //saveSchools();
-    console.log(this.state.schoolsObj);
+    //this.state.schoolsObj.push(new School(name, id));
+
+    let copy = this.state.schoolsObj.slice(); //Create copy
+    copy.push(new School(name, id));
+    this.setState({schoolsObj: copy})
+    
+    //console.log(this.state.schoolsObj);
+
+    //Save schools
+    this.saveSchoolData(copy);
+
+
+    this.toggleModalSchool(false);
   }
 
- 
-  toggleMenu(val)
+  saveSchoolData(data)
   {
-    this.state.menuVisable = !this.state.menuVisable;
-    this.forceUpdate();
-    console.log("MENU PRESSED!: " + this.state.menuVisable);
+    //Save schools
+    var jsonData = JSON.stringify(data);
+    console.log(jsonData);
+    AsyncStorage.setItem('schools', jsonData);
+  }
+
+  loadSchools()
+  {
+    AsyncStorage.getItem('schools')
+    .then(
+      (schools) => 
+      {
+        if (schools != null)
+        {
+          //Schools
+          var parsedSchools = JSON.parse(schools);
+          
+          this.setState({schoolsObj: parsedSchools})
+        }
+      })
   }
 
 
   addStudent(firstName, lastName, ethnicity, school, birth, language, grade = 5){
 
-    this.state.schoolsObj[this.state.selectedSchool].students.push(      
-      new Student(firstName, lastName, ethnicity, school, birth, language, grade)      
-      );
+
+    var student = new Student(firstName, lastName, ethnicity, school, birth, language, grade);
+
+    let copy = this.state.schoolsObj.slice(); //Create copy
+    copy[this.state.selectedSchool].students.push(student);
+    this.setState({schoolsObj: copy})
+
+    this.saveSchoolData(copy);
+    //this.state.schoolsObj[this.state.selectedSchool].students.push(student);
+
 
     //this.state.studentsObj.push(new Student(text));
     this.toggleModalStudent(false);
   }
 
   selectSchool(index){
-    this.state.selectedSchool = index;
-    this.forceUpdate();
+
+    this.setState({selectedSchool: index});
+
+    //this.state.selectedSchool = index;
+    //this.forceUpdate();
   }
 
   clearInputs(){
@@ -212,10 +172,53 @@ export class SchoolScreen extends Component
     toModify = text;
   }
 
+  renderStudentList = (props) =>
+  {
+    if (this.state.schoolsObj.length == 0)
+    {  
+    }
+
+    else{
+
+      return(
+        this.state.schoolsObj[this.state.selectedSchool].students.map( (student,index) => (
+          <View key={"student"+index}>
+
+          
+          <TouchableOpacity
+            style={styles.mainButton}
+            onPress={ () => props.navigation.navigate('StudentScreen', {student} )}>
+
+            <View style={globalStyles.flexRow}>
+
+            <RoundedText
+                  title = {student.firstName[0]}
+                  color = "black"
+                  backgroundColor = "#cccccc"
+                  fontSize={18}
+                  size={43}
+              />
+
+              <View style={globalStyles.flexCol}>              
+                <Text style={styles.h2}>{student.firstName}</Text>
+                <Text>{student.grade} Grader</Text>
+              </View>
+
+            </View>
+
+          </TouchableOpacity>     
+          <Divider/>
+          </View>
+        ) )
+      )
+    }
+  }
+  
+
 
 // ------------ * RENDER * ------------------------
   render(){
-  const { navigation } = this.props;
+    const { navigation } = this.props;
 
       return(      
         <Provider>
@@ -229,7 +232,9 @@ export class SchoolScreen extends Component
 
         <ScrollView style={styles.schoolsPanel}>
 
+
         {
+         
           this.state.schoolsObj.map((school,index) => (
             <View key={"school"+index}>
             
@@ -290,41 +295,16 @@ export class SchoolScreen extends Component
 
         <ScrollView style={styles.studentsPanel}>
 
+
         {
-          this.state.schoolsObj[this.state.selectedSchool].students.map( (student,index) => (
-            <View key={"student"+index}>
+          this.renderStudentList(this.props)
+        }
 
-            
-            <TouchableOpacity
-              style={styles.mainButton}
-              onPress={ () => navigation.navigate('StudentScreen', {student} )}>
-
-              <View style={globalStyles.flexRow}>
-
-              <RoundedText
-                    title = {student.firstName[0]}
-                    color = "black"
-                    backgroundColor = "#cccccc"
-                    fontSize={18}
-                    size={43}
-                />
-
-                <View style={globalStyles.flexCol}>              
-                  <Text style={styles.h2}>{student.firstName}</Text>
-                  <Text>{student.grade} Grader</Text>
-                </View>
-
-              </View>
-
-            </TouchableOpacity>     
-            <Divider/>
-            </View>
-          ) )
-        }               
 
         </ScrollView>
 
         <View style={globalStyles.flexRow}>
+
             <TouchableOpacity
               style={styles.bottomButton}
               onPress={() => this.toggleModalStudent(true)}>
@@ -368,7 +348,7 @@ export class SchoolScreen extends Component
               <TextInput style={styles.textBox} value={this.state.textbox} onChangeText={text => this.setState( {textbox: text})} placeholder={"Notes"}/>
             </View>
 
-            <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
+          <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
             <TouchableOpacity
               style={[styles.bottomButton, styles.modalButton]}
               onPress={() => this.addStudent(this.state.textFName, this.state.textLName,this.state.textEthnicity,this.state.schoolsObj[this.state.selectedSchool].name + " Elementary School",
@@ -382,6 +362,7 @@ export class SchoolScreen extends Component
               <Text style={styles.modalText}>Cancel</Text>
             </TouchableOpacity>
           </View>   
+
           </View>
         </View>
       </Modal>
@@ -397,18 +378,6 @@ export class SchoolScreen extends Component
             
             <View style={globalStyles.flexRow}>
               <TextInput style={[styles.textInput]} label="School Name" value={this.state.textFName} onChangeText={text => this.setState( {textFName: text})}/>
-
-           
-              {/* <Menu
-                visible={this.state.menuVisable}
-                onDismiss={() => (this.state.menuVisable = false)}
-                anchor={<Button onPress={() => (this.toggleMenu(true))}>Show menu</Button>}>
-                <Menu.Item onPress={() => {}} title="Item 1" />
-                <Menu.Item onPress={() => {}} title="Item 2" />
-                <Divider />
-                <Menu.Item onPress={() => {}} title="Item 3" />
-              </Menu> */}
-
               
 
               <TextInput style={[styles.textInput, styles.schoolID]} label="ID" keyboardType="number-pad" value={this.state.textLName} onChangeText={text => this.setState( {textLName: text})}/>              
@@ -431,7 +400,6 @@ export class SchoolScreen extends Component
           </View>
         </View>
       </Modal>
-
 
 
     </View>

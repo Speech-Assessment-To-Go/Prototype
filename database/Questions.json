@@ -1,309 +1,238 @@
 [
     {
-        "text": "What is the color of the sky?",
-        "img": "https://publicdomainvectors.org/tn_img/1104-blue-sky-and-green-grass-background.png",
-        "tags": ["wh", "color"]
+        "text": "What is this Color?",
+        "img": "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg",
+        "tags": ["WH", "Color"]
     },
 	
     {
-        "text": "What color is the bag ",
-        "img": "https://publicdomainvectors.org/tn_img/Red_bag.png",
-        "tags": ["wh","color"]
+        "text": "Find one like this ",
+        "img": "url-link",
+        "tags": ["WH"]
     },
 	
     {
-        "text": "What color is a crow? ",
-        "img": "https://publicdomainvectors.org/tn_img/crow-silhouette-freesvg.org.jpg",
-        "tags": ["wh","color"]
+        "text": "What can you hear? ",
+        "img": "url-link",
+        "tags": ["WH"]
     },
 	
     {
-        "text": "What do you wear on your feet? ",
-        "img": "https://publicdomainvectors.org/tn_img/high-tops.png",
-        "tags": ["wh"]
+        "text": "What is it? ",
+        "img": "url-link",
+        "tags": ["WH"]
     },
 	
     {
-        "text": "What color are the leaves on the tree? ",
-        "img": "https://publicdomainvectors.org/tn_img/ete.png",
-        "tags": ["wh","color"]
+        "text": "Who is that? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "How many fingers are on each hand? ",
-        "img": -1,
-        "tags": ["quantity"]
+        "text": "What are you doing? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "How many hands do you have?",
-        "img": -1,
-        "tags": ["quantity"]
+        "text": "Say this ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Where are we? ",
-        "img": -1,
-        "tags": ["wh"]
+        "text": "What did you see? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Where is your favorite place to travel?",
-        "img": -1,
-        "tags": ["wh"]
+        "text": "What did you see/do?",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Where do we go to eat? ",
-        "img": "https://publicdomainvectors.org/tn_img/dining-table-publicdomain.jpg",
-        "tags": ["wh"]
+        "text": "What's happened? ",
+        "img": "url-link",
+        "tags": ["WH"]
     },
 	
     {
-        "text": "Where do you sleep? ",
-        "img": "https://publicdomainvectors.org/tn_img/man-sleeps-in-bed-clip-art-publicdomain.jpg",
-        "tags": ["wh"]
+        "text": "Who/what/where? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-
-        "text": "Where do fish live?",
-        "img": "https://publicdomainvectors.org/tn_img/fish-in-the-water-publicdomain.jpg",
-        "tags": ["wh"]
+        "text": "Finish this …. ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "What shape is a soccer ball? ",
-        "img": "https://publicdomainvectors.org/tn_img/1407858226.png",
-        "tags": ["wh"]
+        "text": "What size is it? What shape? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Where do we keep milk and butter?",
-        "img": "https://publicdomainvectors.org/tn_img/Fridge.png",
-        "tags": ["wh"]
+        "text": "What colour? How many? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Who puts out fires ",
-        "img": "https://publicdomainvectors.org/tn_img/1543775377.png",
-        "tags": ["wh"]
+        "text": "How does it taste/smell/feel? Where is it? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Where do we buy groceries? ",
-        "img": "https://publicdomainvectors.org/tn_img/Simple-Isometric-Store.png",
-        "tags": ["wh"]
+        "text": "Show me the one we use for … ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Who flies an airplane? ",
-        "img": "https://publicdomainvectors.org/tn_img/africanpilot.png",
-        "tags": ["wh"]
+        "text": "How are these different? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Who do we go see when we are sick?",
-        "img": "https://publicdomainvectors.org/tn_img/Young-Male-Doctor.png",
-        "tags": ["wh"]
+        "text": "Tell me something that's a type of … ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Who checks our teeth for cavities?",
-        "img": "https://publicdomainvectors.org/tn_img/johnny-automatic-dental-exam.png",
-        "tags": ["wh"]
+        "text": "Which one is not …? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Who delivers mail? ",
-        "img": "https://publicdomainvectors.org/tn_img/Postman.png",
-        "tags": ["wh"]
+        "text": "Tell me something else we could use ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Who takes care of animals at the zoo?",
-        "img": "https://image.freepik.com/free-vector/zoo-keeper-with-eagle_1308-20472.jpg",
-        "tags": ["wh"]
+        "text": "Make these into a story. Show me the first/middle/last ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "What do we need on a rainy day to keep us dry?",
-        "img": "https://publicdomainvectors.org/tn_img/yellow-umbrella-publicdomain.jpg",
-        "tags": ["wh"]
+        "text": "Tell me the story ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "What do spiders build?",
-        "img": "https://publicdomainvectors.org/tn_img/spider-vector-publicdomainv.jpg",
-        "tags": ["wh"]
+        "text": "What happened to all of these? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "What do cows give us that we drink?",
-        "img": "https://publicdomainvectors.org/tn_img/milk-cereals-publicdomain.jpg",
-        "tags": ["wh"]
+        "text": "What is a … ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "What show or movie do you like to watch on TV?",
-        "img": -1,
-        "tags": ["wh"]
+        "text": "What will happen if … ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "What do you like to do when you get home from school? ",
-        "img": -1,
-        "tags": ["wh"]
+        "text": "Why? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "What things make you laugh?",
-        "img": -1,
-        "tags": ["wh"]
+        "text": "Why did it happen? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "When do we sleep?",
-        "img": "https://publicdomainvectors.org/tn_img/full-moon-night-publicdomain.jpg",
-        "tags": ["wh"]
+        "text": "What could you do? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "When do we eat breakfast?",
-        "img": -1,
-        "tags": ["wh"]
+        "text": "Why can't we … ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "When do we wear a coat? ",
-        "img": "https://publicdomainvectors.org/tn_img/publicdomainq-0011469uvhphq.png",
-        "tags": ["wh"]
+        "text": "How can we tell? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Where do we wear a seatbelt? ",
-        "img": "https://publicdomainvectors.org/tn_img/redblue_convertible_sports_car.png",
-        "tags": ["wh"]
+        "text": "What could we use? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "When do we use a flashlight? ",
-        "img": "https://publicdomainvectors.org/tn_img/city-night-landscape-public-domain.jpg",
-        "tags": ["wh"]
+        "text": "Why should we use that? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "When was the last time you went on vacation?",
-        "img": -1,
-        "tags": ["wh"]
+        "text": "Why is … made of …? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "When was the last time you went to the park?",
-        "img": -1,
-        "tags": ["wh"]
+        "text": "Find me one to use with this ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Why do children go to school?",
-        "img": "https://publicdomainvectors.org/tn_img/classroom-school-publicdomain.jpg",
-        "tags": ["wh"]
+        "text": "What will happen next? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Why do we wear shoes?",
-        "img": -1,
-        "tags": ["wh"]
+        "text": "Tell me what to do ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Why do we go to sleep?",
-        "img": -1,
-        "tags": ["wh"]
+        "text": "What would/could/might he say? ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Why do we have teeth?",
-        "img": "https://publicdomainvectors.org/tn_img/1545416165.png",
-        "tags": ["wh"]
+        "text": "Do … and then … ",
+        "img": "url-link",
+        "tags": []
     },
 	
     {
-        "text": "Why do we use an umbrella?",
-        "img": "https://publicdomainvectors.org/tn_img/LadyInTheRain.png",
-        "tags": ["wh"]
-    },
-    
-    {
-        "text": "Why do we put gas in a car?",
-        "img": "https://publicdomainvectors.org/tn_img/woman-driving-car-publicdomain.jpg",
-        "tags": ["wh"]
-    },
-
-    {
-        "text": "Who brings food to your table?",
-        "img": "https://publicdomainvectors.org/tn_img/coupleouttoeat.png",
-        "tags": ["wh"]
-    },
-
-    {
-        "text": "What color are your shoes?",
-        "img": -1,
-        "tags": ["color","wh"]
-    },
-
-    {
-        "text": "What color is your shirt?",
-        "img": -1,
-        "tags": ["wh","color"]
-    },
-
-    {
-        "text": "When does school start?",
-        "img": -1,
-        "tags": ["wh"]
-    },
-
-    {
-        "text": "What shape is this?",
-        "img": "https://publicdomainvectors.org/tn_img/heart.png",
-        "tags": ["shape","wh"]
-    },
-
-    {
-        "text": "What shape is this?",
-        "img": "https://images.freeimg.net/thumbs/button-1102747_1280.png",
-        "tags": ["wh","shape"]
-    },
-
-    {
-        "text": "What shape is this?",
-        "img": "https://publicdomainvectors.org/tn_img/Flag_of_California_Star.png",
-        "tags": ["wh","shape"]
-    },
-
-    {
-        "text": "What shape is this?",
-        "img": "https://publicdomainvectors.org/tn_img/ryanlerch-worldlabel.com-border-burgundy-Black-4x3.3.png",
-        "tags": ["wh","shape"]    
-    },
-
-    {
-        "text": "What shape is this?",
-        "img": "https://publicdomainvectors.org/tn_img/circle-15.png",
-        "tags": ["wh","shape"]    
-    },
-
-    {
-        "text": "What shape is this?",
-        "img": "https://publicdomainvectors.org/tn_img/milker_Block_icon_1.png",
-        "tags": ["wh","shape"]    
-    },
-
-    {
-        "text": "What shape is this?",
-        "img": "https://publicdomainvectors.org/tn_img/led-triangular-1-grey.png",
-        "tags": ["wh","shape"]    
-    }
-
+        "text": "How are these the same? ",
+        "img": "url-link",
+        "tags": []
+    }	
+	
 ]
+
+

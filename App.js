@@ -32,6 +32,8 @@ import { AssessmentScreen } from './screens/AssessmentScreen';
 import { TemplateScreen } from './screens/TemplateScreen';
 import { ResultScreen } from './screens/ResultScreen';
 
+import './global'
+
 const Nav = createStackNavigator();
 
 //Force Screen Orientation to Landscape
@@ -42,7 +44,7 @@ export default function App() {
   return (
   // <Provider>
     <NavigationContainer>
-      <Nav.Navigator initialRouteName="StudentScreen" >
+      <Nav.Navigator initialRouteName="SchoolScreen" >
 
         <Nav.Screen name="SchoolScreen" component = {SchoolScreen} options= {optionStyle}/>
         <Nav.Screen name="StudentScreen" component = {StudentScreen} options= {optionStyle}/>
