@@ -124,7 +124,7 @@ export class TopicScreen extends Component
 // ------------ * RENDER * ------------------------
   render(){
   const { route, navigation } = this.props;
-  const { student, updateHomeStudent } = route.params;
+  const { student, updateHomeStudent, updateStudent } = route.params;
 
       return(      
 
@@ -223,11 +223,11 @@ export class TopicScreen extends Component
               onPress={ () => {
 
                 let copy = student;
-                copy.firstName = "123123123";
+                copy.firstName = "25fe";
 
                  this.setState({student: copy})
                 //  student.firstName = "SDJLK"; 
-                //  updateHomeStudent(copy); 
+                updateStudent(copy); 
                 updateHomeStudent(copy); 
 
 

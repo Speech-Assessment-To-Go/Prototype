@@ -103,10 +103,10 @@ export class StudentScreen extends Component
   }
 
 
-  // handlerUpdateStudent(studentData)
-  // {
-  //   this.setState({student: studentData})
-  // }
+  handlerUpdateStudent(studentData)
+  {
+    this.setState({student: studentData})
+  }
 
   clearInput(){
     this.state.textEAddress = '';
@@ -229,7 +229,7 @@ export class StudentScreen extends Component
         <View style={globalStyles.flexRowReverse}>
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={ () => navigation.push('TopicScreen', {student: student, updateHomeStudent: updateHomeStudent.bind(this)})}> 
+              onPress={ () => navigation.push('TopicScreen', {student: student, updateHomeStudent: updateHomeStudent.bind(this), updateStudent: this.handlerUpdateStudent.bind(this) })}> 
               <Text style={styles.buttonText}>Take Assessment</Text>
             </TouchableOpacity>
 
