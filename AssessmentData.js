@@ -2,13 +2,13 @@ import { QuestionData } from './QuestionData.js'
 
 export class AssessmentData
 {
-    constructor(name, questionData, dateTaken)
+    constructor(questionData, dateTaken,)
     {   
-        this.name = name;
+        this.name = "ASSESSMENT NAME";
         this.dateTaken= dateTaken;
         //this.questions = questions; //IDS of the questions
 
-        this.QuestionData=[];//List of question data (date, notes, scaffolding, etc)
+        this.QuestionData=questionData;//List of question data (date, notes, scaffolding, etc)
 
         this.slp = "SLP's Name";
 

@@ -14,6 +14,7 @@ export class Student
         this.id = -1;
         this.middleName;
         
+        this.assessmentData = [];
         
     }
 }

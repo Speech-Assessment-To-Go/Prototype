@@ -106,19 +106,21 @@ export class TopicScreen extends Component
     this.forceUpdate();
   }
 
-  startAssessment(props)
-  {
-    // var questions = this.state.assessments[this.state.selectedStructure].questions;
+  // startAssessment(props)
+  // {
+  //   // var questions = this.state.assessments[this.state.selectedStructure].questions;
 
-    //console.log(this.state.assessments[this.state.selectedAssessment]);
+  //   //console.log(this.state.assessments[this.state.selectedAssessment]);
 
-    global.questions = this.state.assessments[this.state.selectedAssessment];
+  //   global.questions = this.state.assessments[this.state.selectedAssessment];
 
-    //console.log(global.questions);
-    console.log(global.parsedQuestions[1].text);
-    // props.navigation.navigate('AssessmentScreen');
-    props.navigation.navigate('AssessmentScreen', questions);
-  }
+  //   //console.log(global.questions);
+  //   console.log(global.parsedQuestions[1].text);
+  //   // props.navigation.navigate('AssessmentScreen');
+
+  //   //Pass update student to update recent assessments panel
+  //   props.navigation.navigate('AssessmentScreen', {questions:questions, updateStudent: updateStudent.bind(this)});
+  // }
 
 
 // ------------ * RENDER * ------------------------
@@ -264,7 +266,14 @@ export class TopicScreen extends Component
             <TouchableOpacity
               style={styles.mainButton}
               // onPress={ () => navigation.navigate('AssessmentScreen', {assessment} )}>
-              onPress={ () => this.startAssessment(this.props) }>
+              onPress={ () => 
+              {
+                //Get questions from premade assessments
+                global.questions = this.state.assessments[this.state.selectedAssessment].questions;
+            
+                //Pass update student to update recent assessments panel
+                navigation.navigate('AssessmentScreen', {questions:global.questions, student:student, updateStudent: updateStudent.bind(this)});
+              } }>
 
               <View style={globalStyles.flexRow}>
 

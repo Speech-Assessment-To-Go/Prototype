@@ -2,13 +2,13 @@
 
 export class QuestionData
 {
-    constructor(questionID, correctness, notes)
+    constructor(questionID, correctness, notes, scaffolding)
     {
         this.questionID = questionID;
 
         this.correctness = correctness;
         this.notes = notes;
 
-        //scaffolding
+        this.scaffolding = scaffolding;
     }
 }

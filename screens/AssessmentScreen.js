@@ -20,6 +20,9 @@ import { TemplateScreen } from './TemplateScreen';
 import { Question } from '../Question.js'
 import { RoundedText } from '../components/RoundedText';
 
+import {AssessmentData} from '../AssessmentData'
+import {QuestionData} from '../QuestionData'
+
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
 {
@@ -50,7 +53,9 @@ export class AssessmentScreen extends Component
 
       notes:'',
 
-      modalNotesVisible:false
+      modalNotesVisible:false,
+
+      questionsData:[]
 
 
     };
@@ -77,8 +82,6 @@ export class AssessmentScreen extends Component
       num = 0;
 
     this.setState( {scaffolding: num})
-    console.log("TEST");
-
 
   }
 
@@ -86,7 +89,7 @@ export class AssessmentScreen extends Component
     this.setState({ modalNotesVisible: visible });
   }
 
-  grade(val)
+  grade(val, id, student, updateStudent)
   {
     this.state.grading.push(val);
 
@@ -95,16 +98,41 @@ export class AssessmentScreen extends Component
 
     if ((this.state.currentQuestion+1) >= this.state.maxQuestions)
     {
+      //Record to student Data!
+      var questionsCopy = this.state.questionsData.slice();
+      console.log("00000");
+      console.log(this.state.questionsData);
+      var assessmentData = new AssessmentData(questionsCopy, "BABABOOEY" );
+      console.log(assessmentData);
+
+      console.log("1111");
+      var copy = student;
+      copy.assessmentData.push( assessmentData);
+
+      console.log("2222");
+      this.setState({student: copy})
+      //  student.firstName = "SDJLK"; 
+      updateStudent(copy); 
+
+      console.log("333");
+      //Clear
+      this.setState({questionsData: [] })
+      console.log("444");
       this.props.navigation.navigate('ResultScreen', {grading});
     }
 
     else
     {
-      // this.state.currentQuestion++;
-      // this.state.scaffolding = 0;
-      // this.state.notes = '';
+      //Copy questions data into array
+      var questionData = new QuestionData( id, val, this.state.notes, this.state.scaffolding);
 
+      var copy = this.state.questionsData.slice(); //Create copy
+      copy.push(questionData);
+      this.setState({questionsData: copy});
 
+      console.log(JSON.stringify( this.state.questionsData ));
+
+      //Clear
       this.setState({currentQuestion: this.state.currentQuestion+1});
       this.setState({scaffolding: 0});
       this.setState({notes: ''});
@@ -116,7 +144,7 @@ export class AssessmentScreen extends Component
 // ------------ * RENDER * ------------------------
   render(){
     const { route, navigation } = this.props;
-    const { questions } = route.params;
+    const { questions, student , updateStudent } = route.params;
 
     this.state.maxQuestions = questions.length;
 
@@ -182,13 +210,13 @@ export class AssessmentScreen extends Component
 
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={() => this.grade(true)}>
+              onPress={() => this.grade(true, questions[this.state.currentQuestion], student, updateStudent)}>
               <Text style={styles.buttonText}>Correct</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={[styles.bottomButton, globalStyles.danger]}
-              onPress={() => this.grade(false)}>
+              onPress={() => this.grade(false, questions[this.state.currentQuestion], student, updateStudent)}>
               <Text style={styles.buttonText}>Incorrect</Text>
             </TouchableOpacity>
 

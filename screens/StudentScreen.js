@@ -112,6 +112,46 @@ export class StudentScreen extends Component
     this.state.textEAddress = '';
   }
 
+  renderRecentAssessments = (props, student) =>
+  {
+    if (student.assessmentData.length == 0)
+    {  
+      return(
+        <Text style={[globalStyles.flexAlignCenter]}>No recent assessments</Text>
+      )
+
+    }
+
+    else{
+
+      return(
+        <ScrollView style={styles.assessmentsPanel}>
+          <Text style={[globalStyles.flexAlignCenter]}>ASSESSMENTS EXISTS!</Text>
+
+
+        {       
+          //console.log(student.assessmentData[0].slp)   
+          // //this.state.recentAssessments.map((assessment,index) => (
+            student.assessmentData.map((assessment,index) => (
+            <View key={"assessment"+index}>
+            
+
+            <View style={styles.recentAssessments}>
+
+              <Text style={styles.h2}>{assessment.name} DATE HAHA</Text>
+
+            </View>
+
+            <Divider/>
+            </View>
+          ) )
+        }      
+
+        </ScrollView>
+      )
+    }
+  }
+
 // ------------ * RENDER * ------------------------
   render(){
   const { route, navigation } = this.props;
@@ -167,12 +207,14 @@ export class StudentScreen extends Component
                 style={styles.bottomButton}
                 onPress={ () => {
 
-                  let copy = student;
-                  copy.firstName = "12364356";
+                  console.log(student);
+                  console.log(student.assessmentData.length);
+                  // let copy = student;
+                  // copy.firstName = "12364356";
 
-                   this.setState({student: copy})
-                   //student.firstName = "SDJLK"; 
-                   updateHomeStudent(copy); 
+                  //  this.setState({student: copy})
+                  //  //student.firstName = "SDJLK"; 
+                  //  updateHomeStudent(copy); 
 
 
                   }}>
@@ -198,27 +240,12 @@ export class StudentScreen extends Component
         <View style={styles.rightPanel}>
 
           <View style={styles.box}>
-            {/* <Text style={[globalStyles.flexAlignCenter]}>No recent assessments</Text> */}
-
-
-            <ScrollView style={styles.assessmentsPanel}>
-            {
             
-              this.state.recentAssessments.map((assessment,index) => (
-                <View key={"assessment"+index}>
-                
 
-                <View style={styles.recentAssessments}>
 
-                  <Text style={styles.h2}>{assessment} DATE HAHA</Text>
-
-                </View>
-
-                <Divider/>
-                </View>
-              ) )
-            }               
-            </ScrollView>
+          {
+            this.renderRecentAssessments(this.props, student)
+          }
 
 
 
