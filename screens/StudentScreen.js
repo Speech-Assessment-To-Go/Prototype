@@ -34,11 +34,16 @@ const title = 'A';
 
 export class StudentScreen extends Component
 {
+  constructor(props){
+    super(props);
+  }
 
   state = {
     modalVisible:false,        
         //Email MODAL
         textEAddress:'',
+
+      recentAssessments:["4/12/21","4/13/21","4/14/21","4/15/21","4/16/21","4/17/21","4/18/21","4/19/21","4/13/21","4/14/21","4/15/21","4/16/21","4/17/21","4/18/21","4/19/21","4/13/21","4/14/21","4/15/21","4/16/21","4/17/21","4/18/21","4/19/21","4/13/21","4/14/21","4/15/21","4/16/21","4/17/21","4/18/21","4/19/21","4/13/21","4/14/21","4/15/21","4/16/21","4/17/21","4/18/21","4/19/21"],  
   }
   
     toggleModalEmail(visible) {
@@ -75,7 +80,8 @@ export class StudentScreen extends Component
           var t = new XMLHttpRequest; 
           return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof XDomainRequest ? (t = new XDomainRequest).open(e, n) : t = null, t 
       } 
-};
+    };
+
     Email.send({
     Host: "smtp.elasticemail.com",
     Username: "stackunderflow2021@gmail.com",
@@ -96,6 +102,12 @@ export class StudentScreen extends Component
     this.toggleModalEmail(false);
   }
 
+
+  // handlerUpdateStudent(studentData)
+  // {
+  //   this.setState({student: studentData})
+  // }
+
   clearInput(){
     this.state.textEAddress = '';
   }
@@ -103,7 +115,9 @@ export class StudentScreen extends Component
 // ------------ * RENDER * ------------------------
   render(){
   const { route, navigation } = this.props;
-  const { student } = route.params;
+  const { student, updateHomeStudent } = route.params; //This is done so I don't have to type the long path
+
+  //var student = schoolsObj[global.selectedSchool].students[global.selectedStudent];
 
       return(
         <Provider>
@@ -142,11 +156,29 @@ export class StudentScreen extends Component
           {/* BOTTOM */}
           <View style={[globalStyles.flex1, globalStyles.flexVertEnd]}>
             <TextInput style={styles.textInput} onChangeText={(text) => console.log(text)} placeholder={"Notes"}/>
+
+            {/* <TouchableOpacity
+                style={styles.bottomButton}
+                onPress={ () => navigation.push('TopicScreen', {student: student})}> 
+                <Text style={[styles.buttonText]}>Edit</Text>
+            </TouchableOpacity> */}
+
             <TouchableOpacity
                 style={styles.bottomButton}
-                onPress={ () => navigation.push('TopicScreen')}>
-                <Text style={[styles.buttonText]}>Edit</Text>
+                onPress={ () => {
+
+                  let copy = student;
+                  copy.firstName = "12364356";
+
+                   this.setState({student: copy})
+                   //student.firstName = "SDJLK"; 
+                   updateHomeStudent(copy); 
+
+
+                  }}>
+                <Text style={[styles.buttonText]}>CHANGE</Text>
             </TouchableOpacity>
+
           </View>
 
           </View>
@@ -166,8 +198,27 @@ export class StudentScreen extends Component
         <View style={styles.rightPanel}>
 
           <View style={styles.box}>
-            <Text style={[globalStyles.flexAlignCenter]}>No recent assessments</Text>
+            {/* <Text style={[globalStyles.flexAlignCenter]}>No recent assessments</Text> */}
 
+
+            <ScrollView style={styles.assessmentsPanel}>
+            {
+            
+              this.state.recentAssessments.map((assessment,index) => (
+                <View key={"assessment"+index}>
+                
+
+                <View style={styles.recentAssessments}>
+
+                  <Text style={styles.h2}>{assessment} DATE HAHA</Text>
+
+                </View>
+
+                <Divider/>
+                </View>
+              ) )
+            }               
+            </ScrollView>
 
 
 
@@ -178,7 +229,7 @@ export class StudentScreen extends Component
         <View style={globalStyles.flexRowReverse}>
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={ () => navigation.push('TopicScreen')}>
+              onPress={ () => navigation.push('TopicScreen', {student: student, updateHomeStudent: updateHomeStudent.bind(this)})}> 
               <Text style={styles.buttonText}>Take Assessment</Text>
             </TouchableOpacity>
 
@@ -279,8 +330,6 @@ const styles = StyleSheet.create({
     width: "50%"
   },
 
-
-
   h2:{
     fontSize: 18,
     fontWeight: 'bold'
@@ -344,7 +393,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4,
     borderColor: '#00bcd4',
     width: "100%",
-    padding: 15,
+    // padding: 15,
 
   },
 
@@ -364,6 +413,22 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15
     },
+
+  recentAssessments:{
+    justifyContent: "flex-end",
+    width: "100%",
+    height: 32,
+    backgroundColor: "red",
+    margin: 0,
+    padding: 0
+    // borderBottomWidth: 1
+  },
+
+  // assessmentsPanel:{
+  //   width: "100%",
+  //   margin: 0,
+  //   padding: 0
+  // },
 
 ////// MODAL STUFF 
 

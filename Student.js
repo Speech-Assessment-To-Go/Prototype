@@ -1,3 +1,5 @@
+import { QuestionData } from './QuestionData.js'
+
 export class Student
 {
     constructor(firstName = 'NULL', lastName = 'NULL', ethnicity = 'NULL', school = 'NULL', birth = 'NULL', language = 'NULL', grade = 5, id = "-1")
@@ -11,6 +13,7 @@ export class Student
         this.grade = grade;
         this.id = -1;
         this.middleName;
+        
         
     }
 }

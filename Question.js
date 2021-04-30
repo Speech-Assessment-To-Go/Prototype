@@ -1,3 +1,6 @@
+//Deprecate this!
+//POINTLESS CLASS!
+
 export class Question
 {
     constructor(img, question = 'What is this Object?')

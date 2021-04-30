@@ -123,7 +123,8 @@ export class TopicScreen extends Component
 
 // ------------ * RENDER * ------------------------
   render(){
-  const { navigation } = this.props;
+  const { route, navigation } = this.props;
+  const { student, updateHomeStudent } = route.params;
 
       return(      
 
@@ -219,7 +220,18 @@ export class TopicScreen extends Component
 
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={ () => navigation.navigate('AssessmentScreen', {assessment} )}>
+              onPress={ () => {
+
+                let copy = student;
+                copy.firstName = "123123123";
+
+                 this.setState({student: copy})
+                //  student.firstName = "SDJLK"; 
+                //  updateHomeStudent(copy); 
+                updateHomeStudent(copy); 
+
+
+                }}>
               <Text style={styles.buttonText}>Add</Text>
             </TouchableOpacity>
 

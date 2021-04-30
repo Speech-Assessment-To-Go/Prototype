@@ -64,6 +64,8 @@ export class SchoolScreen extends Component
     
         }
 
+        // this.handlerUpdateStudentData = this.handlerUpdateStudentData.bind(this)
+
         this.init();
 
       }
@@ -72,12 +74,24 @@ export class SchoolScreen extends Component
   //Initialize
   init ()
   {
-
-    //console.log('BURP INIT');
-    //console.log(globalStyles.hello);
-    //console.log(global.hello);
+    // console.log("Loaded from init!");
     this.loadSchools();
   }
+
+  handlerUpdateStudent(studentData)
+  {
+    //this.forceUpdate();
+    let copy = this.state.schoolsObj.slice(); //Create copy
+
+    copy[global.selectedSchool].students[selectedStudent] = studentData;
+
+    this.setState({schoolsObj: copy})
+  }
+
+  // componentDidMount()
+  // {
+  //   console.log("Loaded from componentDidMount");
+  // }
 
   toggleModalStudent(visible) {
     this.setState({ modalVisible: visible });
@@ -172,6 +186,14 @@ export class SchoolScreen extends Component
     toModify = text;
   }
 
+  goToStudent(props, student, studentIndex)
+  {
+    global.selectedSchool = this.state.selectedSchool
+    global.selectedStudent = studentIndex;
+
+    props.navigation.navigate('StudentScreen', {student: student, updateHomeStudent: this.handlerUpdateStudent.bind(this) });
+  }
+
   renderStudentList = (props) =>
   {
     if (this.state.schoolsObj.length == 0)
@@ -187,7 +209,7 @@ export class SchoolScreen extends Component
           
           <TouchableOpacity
             style={styles.mainButton}
-            onPress={ () => props.navigation.navigate('StudentScreen', {student} )}>
+            onPress={ () => this.goToStudent(this.props, student, index) }>
 
             <View style={globalStyles.flexRow}>
 
