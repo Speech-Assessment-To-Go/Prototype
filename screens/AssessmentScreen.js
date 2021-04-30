@@ -100,24 +100,21 @@ export class AssessmentScreen extends Component
     {
       //Record to student Data!
       var questionsCopy = this.state.questionsData.slice();
-      console.log("00000");
+
       console.log(this.state.questionsData);
       var assessmentData = new AssessmentData(questionsCopy, "BABABOOEY" );
       console.log(assessmentData);
 
-      console.log("1111");
       var copy = student;
       copy.assessmentData.push( assessmentData);
 
-      console.log("2222");
       this.setState({student: copy})
       //  student.firstName = "SDJLK"; 
       updateStudent(copy); 
 
-      console.log("333");
       //Clear
       this.setState({questionsData: [] })
-      console.log("444");
+
       this.props.navigation.navigate('ResultScreen', {grading});
     }
 
@@ -144,7 +141,7 @@ export class AssessmentScreen extends Component
 // ------------ * RENDER * ------------------------
   render(){
     const { route, navigation } = this.props;
-    const { questions, student , updateStudent } = route.params;
+    const { assessmentData, questions, student , updateStudent } = route.params;
 
     this.state.maxQuestions = questions.length;
 

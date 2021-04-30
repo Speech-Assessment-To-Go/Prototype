@@ -2,7 +2,7 @@ import { QuestionData } from './QuestionData.js'
 
 export class AssessmentData
 {
-    constructor(questionData, dateTaken,)
+    constructor(questionData, dateTaken)
     {   
         this.name = "ASSESSMENT NAME";
         this.dateTaken= dateTaken;

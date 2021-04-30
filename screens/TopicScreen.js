@@ -11,7 +11,7 @@ import {
   Modal
 } from 'react-native';
 
-import {  TextInput, Checkbox  } from 'react-native-paper';
+import {  TextInput, Checkbox, RadioButton  } from 'react-native-paper';
 
 import { globalStyles } from '../globalStyles';
 import { Button, Divider,   } from 'react-native-paper';
@@ -24,6 +24,8 @@ import { Question } from '../Question'
 
 import Database from '../Database.js';
 import { cos } from 'react-native-reanimated';
+
+import {AssessmentData} from '../AssessmentData'
 
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
@@ -52,16 +54,17 @@ export class TopicScreen extends Component
       // topics:[ new Topic('WH Questions'), new Topic('Repeat After Me'), new Topic('Audiotoruim Memory'), new Topic('Repeating Utterances'),
       //  new Topic('Creating Utterances'), new Topic('Following Directions'), new Topic('Phonemes'), new Topic('Articulation')],
 
-      assessments:[ new Assessment('Assessment 1z', [0,1,2,3,4,5]), new Assessment('Assessment 2',[6,7,8,9,10]), new Assessment('Assessment 3',[22,13,15,12,14])],
+      structures:[ new Assessment('WH Questions', [0,1,2,3,4,5]), new Assessment('Repeat After Me',[6,7,8,9,10]), new Assessment('Following Directions',[22,13,15,12,14])],
 
-      content:["General Knowledge", "Personal Experience"],
+      content:["Complexity 1","Complexity 2","Complexity 3","Complexity 4","Complexity 5"],
 
       structureChecks:[false, false, false, false, false, false, false, false], //HARDCODED :)
       contentChecks:[false, false, false, false, false, false, false, false], //Also HARDCODED :D
 
       numQuestions:'',
 
-      questions:[],//Question IDS
+      // questions:[],//Question IDS
+      assessmentData:null, //Pass this information to the next class
 
 
       selectedAssessment:0,
@@ -96,12 +99,20 @@ export class TopicScreen extends Component
 
   setStructureCheckbox(index)
   {
+    //Clear
+    for (var i = 0; i < this.state.structureChecks.length; i++)
+      this.state.structureChecks[i] = false;
+
     this.state.structureChecks[index] = !this.state.structureChecks[index];
     this.forceUpdate();
   }
 
   setContentCheckbox(index)
   {
+    //Clear
+    for (var i = 0; i < this.state.contentChecks.length; i++)
+      this.state.contentChecks[i] = false;
+
     this.state.contentChecks[index] = !this.state.contentChecks[index];
     this.forceUpdate();
   }
@@ -142,7 +153,7 @@ export class TopicScreen extends Component
 
         <ScrollView style={[styles.structurePanel, globalStyles.flex3]}>
         {
-          this.state.assessments.map((assessment,index) => (
+          this.state.structures.map((assessment,index) => (
             <View key={"assessment"+index}>
             
             <TouchableOpacity
@@ -154,7 +165,7 @@ export class TopicScreen extends Component
               
 
               <View style={styles.checkboxBlock}>
-                <Checkbox
+                <RadioButton
                 status={this.state.structureChecks[index] ? 'checked' : 'unchecked'}
                 onPress={() => {
                   this.setStructureCheckbox(index);
@@ -178,7 +189,7 @@ export class TopicScreen extends Component
         <View style={[styles.footer]}></View>
 
         {/* CONTENT */}
-        {/* <View style={[styles.header]}>
+        <View style={[styles.header]}>
           <Text style={[styles.h1]}>Content</Text> 
         </View>
 
@@ -190,18 +201,18 @@ export class TopicScreen extends Component
             <TouchableOpacity
               // style={[styles.mainButton, (index == this.state.selectedTopic)? styles.selectedBG: styles.unselectedBG]}
               style={[styles.mainButton, styles.unselectedBG]}
-              onPress={() => this.setContentCheck(index)}>
+              onPress={() => this.setContentCheckbox(index)}>
 
               <View style={globalStyles.flexRow}>
               
 
               <View style={styles.checkboxBlock}>
-                <Checkbox
+                <RadioButton
                 status={this.state.contentChecks[index] ? 'checked' : 'unchecked'}
                 onPress={() => {
-                  this.setContentCheck(index);
+                  this.setContentCheckbox(index);
                 }}
-                  />
+                />
               </View>
 
 
@@ -216,7 +227,7 @@ export class TopicScreen extends Component
             </View>
           ) )
         }             
-        </ScrollView> */}
+        </ScrollView>
 
         <View style={[globalStyles.flexRowReverse, globalStyles.flexHoriCenter]}>
 
@@ -259,7 +270,7 @@ export class TopicScreen extends Component
         {
 
 
-          this.state.assessments[this.state.selectedAssessment].questions.map( (questionID,index) => (
+          this.state.structures[this.state.selectedAssessment].questions.map( (questionID,index) => (
             <View key={"assessment"+index}>
 
             
@@ -269,10 +280,10 @@ export class TopicScreen extends Component
               onPress={ () => 
               {
                 //Get questions from premade assessments
-                global.questions = this.state.assessments[this.state.selectedAssessment].questions;
+                global.questions = this.state.structures[this.state.selectedAssessment].questions;
             
                 //Pass update student to update recent assessments panel
-                navigation.navigate('AssessmentScreen', {questions:global.questions, student:student, updateStudent: updateStudent.bind(this)});
+                navigation.navigate('AssessmentScreen', {assessmentData:this.state.assessmentData, questions:global.questions, student:student, updateStudent: updateStudent.bind(this)});
               } }>
 
               <View style={globalStyles.flexRow}>
