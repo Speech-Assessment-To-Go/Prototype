@@ -26,6 +26,7 @@ import Database from '../Database.js';
 import { cos } from 'react-native-reanimated';
 
 import {AssessmentData} from '../AssessmentData'
+import {QuestionData} from '../QuestionData'
 
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
@@ -64,7 +65,7 @@ export class TopicScreen extends Component
       numQuestions:'',
 
       // questions:[],//Question IDS
-      assessmentData:null, //Pass this information to the next class
+
 
 
       selectedAssessment:0,
@@ -281,9 +282,15 @@ export class TopicScreen extends Component
               {
                 //Get questions from premade assessments
                 global.questions = this.state.structures[this.state.selectedAssessment].questions;
+
+                var questionsData = [];
+                for (var i = 0; i < global.questions.length; i++)
+                  questionsData.push(new QuestionData(global.questions[i]));
+
+                var assessmentData = new AssessmentData(questionsData, "DATE HERE");
             
                 //Pass update student to update recent assessments panel
-                navigation.navigate('AssessmentScreen', {assessmentData:this.state.assessmentData, questions:global.questions, student:student, updateStudent: updateStudent.bind(this)});
+                navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: updateStudent.bind(this), reviewMode:false});
               } }>
 
               <View style={globalStyles.flexRow}>

@@ -2,9 +2,9 @@
 
 export class QuestionData
 {
-    constructor(questionID, correctness, notes, scaffolding)
+    constructor(id, correctness = false, notes = '', scaffolding = 0)
     {
-        this.questionID = questionID;
+        this.id = id;
 
         this.correctness = correctness;
         this.notes = notes;

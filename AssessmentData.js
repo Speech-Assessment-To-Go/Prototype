@@ -8,7 +8,7 @@ export class AssessmentData
         this.dateTaken= dateTaken;
         //this.questions = questions; //IDS of the questions
 
-        this.QuestionData=questionData;//List of question data (date, notes, scaffolding, etc)
+        this.questionData=questionData;//List of question data (date, notes, scaffolding, etc)
 
         this.slp = "SLP's Name";
 

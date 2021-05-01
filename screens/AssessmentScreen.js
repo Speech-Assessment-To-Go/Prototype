@@ -23,6 +23,7 @@ import { RoundedText } from '../components/RoundedText';
 import {AssessmentData} from '../AssessmentData'
 import {QuestionData} from '../QuestionData'
 
+
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
 {
@@ -141,9 +142,15 @@ export class AssessmentScreen extends Component
 // ------------ * RENDER * ------------------------
   render(){
     const { route, navigation } = this.props;
-    const { assessmentData, questions, student , updateStudent } = route.params;
+    const { assessmentData, student , updateStudent, reviewMode } = route.params;
 
-    this.state.maxQuestions = questions.length;
+    // this.state.maxQuestions = questions.length;
+    // this.setState({maxQuestions: assessmentData.questionData.length})
+    this.state.maxQuestions = assessmentData.questionData.length;
+
+    console.log(assessmentData);
+
+    questions = assessmentData.questionData;
 
       return(      
       <View style={[styles.container]}>
@@ -172,7 +179,7 @@ export class AssessmentScreen extends Component
           {/* MIDDLE! */}
           <View style={[styles.container, globalStyles.flex8]}>
 
-            <Text style={styles.question}>{ global.parsedQuestions[ questions[this.state.currentQuestion] ].text }</Text>
+            <Text style={styles.question}>{ global.parsedQuestions[ questions[this.state.currentQuestion].id ].text }</Text>
             <Image style={styles.img}  source={this.state.questionsObj[this.state.currentQuestion].img} />
 
           </View>
@@ -207,13 +214,13 @@ export class AssessmentScreen extends Component
 
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={() => this.grade(true, questions[this.state.currentQuestion], student, updateStudent)}>
+              onPress={() => this.grade(true, questions[this.state.currentQuestion].id, student, updateStudent)}>
               <Text style={styles.buttonText}>Correct</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={[styles.bottomButton, globalStyles.danger]}
-              onPress={() => this.grade(false, questions[this.state.currentQuestion], student, updateStudent)}>
+              onPress={() => this.grade(false, questions[this.state.currentQuestion].id, student, updateStudent)}>
               <Text style={styles.buttonText}>Incorrect</Text>
             </TouchableOpacity>
 
