@@ -355,7 +355,7 @@
         "img": "https://publicdomainvectors.org/tn_img/led-triangular-1-grey.png",
         "structure": ["wh"],
         "complexity": [1]   
-    },
+    },-----------------------
 	
     {
         "text": "Why do we mow grass?",
@@ -558,6 +558,580 @@
         "img": "https://publicdomainvectors.org/photos/Rfc1394-Double-Bed.png",
         "structure": ["wh"],
         "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"dog\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"cat\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"house\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"tree\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"bed\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"cup\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"plate\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"red\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"blue\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"green\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"chair\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"table\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"car\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"white\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"black\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"sky\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"door\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"book\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"sand\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"nose\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [1]
+    },
+	
+    {
+        "text": "Can you say \"doorknob\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"computer\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"purple\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"lightbulb\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"giraffe\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"penguin\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"pencil\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"calendar\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"basketball\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"baseball\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"ponytail\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"bookshelf\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"skyscraper\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"apple pie\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"spaghetti\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"flower pot\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"yesterday\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"tomorrow\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"refrigerator\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"chalkboard\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [2]
+    },
+	
+    {
+        "text": "Can you say \"The dog is brown.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"The cat said \'meow.\'\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"The table is yellow.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"Jill likes pizza.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"Tom likes cars.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"Dustin is nice.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"Sally loves to run.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"Jack and Jill went up the hill.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"Her hair is red.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"John's pants are white.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"Anne's shirt is blue.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"The sun is up.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"The dishes are clean.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"The door is open.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"The window is closed.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"The house is very big.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"Maria's shoes are green.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"This music is loud.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"The tree is very tall.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"Jack's eyes are blue.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"Jasmine has brown eyes.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [3]
+    },
+	
+    {
+        "text": "Can you say \"Marcus really like to sleep in late.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"Veronica loves eating lots of food at dinner.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"Ramil works on computers at his job.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"Many dogs have big tails, bit some dogs have small tails.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"The penguin likes to play on the ice.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"Giraffes have long necks and orange spots.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"When the sun comes up, everything gets brighter.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"The mailman likes to give treats to dogs.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"Mixing red and blue makes purple.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"There are seven days in a week.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"The flag's colors are red, white, and blue.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"John's bed is soft, but Maria's bed is hard.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"A triangle has three sides.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"Margarita has many books on her bookshelf.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"Tomorrow is Vincent's birthday.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"When it rains, Elliott uses his umbrella.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"Mr. Smith likes to drive his car fast.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"Destiny loves to swim in her parents' pool.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"Red, orange, yellow, green, blue, purple.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"The gorilla is stronger than the monkey.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
+    },
+	
+    {
+        "text": "Can you say \"Adriana likes to play tic-tac-toe with her brother.\"?",
+        "img": -1,
+        "structure": ["repeat"],
+        "complexity": [4]
     }
 
 ]
