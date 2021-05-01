@@ -51,7 +51,7 @@ export class StudentScreen extends Component
       this.clearInput();
   }
 
-  sendEmail()
+  sendEmail(subject, body)
   {
     var Email = 
     { 
@@ -88,8 +88,8 @@ export class StudentScreen extends Component
     Password: "7637EF12FF54E310A2824C17E3D6F629342D",
     To: this.state.textEAddress,
     From: "stackunderflow2021@gmail.com",
-    Subject: "Student Profile",
-    Body: "This is the file sent for the speech assessment. Please do not respond to this email.",
+    Subject: subject,
+    Body: body,
     //use when we have the pdf/attachment
     // Attachments:[
     // {
@@ -149,7 +149,7 @@ export class StudentScreen extends Component
 
                 //Get saved information of the assessmentData
                 var assessmentData = student.assessmentData[index];
-
+                
                 props.navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: this.handlerUpdateStudent.bind(this), reviewMode:true});
                 }}>
               {/* <Text style={styles.buttonText}>Add</Text> */}

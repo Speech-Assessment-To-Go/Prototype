@@ -58,7 +58,9 @@ export class AssessmentScreen extends Component
 
       questionsData:[], //Used for each question to build question Data
 
-      firstRun: true //check if ran through render loop at least once
+      firstRun: true, //check if ran through render loop at least once
+
+      img: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg"
 
 
     };
@@ -196,7 +198,9 @@ export class AssessmentScreen extends Component
           <View style={[styles.container, globalStyles.flex8]}>
 
             <Text style={styles.question}>{ global.parsedQuestions[ questions[this.state.currentQuestion].id ].text }</Text>
-            <Image style={styles.img}  source={this.state.questionsObj[this.state.currentQuestion].img} />
+            <Image style={styles.img}          
+            source={{uri: this.state.img  }} 
+        />
 
           </View>
 
