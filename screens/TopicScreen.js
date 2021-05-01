@@ -287,7 +287,7 @@ export class TopicScreen extends Component
                 for (var i = 0; i < global.questions.length; i++)
                   questionsData.push(new QuestionData(global.questions[i]));
 
-                var assessmentData = new AssessmentData(questionsData, "DATE HERE");
+                var assessmentData = new AssessmentData(questionsData, (new Date()).toUTCString() );
             
                 //Pass update student to update recent assessments panel
                 navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: updateStudent.bind(this), reviewMode:false});

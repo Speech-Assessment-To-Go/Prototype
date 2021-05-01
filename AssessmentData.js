@@ -2,9 +2,9 @@ import { QuestionData } from './QuestionData.js'
 
 export class AssessmentData
 {
-    constructor(questionData, dateTaken)
+    constructor(questionData, dateTaken, name = "_NAME")
     {   
-        this.name = "ASSESSMENT NAME";
+        this.name = name;
         this.dateTaken= dateTaken;
         //this.questions = questions; //IDS of the questions
 

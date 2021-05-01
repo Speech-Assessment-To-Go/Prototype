@@ -56,7 +56,9 @@ export class AssessmentScreen extends Component
 
       modalNotesVisible:false,
 
-      questionsData:[]
+      questionsData:[], //Used for each question to build question Data
+
+      firstRun: true //check if ran through render loop at least once
 
 
     };
@@ -90,7 +92,7 @@ export class AssessmentScreen extends Component
     this.setState({ modalNotesVisible: visible });
   }
 
-  grade(val, id, student, updateStudent)
+  grade(val, id, student, updateStudent, assessmentData, reviewMode)
   {
     this.state.grading.push(val);
 
@@ -103,7 +105,7 @@ export class AssessmentScreen extends Component
       var questionsCopy = this.state.questionsData.slice();
 
       console.log(this.state.questionsData);
-      var assessmentData = new AssessmentData(questionsCopy, "BABABOOEY" );
+      var assessmentData = new AssessmentData(questionsCopy, assessmentData.dateTaken );
       console.log(assessmentData);
 
       var copy = student;
@@ -130,12 +132,20 @@ export class AssessmentScreen extends Component
 
       console.log(JSON.stringify( this.state.questionsData ));
 
-      //Clear
+      //Clear and go to next question
       this.setState({currentQuestion: this.state.currentQuestion+1});
       this.setState({scaffolding: 0});
       this.setState({notes: ''});
 
-      // this.forceUpdate();
+      //Load data if in review mode
+      if (reviewMode == true)
+      {      
+        this.setState({ notes: questions[this.state.currentQuestion].notes });
+        this.setState({ scaffolding: questions[this.state.currentQuestion].scaffolding });
+        this.state.firstRun = false;
+      }
+
+
     }
   }
 
@@ -144,13 +154,19 @@ export class AssessmentScreen extends Component
     const { route, navigation } = this.props;
     const { assessmentData, student , updateStudent, reviewMode } = route.params;
 
-    // this.state.maxQuestions = questions.length;
-    // this.setState({maxQuestions: assessmentData.questionData.length})
     this.state.maxQuestions = assessmentData.questionData.length;
 
     console.log(assessmentData);
 
     questions = assessmentData.questionData;
+
+    //For first question, make sure to set up notes and scafolding value for loading
+    if (reviewMode == true && this.state.firstRun == true)
+    {      
+      this.setState({ notes: questions[this.state.currentQuestion].notes });
+      this.setState({ scaffolding: questions[this.state.currentQuestion].scaffolding });
+      this.state.firstRun = false;
+    }
 
       return(      
       <View style={[styles.container]}>
@@ -214,13 +230,13 @@ export class AssessmentScreen extends Component
 
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={() => this.grade(true, questions[this.state.currentQuestion].id, student, updateStudent)}>
+              onPress={() => this.grade(true, questions[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
               <Text style={styles.buttonText}>Correct</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={[styles.bottomButton, globalStyles.danger]}
-              onPress={() => this.grade(false, questions[this.state.currentQuestion].id, student, updateStudent)}>
+              onPress={() => this.grade(false, questions[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
               <Text style={styles.buttonText}>Incorrect</Text>
             </TouchableOpacity>
 

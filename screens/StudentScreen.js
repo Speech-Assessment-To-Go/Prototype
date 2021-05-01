@@ -136,11 +136,27 @@ export class StudentScreen extends Component
             <View key={"assessment"+index}>
             
 
-            <View style={styles.recentAssessments}>
+            {/* <View style={styles.recentAssessments}>
 
-              <Text style={styles.h2}>{assessment.name} DATE HAHA</Text>
+              <Text style={styles.h2}>{assessment.dateTaken} </Text>
 
-            </View>
+            </View> */}
+
+            
+            <TouchableOpacity
+              style={styles.recentAssessmentButton}
+              onPress={ () => {
+
+                //Get saved information of the assessmentData
+                var assessmentData = student.assessmentData[index];
+
+                props.navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: this.handlerUpdateStudent.bind(this), reviewMode:true});
+                }}>
+              {/* <Text style={styles.buttonText}>Add</Text> */}
+              <Text style={styles.h2}>{assessment.dateTaken} </Text>
+            </TouchableOpacity>
+
+
 
             <Divider/>
             </View>
@@ -442,6 +458,16 @@ const styles = StyleSheet.create({
     },
 
   recentAssessments:{
+    justifyContent: "flex-end",
+    width: "100%",
+    height: 32,
+    backgroundColor: "red",
+    margin: 0,
+    padding: 0
+    // borderBottomWidth: 1
+  },
+
+  recentAssessmentButton:{
     justifyContent: "flex-end",
     width: "100%",
     height: 32,
