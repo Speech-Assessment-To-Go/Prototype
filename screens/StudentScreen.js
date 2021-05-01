@@ -132,7 +132,7 @@ export class StudentScreen extends Component
         {       
           //console.log(student.assessmentData[0].slp)   
           // //this.state.recentAssessments.map((assessment,index) => (
-            student.assessmentData.map((assessment,index) => (
+            student.assessmentData.map((assessment, index) => (
             <View key={"assessment"+index}>
             
 

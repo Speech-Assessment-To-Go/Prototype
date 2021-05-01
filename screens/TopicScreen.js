@@ -64,7 +64,7 @@ export class TopicScreen extends Component
 
       numQuestions:'',
 
-      // questions:[],//Question IDS
+      questions:[],//Question IDS
 
 
 
@@ -94,6 +94,17 @@ export class TopicScreen extends Component
 
   selectTopic(index){
     this.state.selectedAssessment = index;
+
+    this.setState({questions: []});
+
+    var newQuestions = [];
+
+    for (var i = 0; i < this.state.structures[this.state.selectedAssessment].questions.length; i++)
+      newQuestions.push(this.state.structures[this.state.selectedAssessment].questions[i]);
+
+    this.setState({questions: newQuestions});
+
+
     this.setStructureCheckbox(index);
     //this.forceUpdate();
   }
@@ -271,7 +282,7 @@ export class TopicScreen extends Component
         {
 
 
-          this.state.structures[this.state.selectedAssessment].questions.map( (questionID,index) => (
+          this.state.questions.map( (questionID,index) => (
             <View key={"assessment"+index}>
 
             
@@ -280,26 +291,18 @@ export class TopicScreen extends Component
               // onPress={ () => navigation.navigate('AssessmentScreen', {assessment} )}>
               onPress={ () => 
               {
-                //Get questions from premade assessments
-                global.questions = this.state.structures[this.state.selectedAssessment].questions;
-
-                var questionsData = [];
-                for (var i = 0; i < global.questions.length; i++)
-                  questionsData.push(new QuestionData(global.questions[i]));
-
-                var assessmentData = new AssessmentData(questionsData, (new Date()).toUTCString() );
-            
-                //Pass update student to update recent assessments panel
-                navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: updateStudent.bind(this), reviewMode:false});
+                  let copy = this.state.questions.slice(); //Create copy
+                  copy.splice(index, 1);
+                  this.setState({questions: copy});
               } }>
 
               <View style={globalStyles.flexRow}>
 
               <RoundedText
-                    title = "+"
+                    title = "-"
                     color = "black"
                     backgroundColor = "#cccccc"
-                    fontSize={18}
+                    fontSize={24}
                     size={43}
                 />
      
@@ -318,7 +321,27 @@ export class TopicScreen extends Component
         <View style={globalStyles.flexRowReverse}>
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={ () => navigation.navigate('AssessmentScreen', {assessment} )}>
+              onPress={ () => 
+                {
+                  if (this.state.questions.length == 0)
+                  {
+                    alert("Cannot start without questions!");
+                    return;
+                  }
+
+                  //Get questions from premade assessments
+                  global.questions = this.state.questions;
+  
+                  var questionsData = [];
+                  for (var i = 0; i < global.questions.length; i++)
+                    questionsData.push(new QuestionData(global.questions[i]));
+  
+                  var assessmentData = new AssessmentData(questionsData, (new Date()).toUTCString() );
+              
+                  //Pass update student to update recent assessments panel
+                  navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: updateStudent.bind(this), reviewMode:false});
+                } }>
+  
               <Text style={styles.buttonText}>Start</Text>
             </TouchableOpacity>
         </View>   
