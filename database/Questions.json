@@ -2,1136 +2,1136 @@
     {
         "text": "What is the color of the sky?",
         "img": "https://publicdomainvectors.org/tn_img/1104-blue-sky-and-green-grass-background.png",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "What color is the bag?",
         "img": "https://publicdomainvectors.org/tn_img/Red_bag.png",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "What color is a crow?",
         "img": "https://publicdomainvectors.org/tn_img/crow-silhouette-freesvg.org.jpg",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "What do you wear on your feet?",
         "img": "https://publicdomainvectors.org/tn_img/high-tops.png",
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "What color are the leaves on the tree?",
         "img": "https://publicdomainvectors.org/tn_img/ete.png",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "How many fingers are on each hand?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "How many hands do you have?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "Where are we?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "Where is your favorite place to travel?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "Where do we go to eat?",
         "img": "https://publicdomainvectors.org/tn_img/dining-table-publicdomain.jpg",
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "Where do you sleep?",
         "img": "https://publicdomainvectors.org/tn_img/man-sleeps-in-bed-clip-art-publicdomain.jpg",
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
 
         "text": "Where do fish live?",
         "img": "https://publicdomainvectors.org/tn_img/fish-in-the-water-publicdomain.jpg",
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "What shape is a soccer ball?",
         "img": "https://publicdomainvectors.org/tn_img/1407858226.png",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "Where do we keep milk and butter?",
         "img": "https://publicdomainvectors.org/tn_img/Fridge.png",
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "Who puts out fires?",
         "img": "https://publicdomainvectors.org/tn_img/1543775377.png",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "Where do we buy groceries? ",
         "img": "https://publicdomainvectors.org/tn_img/Simple-Isometric-Store.png",
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "Who flies an airplane? ",
         "img": "https://publicdomainvectors.org/tn_img/africanpilot.png",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "Who do we go see when we are sick?",
         "img": "https://publicdomainvectors.org/tn_img/Young-Male-Doctor.png",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "Who checks our teeth for cavities?",
         "img": "https://publicdomainvectors.org/tn_img/johnny-automatic-dental-exam.png",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "Who delivers mail?",
         "img": "https://publicdomainvectors.org/tn_img/Postman.png",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "Who takes care of animals at the zoo?",
         "img": "https://image.freepik.com/free-vector/zoo-keeper-with-eagle_1308-20472.jpg",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "What do we need on a rainy day to keep us dry?",
         "img": "https://publicdomainvectors.org/tn_img/yellow-umbrella-publicdomain.jpg",
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "What do spiders build?",
         "img": "https://publicdomainvectors.org/tn_img/spider-vector-publicdomainv.jpg",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "What do cows give us that we drink?",
         "img": "https://publicdomainvectors.org/tn_img/milk-cereals-publicdomain.jpg",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "What show or movie do you like to watch on TV?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "What do you like to do when you get home from school? ",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "What things make you laugh?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "When do we sleep?",
         "img": "https://publicdomainvectors.org/tn_img/full-moon-night-publicdomain.jpg",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "When do we eat breakfast?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 	
     {
         "text": "When do we wear a coat?",
         "img": "https://publicdomainvectors.org/tn_img/publicdomainq-0011469uvhphq.png",
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "Where do we wear a seatbelt?",
         "img": "https://publicdomainvectors.org/tn_img/redblue_convertible_sports_car.png",
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "When do we use a flashlight?",
         "img": "https://publicdomainvectors.org/tn_img/city-night-landscape-public-domain.jpg",
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "When was the last time you went on vacation?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "When was the last time you went to the park?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "Why do children go to school?",
         "img": "https://publicdomainvectors.org/tn_img/classroom-school-publicdomain.jpg",
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do we wear shoes?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do we go to sleep?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do we have teeth?",
         "img": "https://publicdomainvectors.org/tn_img/1545416165.png",
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do we use an umbrella?",
         "img": "https://publicdomainvectors.org/tn_img/LadyInTheRain.png",
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
     
     {
         "text": "Why do we put gas in a car?",
         "img": "https://publicdomainvectors.org/tn_img/woman-driving-car-publicdomain.jpg",
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 
     {
         "text": "Who brings food to your table?",
         "img": "https://publicdomainvectors.org/tn_img/coupleouttoeat.png",
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 
     {
         "text": "What color are your shoes?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 
     {
         "text": "What color is your shirt?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 
     {
         "text": "When does school start?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [2]
+        "structure": "wh",
+        "complexity": 2
     },
 
     {
         "text": "What shape is this?",
         "img": "https://publicdomainvectors.org/tn_img/heart.png",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 
     {
         "text": "What shape is this?",
         "img": "https://images.freeimg.net/thumbs/button-1102747_1280.png",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 
     {
         "text": "What shape is this?",
         "img": "https://publicdomainvectors.org/tn_img/Flag_of_California_Star.png",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 
     {
         "text": "What shape is this?",
         "img": "https://publicdomainvectors.org/tn_img/ryanlerch-worldlabel.com-border-burgundy-Black-4x3.3.png",
-        "structure": ["wh"],
-        "complexity": [1]   
+        "structure": "wh",
+        "complexity": 1   
     },
 
     {
         "text": "What shape is this?",
         "img": "https://publicdomainvectors.org/tn_img/circle-15.png",
-        "structure": ["wh"],
-        "complexity": [1]    
+        "structure": "wh",
+        "complexity": 1    
     },
 
     {
         "text": "What shape is this?",
         "img": "https://publicdomainvectors.org/tn_img/milker_Block_icon_1.png",
-        "structure": ["wh"],
-        "complexity": [1]   
+        "structure": "wh",
+        "complexity": 1   
     },
 
     {
         "text": "What shape is this?",
         "img": "https://publicdomainvectors.org/tn_img/led-triangular-1-grey.png",
-        "structure": ["wh"],
-        "complexity": [1]   
+        "structure": "wh",
+        "complexity": 1   
     },-----------------------
 	
     {
         "text": "Why do we mow grass?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do we wear sunglasses?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do we take showers?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do birds have wings?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do kids go to school?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do people drink water?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do people watch TV?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do we water flowers?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do dogs bark?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do people smell flowers?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do people have pets?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do people listen to music?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do you eat food?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "Why do people run?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [4]
+        "structure": "wh",
+        "complexity": 4
     },
 	
     {
         "text": "What is a house?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "What is a school?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "What is a bed?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "What is a door?",
         "img": -1,
-        "structure": ["wh"],
-        "complexity": [3]
+        "structure": "wh",
+        "complexity": 3
     },
 	
     {
         "text": "What animal is this?",
         "img": "https://publicdomainvectors.org/photos/Gerald_G_Black_Lab.png",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "What animal is this?",
         "img": "https://publicdomainvectors.org/photos/1311548236.png",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "What animal is this?",
         "img": "https://publicdomainvectors.org/photos/Horse.png",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "What animal is this?",
         "img": "https://publicdomainvectors.org/photos/sea-turtle-cartoon-publicdomain.jpg",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "What animal is this?",
         "img": "https://publicdomainvectors.org/photos/penguin-clipart.jpg",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "What animal is this?",
         "img": "https://publicdomainvectors.org/photos/duck-clipart-publicdomain.jpg",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "What is this?",
         "img": "https://publicdomainvectors.org/photos/village-house.png",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "What is this?",
         "img": "https://publicdomainvectors.org/photos/1319326522.png",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "What is this?",
         "img": "https://publicdomainvectors.org/photos/ete.png",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "What is this?",
         "img": "https://publicdomainvectors.org/photos/GlitchSimplifiedBlueOfficeChair.png",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "What is this?",
         "img": "https://publicdomainvectors.org/photos/Rfc1394-Double-Bed.png",
-        "structure": ["wh"],
-        "complexity": [1]
+        "structure": "wh",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"dog\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"cat\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"house\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"tree\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"bed\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"cup\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"plate\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"red\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"blue\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"green\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"chair\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"table\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"car\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"white\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"black\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"sky\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"door\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"book\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"sand\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"nose\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [1]
+        "structure": "repeat",
+        "complexity": 1
     },
 	
     {
         "text": "Can you say \"doorknob\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"computer\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"purple\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"lightbulb\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"giraffe\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"penguin\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"pencil\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"calendar\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"basketball\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"baseball\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"ponytail\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"bookshelf\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"skyscraper\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"apple pie\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"spaghetti\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"flower pot\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"yesterday\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"tomorrow\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"refrigerator\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"chalkboard\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [2]
+        "structure": "repeat",
+        "complexity": 2
     },
 	
     {
         "text": "Can you say \"The dog is brown.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"The cat said \'meow.\'\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"The table is yellow.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"Jill likes pizza.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"Tom likes cars.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"Dustin is nice.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"Sally loves to run.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"Jack and Jill went up the hill.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"Her hair is red.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"John's pants are white.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"Anne's shirt is blue.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"The sun is up.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"The dishes are clean.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"The door is open.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"The window is closed.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"The house is very big.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"Maria's shoes are green.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"This music is loud.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"The tree is very tall.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"Jack's eyes are blue.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"Jasmine has brown eyes.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [3]
+        "structure": "repeat",
+        "complexity": 3
     },
 	
     {
         "text": "Can you say \"Marcus really like to sleep in late.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"Veronica loves eating lots of food at dinner.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"Ramil works on computers at his job.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"Many dogs have big tails, bit some dogs have small tails.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"The penguin likes to play on the ice.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"Giraffes have long necks and orange spots.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"When the sun comes up, everything gets brighter.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"The mailman likes to give treats to dogs.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"Mixing red and blue makes purple.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"There are seven days in a week.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"The flag's colors are red, white, and blue.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"John's bed is soft, but Maria's bed is hard.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"A triangle has three sides.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"Margarita has many books on her bookshelf.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"Tomorrow is Vincent's birthday.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"When it rains, Elliott uses his umbrella.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"Mr. Smith likes to drive his car fast.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"Destiny loves to swim in her parents' pool.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"Red, orange, yellow, green, blue, purple.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"The gorilla is stronger than the monkey.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     },
 	
     {
         "text": "Can you say \"Adriana likes to play tic-tac-toe with her brother.\"?",
         "img": -1,
-        "structure": ["repeat"],
-        "complexity": [4]
+        "structure": "repeat",
+        "complexity": 4
     }
 
 ]
