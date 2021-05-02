@@ -129,16 +129,29 @@ export class AssessmentScreen extends Component
     {
       return(
         <View style={[styles.container]}>
+     
+        <View style={[globalStyles.flexRow]}>
 
-        {/* NOTES BUTTON */}
-        <View style={globalStyles.flexRow, globalStyles.flex1}>
-          <TouchableOpacity
-            style={styles.topButton}
-            onPress={() => this.toggleModalNotes(true)}>
-            <Text style={styles.buttonText}>Notes</Text>
-          </TouchableOpacity>
+            {/* NOTES BUTTON */}
+            <View style={globalStyles.flexRow, globalStyles.flex1}>
+
+            <View style={[globalStyles.flex1]}>
+                <Text style={[styles.h2, globalStyles.flexAlignStart]}> { (this.state.currentQuestion+1) + " of " + assessmentData.questionData.length + " Questions"}</Text>
+            </View>
+
+
+            <View style={[globalStyles.flex1, globalStyles.flexHoriCenter]}>
+              <TouchableOpacity
+                  style={styles.topButton}
+                  onPress={() => this.toggleModalNotes(true)}>
+                  <Text style={styles.buttonText}>Notes</Text>
+                </TouchableOpacity>
+            </View>
+
+        </View>
 
         </View>     
+
 
 
       {/* QUESTIONS IMG & TEXT & SIDES*/}
@@ -278,6 +291,7 @@ export class AssessmentScreen extends Component
       // console.log(this.state.questionsData);
       var newAssessmentData = new AssessmentData(questionsCopy, assessmentData.dateTaken );
       // console.log(assessmentData);
+      newAssessmentData.score = this.getPercent(grading);
 
       var copyStudent = student;
       // var copyStudent = Object.assign({}, student);
@@ -365,7 +379,13 @@ export class AssessmentScreen extends Component
             <TouchableOpacity
               style={[styles.bottomButton]}
               onPress={() => props.navigation.goBack()}>
-              <Text style={styles.buttonText}>Review</Text>
+              <Text style={styles.buttonText}>Back</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.bottomButton]}
+              onPress={() => props.navigation.goBack()}>
+              <Text style={styles.buttonText}>Email</Text>
             </TouchableOpacity>
 
           </View>
@@ -420,6 +440,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
+  h2:{
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+
+
   bottomButton: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -440,6 +466,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 140,
     marginTop: 12,
     height: 25,
+    maxWidth: 200,
     backgroundColor: "#ffbcd4"
 
   },

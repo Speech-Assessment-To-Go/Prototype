@@ -255,7 +255,7 @@ export class SchoolScreen extends Component
 
       return(
         <ScrollView style={styles.assessmentsPanel}>
-          <Text style={[globalStyles.flexAlignCenter]}>ASSESSMENTS EXISTS!</Text>
+          <Text style={[globalStyles.flexAlignCenter]}> {this.state.studentsObjs[this.state.selectedStudent].assessmentData.length + " Assessments Taken"}</Text>
 
 
         {       
@@ -283,7 +283,22 @@ export class SchoolScreen extends Component
 
                 }}>
               {/* <Text style={styles.buttonText}>Add</Text> */}
-              <Text style={styles.h2}>{assessment.dateTaken} </Text>
+              <View style={[globalStyles.flexRow]}>
+
+              <TouchableOpacity style={[styles.reviewButton]}>
+                  <Text style={styles.buttonText}>Review</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={[styles.retakeButton, globalStyles.danger, globalStyles.flexAlignEnd]}>
+                  <Text style={styles.buttonText}>Retake</Text>
+              </TouchableOpacity>
+
+                  <Text style={styles.h2}>{assessment.dateTaken + " \t-\t " + assessment.questionData.length + " Questions \t-\t " + assessment.score + "%"} </Text>
+
+
+                  
+              </View>
+
             </TouchableOpacity>
 
 
@@ -584,7 +599,7 @@ const styles = StyleSheet.create({
 
 
   schoolsPanel:{
-    flex:1,
+    flex:2,
     // backgroundColor: "red",
     height: "100%",
     borderRightColor: '#00bcd4',
@@ -593,8 +608,9 @@ const styles = StyleSheet.create({
   },
 
   studentsPanel:{
-    flex:1,
+    flex:5,
     height: "100%",
+    // backgroundColor: "blue",
     // borderLeftColor: '#00bcd4',
     // borderLeftWidth: 1,
 
@@ -620,12 +636,38 @@ const styles = StyleSheet.create({
 
   recentAssessmentButton:{
     justifyContent: "flex-end",
+    alignItems: 'flex-start',
     width: "100%",
-    height: 36,
+    height: 44,
     backgroundColor: "#f0f0f0",
     margin: 0,
     padding: 0,
     borderBottomWidth: 2
+  },
+
+  retakeButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 5,
+    paddingVertical: 10,
+    marginLeft: 5,
+    marginRight: 10,
+    marginBottom: 8,
+    // marginVertical: 12,
+    height: 25,
+    backgroundColor: "#00bcd4"
+  },
+
+  reviewButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 5,
+    paddingVertical: 10,
+    marginLeft: 10,
+    marginRight: 5,
+    // marginVertical: 12,
+    height: 25,
+    backgroundColor: "#00bcd4"
   },
 
   ////// MODAL STUFF : ToDo: Seperate component
