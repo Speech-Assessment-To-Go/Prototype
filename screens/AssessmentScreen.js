@@ -133,7 +133,7 @@ export class AssessmentScreen extends Component
       // this.setState({questionsData: copyQuestion});
       this.state.questionsData.push(questionData);
 
-      console.log(this.state.currentQuestion + " VS " + assessmentData.questionData.length);
+      // console.log(this.state.currentQuestion + " VS " + assessmentData.questionData.length);
 
       //Record to student Data!
       var questionsCopy = this.state.questionsData.slice();

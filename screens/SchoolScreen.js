@@ -9,7 +9,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Modal
+  Modal,
+  Alert
 } from 'react-native';
 
 import { globalStyles } from '../globalStyles';
@@ -51,7 +52,7 @@ export class SchoolScreen extends Component
             studentsObjs:[],
     
             modalVisible:false,
-            modalSchoolVisible:false,
+            // modalSchoolVisible:false,
             menuVisable:true,
             
             //Student MODAL
@@ -62,7 +63,7 @@ export class SchoolScreen extends Component
             textBirth:'',
             textLanguage:'',
     
-            selectedSchool:-1,
+            // selectedSchool:-1,
             selectedStudent:-1,
     
         }
@@ -78,21 +79,23 @@ export class SchoolScreen extends Component
   init ()
   {
     // console.log("Loaded from init!");
-    this.loadSchools();
+    // this.loadSchools();
     this.loadStudents();
   }
 
   handlerUpdateStudent(studentData)
   {
     //this.forceUpdate();
-    let copy = this.state.studentsObjs.slice(); //Create copy
+    // let copy = this.state.studentsObjs.slice(); //Create copy
 
-    copy[global.selectedStudent] = studentData;
+    // copy[global.selectedStudent] = studentData;
 
-    this.setState({studentsObjs: copy})
+    // this.setState({studentsObjs: copy})
+
+    this.state.studentsObjs[global.selectedStudent] = studentData;
 
     //Save assessments
-    //this.saveStudentsData(copy);
+    this.saveStudentsData(this.state.studentsObjs);
   }
 
   // componentDidMount()
@@ -105,58 +108,13 @@ export class SchoolScreen extends Component
     this.clearInputs();
   }
 
-  toggleModalSchool(visible) {
-    this.setState({ modalSchoolVisible: visible });
-    this.clearInputs();
-  }
-
-  addSchool(name = "NULL", id = 259){
-
-    //this.state.schoolsObj.push(new School(name, id));
-
-    let copy = this.state.schoolsObj.slice(); //Create copy
-    copy.push(new School(name, id));
-    this.setState({schoolsObj: copy})
-    
-    //console.log(this.state.schoolsObj);
-
-    //Save schools
-    this.saveSchoolData(copy);
-
-
-    this.toggleModalSchool(false);
-  }
-
-  saveSchoolData(data)
-  {
-    //Save schools
-    var jsonData = JSON.stringify(data);
-    console.log(jsonData);
-    AsyncStorage.setItem('schools', jsonData);
-  }
-
-  loadSchools()
-  {
-    AsyncStorage.getItem('schools')
-    .then(
-      (schools) => 
-      {
-        if (schools != null)
-        {
-          //Schools
-          var parsedSchools = JSON.parse(schools);
-          
-          this.setState({schoolsObj: parsedSchools})
-        }
-      })
-  }
-
 
   saveStudentsData(data)
   {
     //Save schools
     var jsonData = JSON.stringify(data);
-    console.log(jsonData);
+    // console.log(jsonData);
+    console.log("SAVED!");
     AsyncStorage.setItem('students', jsonData);
   }
 
@@ -170,7 +128,7 @@ export class SchoolScreen extends Component
         {
           //Schools
           var parsedStudents = JSON.parse(students);
-          
+          console.log("LOADED!");
           this.setState({studentsObjs: parsedStudents})
         }
       })
@@ -192,17 +150,44 @@ export class SchoolScreen extends Component
     this.setState({selectedStudent: this.state.studentsObjs.length})
     //this.state.studentsObj.push(new Student(text));
     this.toggleModalStudent(false);
+  }
+
+  removeStudent()
+  {
+    if (this.state.selectedStudent < 0)
+    {
+      alert("A student needs to be selected to be deleted.");
+      return;
+    }
+
+    Alert.alert(
+      "Warning",
+      "Are you sure you want to delete this student! All files associated with this student will be lost!",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Delete", onPress: () => 
+      {
+        var selected = this.state.selectedStudent;
+        this.state.selectedStudent = -1;
+    
+    
+        let copy = this.state.studentsObjs.slice(); //Create copy
+        copy.splice(selected, 1);
+        this.setState({studentsObjs: copy});
+        
+    
+        this.saveStudentsData(this.state.studentsObjs);
+      } }
+      ]
+    ) 
 
 
   }
 
-  selectSchool(index){
-
-    this.setState({selectedSchool: index});
-
-    //this.state.selectedSchool = index;
-    //this.forceUpdate();
-  }
 
   selectStudent(index)
   {
@@ -330,7 +315,7 @@ export class SchoolScreen extends Component
 
                 <View style={globalStyles.flexCol}>              
 
-                  <Text style={styles.h2}>{student.firstName}</Text>
+                  <Text style={styles.h2}>{student.firstName + " " + student.lastName}</Text>
                   <Text>Grade {student.grade}</Text>
 
                 </View>
@@ -370,7 +355,9 @@ export class SchoolScreen extends Component
 
             <TouchableOpacity
               style={[styles.bottomButton, globalStyles.danger]}
-              onPress={() => alert("Bottom!")}>
+              onPress={() => 
+                this.removeStudent()
+              }>
               <Text style={styles.buttonText}>Remove Student</Text>
             </TouchableOpacity>
 
