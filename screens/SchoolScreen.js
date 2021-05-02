@@ -278,7 +278,11 @@ export class SchoolScreen extends Component
 
 
                 <View style={globalStyles.flexCol}>              
+<<<<<<< HEAD
                   <Text style={styles.h2}>{school.name} Elementary School</Text>
+=======
+                  <Text style={styles.h2}>{school.name}</Text>
+>>>>>>> parent of 07f33c0 (Schools and Students screen merged)
                   <Text>USD {school.id}</Text>
                 </View>
 
