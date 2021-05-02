@@ -62,7 +62,11 @@ export class AssessmentScreen extends Component
 
       img: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg",
 
-      resultsScreen: false
+      resultsScreen: false,
+
+      totalScaffolding: 0,
+
+      score:0
 
 
     };
@@ -124,7 +128,6 @@ export class AssessmentScreen extends Component
 
   renderReviewModeText = (reviewMode) =>
   {
-
     if (reviewMode == true)
     {
       return(
@@ -134,6 +137,41 @@ export class AssessmentScreen extends Component
         
       )
     }    
+  }
+
+  renderGradeButtons = (questionsData, student, updateStudent, assessmentData, reviewMode) =>
+  {
+    if (reviewMode == true)
+    {
+      return(
+        <View style={[globalStyles.flexRow]}>
+          <TouchableOpacity
+              style={styles.bottomButton}
+              onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
+              <Text style={styles.buttonText}>Next Question</Text>
+          </TouchableOpacity>    
+        </View>        
+      )
+    }    
+
+    else{
+      return(
+        <View style={[globalStyles.flexRow]}>   
+          <TouchableOpacity
+            style={styles.bottomButton}
+            onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
+            <Text style={styles.buttonText}>Correct</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.bottomButton, globalStyles.danger]}
+            onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}            
+            >
+            <Text style={styles.buttonText}>Incorrect</Text>
+          </TouchableOpacity>
+        </View>
+      )
+    }
   }
 
   renderAssessment = (questionsData, student, updateStudent, assessmentData, reviewMode) =>
@@ -224,7 +262,17 @@ export class AssessmentScreen extends Component
 
         <View style={[globalStyles.flexRow]}>
 
-          <TouchableOpacity
+          {
+            this.renderGradeButtons(questionsData, student, updateStudent, assessmentData, reviewMode)
+          }
+
+          {/* <TouchableOpacity
+            style={styles.bottomButton}
+            onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
+            <Text style={styles.buttonText}>Next Question</Text>
+          </TouchableOpacity>          
+
+          {/* <TouchableOpacity
             style={styles.bottomButton}
             onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
             <Text style={styles.buttonText}>Correct</Text>
@@ -235,7 +283,7 @@ export class AssessmentScreen extends Component
             onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}            
             >
             <Text style={styles.buttonText}>Incorrect</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */} 
 
         </View>
 
@@ -299,42 +347,40 @@ export class AssessmentScreen extends Component
 
   grade(val, questionID, student, updateStudent, assessmentData, reviewMode)
   {
-    //Prevent from updating grades if loading results screen
-    if ((this.state.currentQuestion) < assessmentData.questionData.length)
-    {
-      var copy = this.state.grading.slice();
-      copy.push(val);
-      this.setState({grading: copy})
-
-    }    
+      this.state.grading.push(val);
 
     var grading = this.state.grading;
 
     //If last question!
     if ((this.state.currentQuestion+1) >= assessmentData.questionData.length)
     {
-      //Refactor : copied from else
-      var questionData = new QuestionData( questionID, val, this.state.notes, this.state.scaffolding);
-      this.state.questionsData.push(questionData);
+      if (reviewMode != true)
+      {
+        //Refactor : copied from else
+        var questionData = new QuestionData( questionID, val, this.state.notes, this.state.scaffolding);
+        this.state.questionsData.push(questionData);
 
-      //Record to student Data!
-      var questionsCopy = this.state.questionsData.slice();
+        //Record to student Data!
+        var questionsCopy = this.state.questionsData.slice();
 
-      // console.log(this.state.questionsData);
-      var newAssessmentData = new AssessmentData(questionsCopy, assessmentData.dateTaken );
-      // console.log(assessmentData);
-      newAssessmentData.score = this.getPercent(grading);
+        // console.log(this.state.questionsData);
+        var newAssessmentData = new AssessmentData(questionsCopy, assessmentData.dateTaken );
+        // console.log(assessmentData);
+        newAssessmentData.score = this.getPercent(grading);
 
-      var copyStudent = student;
-      // var copyStudent = Object.assign({}, student);
-      copyStudent.assessmentData.push( newAssessmentData);
+        //console.log(this.state.grading);
+        this.state.score = this.getPercent(this.state.grading);
 
-      this.setState({student: copyStudent});
-      updateStudent(copyStudent); 
+        var copyStudent = student;
+        // var copyStudent = Object.assign({}, student);
+        copyStudent.assessmentData.push( newAssessmentData);
 
-      //Clear
-      this.setState({questionsData: [] });
+        this.setState({student: copyStudent});
+        updateStudent(copyStudent); 
 
+        //Clear
+        this.setState({questionsData: [] });
+      }
 
       //this.props.navigation.navigate('ResultScreen', {grading});
       this.setState({resultsScreen: true});
@@ -342,13 +388,19 @@ export class AssessmentScreen extends Component
 
     else
     {
-      //Copy questions data into array
-      var questionData = new QuestionData( questionID, val, this.state.notes, this.state.scaffolding);
-      this.state.questionsData.push(questionData);
+      if (reviewMode != true)
+      {
+        //Copy questions data into array
+        var questionData = new QuestionData( questionID, val, this.state.notes, this.state.scaffolding);
+        this.state.questionsData.push(questionData);
+      }
 
       //Clear and go to next question
       var nextQuestion = this.state.currentQuestion + 1;
       this.state.currentQuestion = nextQuestion;
+
+      this.state.totalScaffolding += this.state.scaffolding;
+
       this.setState({scaffolding: 0});
       this.setState({notes: ''});
 
@@ -376,16 +428,34 @@ export class AssessmentScreen extends Component
 
  
         {/* QUESTIONS IMG & TEXT */}
-        <View style={[styles.container, globalStyles.flex8]}>
+        <View style={[styles.container, globalStyles.flex3]}>
 
-      <Text style={styles.percentText}>{this.getPercent(grading)}%</Text>
+      <Text style={styles.percentText}>{this.state.score}%</Text>
+      <Text style={styles.scaffoldingText}>{this.state.totalScaffolding + " scaffoldings used"}</Text>
 
         </View>
 
         {/* QUESTION BUBBLES */}
-        <View style={[styles.container, globalStyles.flex1]}>
+        <View style={[styles.chipContainer]}>
 
-          <View style={globalStyles.flexRow}>
+
+        {
+          // this.state.grading.map((grade,index) => (
+          //   <View key={"grading"+index } style={[styles.chipContainer]}>
+          //     {/* <ScrollView> */}
+          //       <Chip style={[styles.chip, globalStyles.flex1, (grade)? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q{index+1}</Chip>
+
+          //     {/* </ScrollView> */}
+          //   </View>
+          // ) )
+        }
+
+
+
+
+
+
+          {/* <View style={globalStyles.flexRow}>
             <Chip style={[styles.chip, (grading[0])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q1</Chip>
             <Chip style={[styles.chip, (grading[1])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q2</Chip>
             <Chip style={[styles.chip, (grading[2])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q3</Chip>
@@ -398,8 +468,8 @@ export class AssessmentScreen extends Component
             <Chip style={[styles.chip, (grading[6])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q7</Chip>
             <Chip style={[styles.chip, (grading[7])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q8</Chip>
             <Chip style={[styles.chip, (grading[8])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q9</Chip>
-            <Chip style={[styles.chip, (grading[9])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q10</Chip>
-          </View>
+            <Chip style={[styles.chip, (grading[9])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q10</Chip> 
+          </View> */}
           
         </View>
 
@@ -444,6 +514,8 @@ export class AssessmentScreen extends Component
     //For first question, make sure to set up notes and scafolding value for loading
     if (reviewMode == true && this.state.firstRun == true)
     {      
+      this.setState({totalScaffolding: assessmentData.totalScaffolding});
+      this.setState({score: assessmentData.score});
       this.setState({ notes: questionsData[this.state.currentQuestion].notes });
       this.setState({ scaffolding: questionsData[this.state.currentQuestion].scaffolding });
       this.state.firstRun = false;
@@ -470,6 +542,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: 'column',
+  },
+
+  chipContainer: {
+    // flexGrow: 5,
+    // backgroundColor: 'red',
+    // flex: 1,
+    // justifyContent: "space-evenly",
+    // alignItems: "center",
+    // width: 700,
+    // height: 200,
+    // minHeight: 200,
+    // flexBasis: 150,
+    // // justifyContent: 'center',
+    // // alignItems:  "center",
+    // flexDirection: "row",
+    // flexWrap: "wrap"
   },
 
   reviewModeText:{
@@ -665,11 +753,16 @@ modalText:{
 ///RESULTS SCREEN
 
 percentText:{
-  fontSize: 185,
+  fontSize: 155,
   fontWeight: '100',
   color: '#6bc46b'
 },
 
+scaffoldingText:{
+  fontSize: 85,
+  fontWeight: '100',
+  color: '#6bc46b'
+},
 
 chip:{
   flex:1,
@@ -677,6 +770,7 @@ chip:{
   // backgroundColor: '#76db76',
   justifyContent: 'center',
   maxWidth: 100,
+  minWidth: 100,
   marginHorizontal: 10,
   marginBottom: 20,  
 },

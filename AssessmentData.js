@@ -14,6 +14,8 @@ export class AssessmentData
 
         this.score;
 
+        this.totalScaffolding = 0;
+
         //Scoring
         this.attention;
         this.performance;
@@ -21,7 +23,5 @@ export class AssessmentData
         this.awareness;
         this.motivation;
         this.interaction;
-
-    }
-   
+    }   
 }
