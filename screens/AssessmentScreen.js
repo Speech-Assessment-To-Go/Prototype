@@ -15,7 +15,7 @@ import {
 import {  TextInput  } from 'react-native-paper';
 
 import { globalStyles } from '../globalStyles';
-import { Button, Avatar, Divider  } from 'react-native-paper';
+import { Button, Avatar, Divider, Chip  } from 'react-native-paper';
 import { TemplateScreen } from './TemplateScreen';
 import { Question } from '../Question.js'
 import { RoundedText } from '../components/RoundedText';
@@ -90,6 +90,21 @@ export class AssessmentScreen extends Component
 
     this.setState( {scaffolding: num})
 
+  }
+
+  getPercent(array)
+  {
+    var correct = 0;
+
+    for (var i = 0; i < array.length; i++)
+    {
+      if (array[i] == true)
+        correct++;
+    }
+
+    var ratio = (correct / array.length) * 100; 
+    var rounded = Math.round(ratio * 10) / 10; //Rounded to 1 decimal place
+    return rounded;
   }
 
   renderImage = (questionsData) =>
@@ -246,7 +261,6 @@ export class AssessmentScreen extends Component
       copy.push(val);
       this.setState({grading: copy})
 
-
     }    
 
     var grading = this.state.grading;
@@ -269,14 +283,15 @@ export class AssessmentScreen extends Component
       // var copyStudent = Object.assign({}, student);
       copyStudent.assessmentData.push( newAssessmentData);
 
-      this.setState({student: copyStudent})
+      this.setState({student: copyStudent});
       updateStudent(copyStudent); 
 
       //Clear
-      this.setState({questionsData: [] })
+      this.setState({questionsData: [] });
 
 
-      this.props.navigation.navigate('ResultScreen', {grading});
+      //this.props.navigation.navigate('ResultScreen', {grading});
+      this.setState({resultsScreen: true});
     }
 
     else
@@ -303,6 +318,66 @@ export class AssessmentScreen extends Component
     }
   }
 
+  renderResults = (props) =>
+  {
+
+    if (this.state.resultsScreen == true)
+    {
+      var grading = this.state.grading;
+
+      return(
+        <View style={styles.container}>
+
+ 
+        {/* QUESTIONS IMG & TEXT */}
+        <View style={[styles.container, globalStyles.flex8]}>
+
+      <Text style={styles.percentText}>{this.getPercent(grading)}%</Text>
+
+        </View>
+
+        {/* QUESTION BUBBLES */}
+        <View style={[styles.container, globalStyles.flex1]}>
+
+          <View style={globalStyles.flexRow}>
+            <Chip style={[styles.chip, (grading[0])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q1</Chip>
+            <Chip style={[styles.chip, (grading[1])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q2</Chip>
+            <Chip style={[styles.chip, (grading[2])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q3</Chip>
+            <Chip style={[styles.chip, (grading[3])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q4</Chip>
+            <Chip style={[styles.chip, (grading[4])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q5</Chip>
+          </View>
+
+          <View style={globalStyles.flexRow}>
+            <Chip style={[styles.chip, (grading[5])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q6</Chip>
+            <Chip style={[styles.chip, (grading[6])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q7</Chip>
+            <Chip style={[styles.chip, (grading[7])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q8</Chip>
+            <Chip style={[styles.chip, (grading[8])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q9</Chip>
+            <Chip style={[styles.chip, (grading[9])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q10</Chip>
+          </View>
+          
+        </View>
+
+       {/* Bottom Buttons */}
+        <View style={[globalStyles.flexVertEnd, globalStyles.flex1]}>        
+
+          <View style={[globalStyles.flexRow]}>
+
+            <TouchableOpacity
+              style={[styles.bottomButton]}
+              onPress={() => props.navigation.goBack()}>
+              <Text style={styles.buttonText}>Review</Text>
+            </TouchableOpacity>
+
+          </View>
+
+          </View>
+
+      </View>
+        
+      )
+    }    
+  }
+
 // ------------ * RENDER * ------------------------
   render(){
     const { route, navigation } = this.props;
@@ -325,6 +400,8 @@ export class AssessmentScreen extends Component
       return(      
       <View style={styles.container}>
         {this.renderAssessment(questionsData, student, updateStudent, assessmentData, reviewMode)}
+
+        {this.renderResults(this.props)}
       </View>
     );
   }
@@ -517,7 +594,42 @@ modalText:{
   fontSize: 18,
   fontWeight: 'bold',
   color: "#00bcd4"
+},
+
+///RESULTS SCREEN
+
+percentText:{
+  fontSize: 185,
+  fontWeight: '100',
+  color: '#6bc46b'
+},
+
+
+chip:{
+  flex:1,
+  // backgroundColor: '#d4d4d4',
+  // backgroundColor: '#76db76',
+  justifyContent: 'center',
+  maxWidth: 100,
+  marginHorizontal: 10,
+  marginBottom: 20,  
+},
+
+chipText:{
+  fontWeight: 'bold',
+  textAlign: 'center',
+  width: '90%'
+  // paddingHorizontal: 10
+},
+
+chipCorrect:{
+  backgroundColor: '#76db76',
+},
+
+chipIncorrect:{
+  backgroundColor: '#ff6f6b',
 }
+
 
 
 });

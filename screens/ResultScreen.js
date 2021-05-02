@@ -144,12 +144,6 @@ const styles = StyleSheet.create({
 
   },
 
-  percentText:{
-    fontSize: 185,
-    fontWeight: '100',
-    color: '#6bc46b'
-  },
-
   buttonText:{
     fontSize: 17,
     fontWeight: 'bold',
@@ -177,6 +171,13 @@ const styles = StyleSheet.create({
     width: 256*scale,
     height: 192*scale
   },
+
+  percentText:{
+    fontSize: 185,
+    fontWeight: '100',
+    color: '#6bc46b'
+  },
+
 
   chip:{
     flex:1,
