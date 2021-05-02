@@ -272,26 +272,24 @@ export class SchoolScreen extends Component
             </View> */}
 
             
-            <TouchableOpacity
-              style={styles.recentAssessmentButton}
-              onPress={ () => {
-
-                //Get saved information of the assessmentData
-                //var assessmentData = this.state.studentsObjs[this.state.selectedStudent].assessmentData[index];
-                
-                props.navigation.navigate('AssessmentScreen', {assessmentData:assessment, student:this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this), reviewMode:true});
-
-                }}>
+            <View style={styles.recentAssessmentButton}>
+              
               {/* <Text style={styles.buttonText}>Add</Text> */}
               <View style={[globalStyles.flexRow]}>
 
-              <TouchableOpacity style={[styles.reviewButton]}>
-                  <Text style={styles.buttonText}>Review</Text>
-              </TouchableOpacity>
+                  <TouchableOpacity style={[styles.reviewButton]}
+                  onPress={ () => {                
+                    props.navigation.navigate('AssessmentScreen', {assessmentData:assessment, student:this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this), reviewMode:true});
+                    }}>
+                      <Text style={styles.buttonText}>Review</Text>
+                  </TouchableOpacity>
 
-              <TouchableOpacity style={[styles.retakeButton, globalStyles.danger, globalStyles.flexAlignEnd]}>
-                  <Text style={styles.buttonText}>Retake</Text>
-              </TouchableOpacity>
+                  <TouchableOpacity style={[styles.retakeButton, globalStyles.danger, globalStyles.flexAlignEnd]}
+                  onPress={ () => {                
+                    props.navigation.navigate('AssessmentScreen', {assessmentData:assessment, student:this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this), reviewMode:false});
+                    }}>
+                      <Text style={styles.buttonText}>Retake</Text>
+                  </TouchableOpacity>
 
                   <Text style={styles.h2}>{assessment.dateTaken + " \t-\t " + assessment.questionData.length + " Questions \t-\t " + assessment.score + "%"} </Text>
 
@@ -299,7 +297,7 @@ export class SchoolScreen extends Component
                   
               </View>
 
-            </TouchableOpacity>
+            </View>
 
 
 
@@ -648,8 +646,8 @@ const styles = StyleSheet.create({
   retakeButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 5,
-    paddingVertical: 10,
+    paddingHorizontal: 7,
+    paddingVertical: 12,
     marginLeft: 5,
     marginRight: 10,
     marginBottom: 8,
@@ -661,8 +659,8 @@ const styles = StyleSheet.create({
   reviewButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 5,
-    paddingVertical: 10,
+    paddingHorizontal: 7,
+    paddingVertical: 12,
     marginLeft: 10,
     marginRight: 5,
     // marginVertical: 12,

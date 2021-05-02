@@ -122,6 +122,20 @@ export class AssessmentScreen extends Component
     }    
   }
 
+  renderReviewModeText = (reviewMode) =>
+  {
+
+    if (reviewMode == true)
+    {
+      return(
+        <View style={[globalStyles.flex1, globalStyles.flexHoriEnd]}>
+          <Text style={[styles.reviewModeText, globalStyles.dangerText]}> {"REVIEW MODE"}</Text>
+        </View>
+        
+      )
+    }    
+  }
+
   renderAssessment = (questionsData, student, updateStudent, assessmentData, reviewMode) =>
   {
 
@@ -135,18 +149,23 @@ export class AssessmentScreen extends Component
             {/* NOTES BUTTON */}
             <View style={globalStyles.flexRow, globalStyles.flex1}>
 
-            <View style={[globalStyles.flex1]}>
-                <Text style={[styles.h2, globalStyles.flexAlignStart]}> { (this.state.currentQuestion+1) + " of " + assessmentData.questionData.length + " Questions"}</Text>
-            </View>
+              <View style={[globalStyles.flex1]}>
+                  <Text style={[styles.h2, globalStyles.flexAlignStart]}> { (this.state.currentQuestion+1) + " of " + assessmentData.questionData.length + " Questions"}</Text>
+              </View>
 
 
-            <View style={[globalStyles.flex1, globalStyles.flexHoriCenter]}>
-              <TouchableOpacity
-                  style={styles.topButton}
-                  onPress={() => this.toggleModalNotes(true)}>
-                  <Text style={styles.buttonText}>Notes</Text>
-                </TouchableOpacity>
-            </View>
+              <View style={[globalStyles.flex1, globalStyles.flexHoriCenter]}>
+                <TouchableOpacity
+                    style={styles.topButton}
+                    onPress={() => this.toggleModalNotes(true)}>
+                    <Text style={styles.buttonText}>Notes</Text>
+                  </TouchableOpacity>
+              </View>
+
+              {/* Display Review Mode Text */}
+              {
+                this.renderReviewModeText(reviewMode)
+              }
 
         </View>
 
@@ -179,7 +198,9 @@ export class AssessmentScreen extends Component
 
           <TouchableOpacity
               style={[styles.sideButton]}
-              onPress={() => this.modifyScaffolding(1)}>
+              onPress={() => this.modifyScaffolding(1)}
+              disabled={reviewMode}
+              >
               <Text style={styles.buttonText}>+</Text>
           </TouchableOpacity>
 
@@ -187,7 +208,9 @@ export class AssessmentScreen extends Component
 
           <TouchableOpacity
               style={[styles.sideButton]}
-              onPress={() => this.modifyScaffolding(-1)}>
+              onPress={() => this.modifyScaffolding(-1)}
+              disabled={reviewMode}
+              >
               <Text style={styles.buttonText}>-</Text>
           </TouchableOpacity>
 
@@ -209,7 +232,8 @@ export class AssessmentScreen extends Component
 
           <TouchableOpacity
             style={[styles.bottomButton, globalStyles.danger]}
-            onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
+            onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}            
+            >
             <Text style={styles.buttonText}>Incorrect</Text>
           </TouchableOpacity>
 
@@ -232,7 +256,15 @@ export class AssessmentScreen extends Component
           <Text style={styles.modalHeader}>Notes</Text> 
           
           <View style={globalStyles.flexRow}>
-            <TextInput style={[styles.textInput]} label="" multiline={true} numberOfLines={5} value={this.state.notes} onChangeText={text => this.setState( {notes: text})} />        
+            <TextInput style={[
+              styles.textInput]}
+               label=""
+                multiline={true}
+                 numberOfLines={5}
+                  value={this.state.notes}
+                   onChangeText={text => this.setState( {notes: text})} 
+                   disabled={reviewMode}
+                   />        
           </View>
 
 
@@ -438,6 +470,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: 'column',
+  },
+
+  reviewModeText:{
+    fontSize: 36,
+    fontWeight: 'bold',
+    margin: 5,
+    marginRight: 35
   },
 
   h2:{
