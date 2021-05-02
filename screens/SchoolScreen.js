@@ -23,7 +23,7 @@ import { Student } from '../Student'
 import Database from '../Database.js';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {filterStudents} from '../filterStudents';
 
 
 //------------ * FUNCTIONS/VAR * ------------------------  
@@ -65,6 +65,11 @@ export class SchoolScreen extends Component
     
             // selectedSchool:-1,
             selectedStudent:-1,
+
+
+            textStudent:'',
+
+            studentsObjsFiltered:[]
     
         }
 
@@ -86,16 +91,14 @@ export class SchoolScreen extends Component
   handlerUpdateStudent(studentData)
   {
     //this.forceUpdate();
-    // let copy = this.state.studentsObjs.slice(); //Create copy
+    let copy = this.state.studentsObjs.slice(); //Create copy
+    copy[global.selectedStudent] = studentData;
+    this.setState({studentsObjs: copy})
 
-    // copy[global.selectedStudent] = studentData;
-
-    // this.setState({studentsObjs: copy})
-
-    this.state.studentsObjs[global.selectedStudent] = studentData;
+    // this.state.studentsObjs[global.selectedStudent] = studentData;
 
     //Save assessments
-    this.saveStudentsData(this.state.studentsObjs);
+    this.saveStudentsData(copy);
   }
 
   // componentDidMount()
@@ -129,7 +132,10 @@ export class SchoolScreen extends Component
           //Schools
           var parsedStudents = JSON.parse(students);
           console.log("LOADED!");
-          this.setState({studentsObjs: parsedStudents})
+          this.setState({studentsObjs: parsedStudents});
+
+          //Make filter match studentsObjs
+          // this.setState({studentsObjsFiltered: parsedStudents});
         }
       })
   }
@@ -150,6 +156,8 @@ export class SchoolScreen extends Component
     this.setState({selectedStudent: this.state.studentsObjs.length})
     //this.state.studentsObj.push(new Student(text));
     this.toggleModalStudent(false);
+
+    // this.setState({studentsObjsFiltered: copy});
   }
 
   removeStudent()
@@ -210,18 +218,36 @@ export class SchoolScreen extends Component
     toModify = text;
   }
 
+  searchStudents()
+  {
+    if (textStudent == '')
+    {
+      this.setState({studentsObjsFiltered: this.state.studentsObjs.slice()});
+      // this.state.studentsObjsFiltered = this.state.studentsObjs.slice();
+    }
+
+    else
+    {
+      var filteredStudentObjs = filterStudents(textStudent, this.state.studentsObjs);
+      this.setState({studentsObjsFiltered: filteredStudentObjs});
+    }
+  }
+
 
   renderRecentAssessments = (props) =>
   {
     //console.log(this.state.studentsObjs[this.state.selectedStudent]);
+    // return(
+    // <Text style={[globalStyles.flexAlignCenter]}>Recent Assessments</Text>
+    // )
 
     if (this.state.selectedStudent == -1) return;
 
     if (this.state.studentsObjs[this.state.selectedStudent].assessmentData.length == 0)
     {  
-      return(
-        <Text style={[globalStyles.flexAlignCenter]}>No recent assessments</Text>
-      )
+      // return(
+      //   <Text style={[globalStyles.flexAlignCenter]}>No recent assessments</Text>
+      // )
 
     }
 
@@ -289,6 +315,9 @@ export class SchoolScreen extends Component
 
 
         <ScrollView style={styles.schoolsPanel}>
+
+        <TextInput style={[styles.textInputStudent]} label="Student Name" value={this.state.textStudent} onChangeText={text => this.setState( {textStudent: text})}/>
+        <Divider/>
 
 
         {
@@ -383,7 +412,17 @@ export class SchoolScreen extends Component
 
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={ () => navigation.push('TopicScreen', {student: this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this) })}>
+              onPress={ () => {
+
+                if (this.state.selectedStudent == -1)
+                {
+                  alert("A student must be selected!");
+                  return;
+                }
+
+                navigation.push('TopicScreen', {student: this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this) })
+              }
+              }>
               <Text style={styles.buttonText}>Take Assessment</Text>
             </TouchableOpacity>
 
@@ -572,8 +611,8 @@ const styles = StyleSheet.create({
   recentAssessments:{
     justifyContent: "flex-end",
     width: "100%",
-    height: 32,
-    backgroundColor: "red",
+    height: 36,
+    // backgroundColor: "red",
     margin: 0,
     padding: 0
     // borderBottomWidth: 1
@@ -582,11 +621,11 @@ const styles = StyleSheet.create({
   recentAssessmentButton:{
     justifyContent: "flex-end",
     width: "100%",
-    height: 32,
-    backgroundColor: "red",
+    height: 36,
+    backgroundColor: "#f0f0f0",
     margin: 0,
-    padding: 0
-    // borderBottomWidth: 1
+    padding: 0,
+    borderBottomWidth: 2
   },
 
   ////// MODAL STUFF : ToDo: Seperate component
@@ -631,6 +670,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 20,
     maxWidth: 350
+  },
+
+  textInputStudent:{
+    flex:1,
+    height: 50,
+    marginHorizontal: 10,
+    marginVertical: 20,
+    maxWidth: "100%"
   },
 
   schoolID:{

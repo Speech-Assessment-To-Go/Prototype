@@ -43,11 +43,6 @@ const fontSize = 18;
 const borderWidth = 0;
 const title = 'A';
 
-const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-
-
 export class TopicScreen extends Component
 {
 
@@ -332,14 +327,10 @@ export class TopicScreen extends Component
                     questionsData.push(new QuestionData(global.questions[i]));
                   
                   //Date Stuff
-                  var date = new Date();
-                  var day = date.getDate();
-                  // var month = date.get();
-                  var year = date.getFullYear();
-                  // var dateString = day + '-' + month + '-' + year;
-                  var dateStr = monthNames[date.getMonth()] +  ' ' + day + ' ' + year;
+                  var dateString =  new Date().toUTCString();
+                  dateString = dateString.slice(0, -13);
                   
-                  var assessmentData = new AssessmentData(questionsData, date.getUTCDate());
+                  var assessmentData = new AssessmentData(questionsData, dateString);
               
                   //Pass update student to update recent assessments panel
                   navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: updateStudent.bind(this), reviewMode:false});

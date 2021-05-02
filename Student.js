@@ -13,6 +13,7 @@ export class Student
         this.grade = grade;
         this.id = -1;
         this.middleName;
+        this.fullName = firstName + ' ' + lastName;
         
         this.assessmentData = [];
         

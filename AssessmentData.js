@@ -12,6 +12,16 @@ export class AssessmentData
 
         this.slp = "SLP's Name";
 
+        this.score;
+
+        //Scoring
+        this.attention;
+        this.performance;
+        this.planning;
+        this.awareness;
+        this.motivation;
+        this.interaction;
+
     }
    
 }

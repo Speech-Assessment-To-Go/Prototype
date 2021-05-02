@@ -60,7 +60,9 @@ export class AssessmentScreen extends Component
 
       firstRun: true, //check if ran through render loop at least once
 
-      img: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg"
+      img: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg",
+
+      resultsScreen: false
 
 
     };
@@ -105,6 +107,132 @@ export class AssessmentScreen extends Component
     }    
   }
 
+  renderAssessment = (questionsData, student, updateStudent, assessmentData, reviewMode) =>
+  {
+
+    if (this.state.resultsScreen == false)
+    {
+      return(
+        <View style={[styles.container]}>
+
+        {/* NOTES BUTTON */}
+        <View style={globalStyles.flexRow, globalStyles.flex1}>
+          <TouchableOpacity
+            style={styles.topButton}
+            onPress={() => this.toggleModalNotes(true)}>
+            <Text style={styles.buttonText}>Notes</Text>
+          </TouchableOpacity>
+
+        </View>     
+
+
+      {/* QUESTIONS IMG & TEXT & SIDES*/}
+      <View style={[globalStyles.flexRow, globalStyles.flex10]}>
+
+          {/* LEFT SIDE */}
+        <View style={[styles.flexCol, globalStyles.flex1]}>
+            <View style={[globalStyles.test]}>
+
+            </View>
+        </View>
+        
+        {/* MIDDLE! */}
+        <View style={[styles.container, globalStyles.flex8]}>
+
+          <Text style={styles.question}>{ global.parsedQuestions[ questionsData[this.state.currentQuestion].id ].text }</Text>
+
+          {this.renderImage(questionsData)}
+          {/* <Image style={styles.img}    source={{uri: this.state.img}}  /> */}
+
+        </View>
+
+        {/* Right SIDE */}
+        <View style={[globalStyles.flexCol, globalStyles.flex1, globalStyles.center]}>
+
+          <TouchableOpacity
+              style={[styles.sideButton]}
+              onPress={() => this.modifyScaffolding(1)}>
+              <Text style={styles.buttonText}>+</Text>
+          </TouchableOpacity>
+
+          <Text style={styles.number}>{this.state.scaffolding}</Text>
+
+          <TouchableOpacity
+              style={[styles.sideButton]}
+              onPress={() => this.modifyScaffolding(-1)}>
+              <Text style={styles.buttonText}>-</Text>
+          </TouchableOpacity>
+
+        </View>
+
+      </View>
+
+
+     {/* Bottom Buttons */}
+      <View style={[globalStyles.flexVertEnd, globalStyles.flex1]}>        
+
+        <View style={[globalStyles.flexRow]}>
+
+          <TouchableOpacity
+            style={styles.bottomButton}
+            onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
+            <Text style={styles.buttonText}>Correct</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.bottomButton, globalStyles.danger]}
+            onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
+            <Text style={styles.buttonText}>Incorrect</Text>
+          </TouchableOpacity>
+
+        </View>
+
+      </View>
+
+      {/* <View style={styles.side}>
+        <Text>Centered text</Text>
+      </View> */}
+
+
+    {/* ********************** | NOTES MODAL | ********************* */}
+    <Modal animationType="slide"  transparent={true} visible={this.state.modalNotesVisible}  >
+
+      <View style={styles.container}>
+
+        <View style={styles.modalView}>
+
+          <Text style={styles.modalHeader}>Notes</Text> 
+          
+          <View style={globalStyles.flexRow}>
+            <TextInput style={[styles.textInput]} label="" multiline={true} numberOfLines={5} value={this.state.notes} onChangeText={text => this.setState( {notes: text})} />        
+          </View>
+
+
+          <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
+          <TouchableOpacity
+            style={[styles.bottomButton, styles.modalButton]}
+            onPress={() => this.toggleModalNotes(false)}>
+            <Text style={styles.modalText}>Submit</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.bottomButton, styles.modalButton]}
+            onPress={() => this.toggleModalNotes(false)}>
+            <Text style={styles.modalText}>Cancel</Text>
+          </TouchableOpacity>
+
+        </View>   
+        </View>
+      </View>
+    </Modal>
+
+
+    </View>
+        
+      )
+    }    
+  }
+
   toggleModalNotes(visible) {
     this.setState({ modalNotesVisible: visible });
   }
@@ -128,12 +256,7 @@ export class AssessmentScreen extends Component
     {
       //Refactor : copied from else
       var questionData = new QuestionData( questionID, val, this.state.notes, this.state.scaffolding);
-      // var copyQuestion = this.state.questionsData.slice(); //Create copy
-      // copyQuestion.push(questionData);
-      // this.setState({questionsData: copyQuestion});
       this.state.questionsData.push(questionData);
-
-      // console.log(this.state.currentQuestion + " VS " + assessmentData.questionData.length);
 
       //Record to student Data!
       var questionsCopy = this.state.questionsData.slice();
@@ -147,9 +270,8 @@ export class AssessmentScreen extends Component
       copyStudent.assessmentData.push( newAssessmentData);
 
       this.setState({student: copyStudent})
-      //  student.firstName = "SDJLK"; 
       updateStudent(copyStudent); 
-      // console.log(this.state.currentQuestion + " VS " + assessmentData.questionData.length);
+
       //Clear
       this.setState({questionsData: [] })
 
@@ -161,17 +283,10 @@ export class AssessmentScreen extends Component
     {
       //Copy questions data into array
       var questionData = new QuestionData( questionID, val, this.state.notes, this.state.scaffolding);
-      // var copyQuestion = this.state.questionsData.slice(); //Create copy
-      // copyQuestion.push(questionData);      
-      // this.setState({questionsData: copyQuestion});
       this.state.questionsData.push(questionData);
-
-      // console.log(JSON.stringify( this.state.questionsData ));
-      // console.log(this.state.currentQuestion + " VS " + assessmentData.questionData.length);
 
       //Clear and go to next question
       var nextQuestion = this.state.currentQuestion + 1;
-      // this.setState({currentQuestion: nextQuestion});
       this.state.currentQuestion = nextQuestion;
       this.setState({scaffolding: 0});
       this.setState({notes: ''});
@@ -184,9 +299,6 @@ export class AssessmentScreen extends Component
         this.setState({ scaffolding: questionsData[this.state.currentQuestion].scaffolding });
         this.state.firstRun = false;
       }
-
-      // console.log(nextQuestion + " VS " + assessmentData.questionData.length);
-      // console.log(this.state.currentQuestion + " VS " + assessmentData.questionData.length);
 
     }
   }
@@ -211,124 +323,9 @@ export class AssessmentScreen extends Component
     }
 
       return(      
-      <View style={[styles.container]}>
-
-          {/* NOTES BUTTON */}
-          <View style={globalStyles.flexRow, globalStyles.flex1}>
-            <TouchableOpacity
-              style={styles.topButton}
-              onPress={() => this.toggleModalNotes(true)}>
-              <Text style={styles.buttonText}>Notes</Text>
-            </TouchableOpacity>
-
-          </View>     
-
- 
-        {/* QUESTIONS IMG & TEXT & SIDES*/}
-        <View style={[globalStyles.flexRow, globalStyles.flex10]}>
-
-            {/* LEFT SIDE */}
-          <View style={[styles.flexCol, globalStyles.flex1]}>
-              <View style={[globalStyles.test]}>
-
-              </View>
-          </View>
-          
-          {/* MIDDLE! */}
-          <View style={[styles.container, globalStyles.flex8]}>
-
-            <Text style={styles.question}>{ global.parsedQuestions[ questionsData[this.state.currentQuestion].id ].text }</Text>
-
-            {this.renderImage(questionsData)}
-            {/* <Image style={styles.img}    source={{uri: this.state.img}}  /> */}
-
-          </View>
-
-          {/* Right SIDE */}
-          <View style={[globalStyles.flexCol, globalStyles.flex1, globalStyles.center]}>
-
-            <TouchableOpacity
-                style={[styles.sideButton]}
-                onPress={() => this.modifyScaffolding(1)}>
-                <Text style={styles.buttonText}>+</Text>
-            </TouchableOpacity>
-
-            <Text style={styles.number}>{this.state.scaffolding}</Text>
-
-            <TouchableOpacity
-                style={[styles.sideButton]}
-                onPress={() => this.modifyScaffolding(-1)}>
-                <Text style={styles.buttonText}>-</Text>
-            </TouchableOpacity>
-
-          </View>
-
-        </View>
-
-
-
-       {/* Bottom Buttons */}
-        <View style={[globalStyles.flexVertEnd, globalStyles.flex1]}>        
-
-          <View style={[globalStyles.flexRow]}>
-
-            <TouchableOpacity
-              style={styles.bottomButton}
-              onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
-              <Text style={styles.buttonText}>Correct</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[styles.bottomButton, globalStyles.danger]}
-              onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
-              <Text style={styles.buttonText}>Incorrect</Text>
-            </TouchableOpacity>
-
-          </View>
-
-        </View>
-
-        {/* <View style={styles.side}>
-          <Text>Centered text</Text>
-        </View> */}
-
-
-      {/* ********************** | NOTES MODAL | ********************* */}
-      <Modal animationType="slide"  transparent={true} visible={this.state.modalNotesVisible}  >
-
-        <View style={styles.container}>
-
-          <View style={styles.modalView}>
-
-            <Text style={styles.modalHeader}>Notes</Text> 
-            
-            <View style={globalStyles.flexRow}>
-              <TextInput style={[styles.textInput]} label="" multiline={true} numberOfLines={5} value={this.state.notes} onChangeText={text => this.setState( {notes: text})} />        
-            </View>
-
-
-            <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
-            <TouchableOpacity
-              style={[styles.bottomButton, styles.modalButton]}
-              onPress={() => this.toggleModalNotes(false)}>
-              <Text style={styles.modalText}>Submit</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[styles.bottomButton, styles.modalButton]}
-              onPress={() => this.toggleModalNotes(false)}>
-              <Text style={styles.modalText}>Cancel</Text>
-            </TouchableOpacity>
-
-          </View>   
-          </View>
-        </View>
-      </Modal>
-
-
+      <View style={styles.container}>
+        {this.renderAssessment(questionsData, student, updateStudent, assessmentData, reviewMode)}
       </View>
-
-
     );
   }
 }
