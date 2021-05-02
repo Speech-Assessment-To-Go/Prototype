@@ -8,7 +8,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Modal
+  Modal,
+  LogBox
 } from 'react-native';
 
 import {  TextInput, Checkbox, RadioButton  } from 'react-native-paper';
@@ -30,6 +31,10 @@ import {AssessmentData} from '../AssessmentData'
 import {QuestionData} from '../QuestionData'
 
 import {filterQuestions} from '../filterQuestions'
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+ ]);
 
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
@@ -333,7 +338,7 @@ export class TopicScreen extends Component
                   var assessmentData = new AssessmentData(questionsData, dateString);
               
                   //Pass update student to update recent assessments panel
-                  navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: updateStudent.bind(this), reviewMode:false});
+                  navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: updateStudent, reviewMode:false});
                 } }>
   
               <Text style={styles.buttonText}>Start Assessment</Text>
