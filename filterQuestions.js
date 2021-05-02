@@ -1,9 +1,9 @@
 
-import Database from '../Database.js';
+import Database from './Database';
 
 let allQuestions = Database.LoadQuestions();
 
-export function filterQuestions(number, structure, complexity) {
+export function filterQuestions(number, structure, complexity, pastQuestions = []) {
 	/*
 	* Parameters:
 		* number, an integer, is how many questions are being added in the current filter (based on checkbox choices on-screen).
@@ -13,8 +13,9 @@ export function filterQuestions(number, structure, complexity) {
 	*/
 	
 	let addedQuestions = []; //return array of questions ids that fit the filters
-	let pastQuestions = []; //questions that have been referenced already (instead of having a growing array, should we change it to an array of length allQuestions.length and shrink it?
+	//let pastQuestions = []; //questions that have been referenced already (instead of having a growing array, should we change it to an array of length allQuestions.length and shrink it?
 	let i = 0;
+	let questionCount = 0;
 	
 	while (pastQuestions.length < allQuestions.length && questionCount < number) { //while we haven't exhausted our list of questions and we haven't reached the requested number
 		
@@ -24,10 +25,13 @@ export function filterQuestions(number, structure, complexity) {
 		
 		if (allQuestions[i].structure == structure && allQuestions[i].complexity == complexity) { //if it fits the filters, add the index (id)
 			addedQuestions.push(i);
+
+			questionCount++;
 		}
 		
 		pastQuestions.push(i); //note that we've looked at this question
-		
+
+				
 	}
 	
 	if (addedQuestions.length < number) { //if there weren't enough questions that fit

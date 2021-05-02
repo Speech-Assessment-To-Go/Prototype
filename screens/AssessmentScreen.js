@@ -39,8 +39,8 @@ export class AssessmentScreen extends Component
 
     this.state = {
 
-      currentQuestion:0,
-      maxQuestions: 10,
+      currentQuestion: 0,
+      // maxQuestions: 10,
   
       questionsObj:[new Question(require('../img/ship.png'), 'Ship'), new Question(require('../img/shark.png'), 'Shark'), new Question(require('../img/shoe.png'),'Shoe'),
        new Question(require('../img/shovel.png'), 'Shovel'), new Question(require('../img/shirt.png'), 'Shirt'),new Question(require('../img/shadow.png'), 'Shadow'),
@@ -58,7 +58,9 @@ export class AssessmentScreen extends Component
 
       questionsData:[], //Used for each question to build question Data
 
-      firstRun: true //check if ran through render loop at least once
+      firstRun: true, //check if ran through render loop at least once
+
+      img: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg"
 
 
     };
@@ -88,35 +90,69 @@ export class AssessmentScreen extends Component
 
   }
 
+  renderImage = (questionsData) =>
+  {
+    var imgVal = global.parsedQuestions[ questionsData[this.state.currentQuestion].id ].img;
+
+    if (imgVal != -1)
+    {
+      return(
+        <View style={styles.imgContainer}>
+          <Image style={styles.img} resizeMode={'cover'} source={{uri: imgVal}}  />
+        </View>
+        
+      )
+    }    
+  }
+
   toggleModalNotes(visible) {
     this.setState({ modalNotesVisible: visible });
   }
 
-  grade(val, id, student, updateStudent, assessmentData, reviewMode)
+  grade(val, questionID, student, updateStudent, assessmentData, reviewMode)
   {
-    this.state.grading.push(val);
+    //Prevent from updating grades if loading results screen
+    if ((this.state.currentQuestion) < assessmentData.questionData.length)
+    {
+      var copy = this.state.grading.slice();
+      copy.push(val);
+      this.setState({grading: copy})
+
+
+    }    
 
     var grading = this.state.grading;
 
-
-    if ((this.state.currentQuestion+1) >= this.state.maxQuestions)
+    //If last question!
+    if ((this.state.currentQuestion+1) >= assessmentData.questionData.length)
     {
+      //Refactor : copied from else
+      var questionData = new QuestionData( questionID, val, this.state.notes, this.state.scaffolding);
+      // var copyQuestion = this.state.questionsData.slice(); //Create copy
+      // copyQuestion.push(questionData);
+      // this.setState({questionsData: copyQuestion});
+      this.state.questionsData.push(questionData);
+
+      console.log(this.state.currentQuestion + " VS " + assessmentData.questionData.length);
+
       //Record to student Data!
       var questionsCopy = this.state.questionsData.slice();
 
-      console.log(this.state.questionsData);
-      var assessmentData = new AssessmentData(questionsCopy, assessmentData.dateTaken );
-      console.log(assessmentData);
+      // console.log(this.state.questionsData);
+      var newAssessmentData = new AssessmentData(questionsCopy, assessmentData.dateTaken );
+      // console.log(assessmentData);
 
-      var copy = student;
-      copy.assessmentData.push( assessmentData);
+      var copyStudent = student;
+      // var copyStudent = Object.assign({}, student);
+      copyStudent.assessmentData.push( newAssessmentData);
 
-      this.setState({student: copy})
+      this.setState({student: copyStudent})
       //  student.firstName = "SDJLK"; 
-      updateStudent(copy); 
-
+      updateStudent(copyStudent); 
+      // console.log(this.state.currentQuestion + " VS " + assessmentData.questionData.length);
       //Clear
       this.setState({questionsData: [] })
+
 
       this.props.navigation.navigate('ResultScreen', {grading});
     }
@@ -124,27 +160,33 @@ export class AssessmentScreen extends Component
     else
     {
       //Copy questions data into array
-      var questionData = new QuestionData( id, val, this.state.notes, this.state.scaffolding);
+      var questionData = new QuestionData( questionID, val, this.state.notes, this.state.scaffolding);
+      // var copyQuestion = this.state.questionsData.slice(); //Create copy
+      // copyQuestion.push(questionData);      
+      // this.setState({questionsData: copyQuestion});
+      this.state.questionsData.push(questionData);
 
-      var copy = this.state.questionsData.slice(); //Create copy
-      copy.push(questionData);
-      this.setState({questionsData: copy});
-
-      console.log(JSON.stringify( this.state.questionsData ));
+      // console.log(JSON.stringify( this.state.questionsData ));
+      // console.log(this.state.currentQuestion + " VS " + assessmentData.questionData.length);
 
       //Clear and go to next question
-      this.setState({currentQuestion: this.state.currentQuestion+1});
+      var nextQuestion = this.state.currentQuestion + 1;
+      // this.setState({currentQuestion: nextQuestion});
+      this.state.currentQuestion = nextQuestion;
       this.setState({scaffolding: 0});
       this.setState({notes: ''});
 
       //Load data if in review mode
       if (reviewMode == true)
       {      
-        this.setState({ notes: questions[this.state.currentQuestion].notes });
-        this.setState({ scaffolding: questions[this.state.currentQuestion].scaffolding });
+        var questionsData = assessmentData.questionData;
+        this.setState({ notes: questionsData[this.state.currentQuestion].notes });
+        this.setState({ scaffolding: questionsData[this.state.currentQuestion].scaffolding });
         this.state.firstRun = false;
       }
 
+      // console.log(nextQuestion + " VS " + assessmentData.questionData.length);
+      // console.log(this.state.currentQuestion + " VS " + assessmentData.questionData.length);
 
     }
   }
@@ -156,15 +198,15 @@ export class AssessmentScreen extends Component
 
     this.state.maxQuestions = assessmentData.questionData.length;
 
-    console.log(assessmentData);
+    // console.log(assessmentData);
 
-    questions = assessmentData.questionData;
+    var questionsData = assessmentData.questionData;
 
     //For first question, make sure to set up notes and scafolding value for loading
     if (reviewMode == true && this.state.firstRun == true)
     {      
-      this.setState({ notes: questions[this.state.currentQuestion].notes });
-      this.setState({ scaffolding: questions[this.state.currentQuestion].scaffolding });
+      this.setState({ notes: questionsData[this.state.currentQuestion].notes });
+      this.setState({ scaffolding: questionsData[this.state.currentQuestion].scaffolding });
       this.state.firstRun = false;
     }
 
@@ -172,7 +214,7 @@ export class AssessmentScreen extends Component
       <View style={[styles.container]}>
 
           {/* NOTES BUTTON */}
-          <View style={globalStyles.flexRow}>
+          <View style={globalStyles.flexRow, globalStyles.flex1}>
             <TouchableOpacity
               style={styles.topButton}
               onPress={() => this.toggleModalNotes(true)}>
@@ -183,7 +225,7 @@ export class AssessmentScreen extends Component
 
  
         {/* QUESTIONS IMG & TEXT & SIDES*/}
-        <View style={[globalStyles.flexRow, globalStyles.flex8]}>
+        <View style={[globalStyles.flexRow, globalStyles.flex10]}>
 
             {/* LEFT SIDE */}
           <View style={[styles.flexCol, globalStyles.flex1]}>
@@ -195,8 +237,10 @@ export class AssessmentScreen extends Component
           {/* MIDDLE! */}
           <View style={[styles.container, globalStyles.flex8]}>
 
-            <Text style={styles.question}>{ global.parsedQuestions[ questions[this.state.currentQuestion].id ].text }</Text>
-            <Image style={styles.img}  source={this.state.questionsObj[this.state.currentQuestion].img} />
+            <Text style={styles.question}>{ global.parsedQuestions[ questionsData[this.state.currentQuestion].id ].text }</Text>
+
+            {this.renderImage(questionsData)}
+            {/* <Image style={styles.img}    source={{uri: this.state.img}}  /> */}
 
           </View>
 
@@ -230,13 +274,13 @@ export class AssessmentScreen extends Component
 
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={() => this.grade(true, questions[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
+              onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
               <Text style={styles.buttonText}>Correct</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={[styles.bottomButton, globalStyles.danger]}
-              onPress={() => this.grade(false, questions[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
+              onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
               <Text style={styles.buttonText}>Incorrect</Text>
             </TouchableOpacity>
 
@@ -320,7 +364,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 44,
     paddingVertical: 30,
     marginHorizontal: 140,
-    marginVertical: 12,
+    marginTop: 12,
     height: 25,
     backgroundColor: "#ffbcd4"
 
@@ -347,7 +391,8 @@ const styles = StyleSheet.create({
     fontSize: 85,
     fontWeight: '100',
     color: '#a1a1a1',
-    marginBottom: 55
+    marginBottom: 55,
+    marginTop: 0
   },
 
   buttonText:{
@@ -367,12 +412,22 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
 
-  img:{
-    maxWidth: 256*scale,
-    maxHeight: 192*scale,
-    aspectRatio: (256*scale)/(192*scale),
+  imgContainer:{
     width: 256*scale,
-    height: 192*scale
+    height: 192*scale,
+    // backgroundColor: "red"
+  },
+
+  img:{
+    // maxWidth: 256*scale,
+    // maxHeight: 192*scale,
+    // aspectRatio: (256*scale)/(192*scale),
+    // width: 256*scale,
+    // height: 192*scale
+    width: '100%',
+    height: undefined,
+    aspectRatio: (256*scale)/(192*scale),
+    resizeMode: 'contain',
   },
 
   side:{

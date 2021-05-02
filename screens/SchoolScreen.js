@@ -225,56 +225,6 @@ export class SchoolScreen extends Component
     toModify = text;
   }
 
-  // goToStudent(props, student, studentIndex)
-  // {
-  //   global.selectedSchool = this.state.selectedSchool
-  //   global.selectedStudent = studentIndex;
-
-  //   props.navigation.navigate('StudentScreen', {student: student, updateHomeStudent: this.handlerUpdateStudent.bind(this) });
-  // }
-
-  // renderStudentList = (props) =>
-  // {
-  //   if (this.state.schoolsObj.length == 0)
-  //   {  
-  //   }
-
-  //   else{
-
-  //     return(
-  //       this.state.schoolsObj[this.state.selectedSchool].students.map( (student,index) => (
-  //         <View key={"student"+index}>
-
-          
-  //         <TouchableOpacity
-  //           style={styles.mainButton}
-  //           onPress={ () => this.goToStudent(this.props, student, index) }>
-
-  //           <View style={globalStyles.flexRow}>
-
-  //           <RoundedText
-  //                 title = {student.firstName[0]}
-  //                 color = "black"
-  //                 backgroundColor = "#cccccc"
-  //                 fontSize={18}
-  //                 size={43}
-  //             />
-
-  //             <View style={globalStyles.flexCol}>              
-  //               <Text style={styles.h2}>{student.firstName}</Text>
-  //               <Text>{student.grade} Grader</Text>
-  //             </View>
-
-  //           </View>
-
-  //         </TouchableOpacity>     
-  //         <Divider/>
-  //         </View>
-  //       ) )
-  //     )
-  //   }
-  // }
-
 
   renderRecentAssessments = (props) =>
   {
@@ -289,10 +239,6 @@ export class SchoolScreen extends Component
       )
 
     }
-
-    // return(
-    //   <Text style={[globalStyles.flexAlignCenter]}>No recent assessments</Text>
-    // )
 
     else{
 

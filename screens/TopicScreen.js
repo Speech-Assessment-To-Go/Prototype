@@ -19,6 +19,7 @@ import { TemplateScreen } from './TemplateScreen';
 
 import { RoundedText } from '../components/RoundedText';
 import { Assessment } from '../Assessment'
+import { Structure } from '../Structure'
 import { Topic } from '../Topic'
 import { Question } from '../Question'
 
@@ -27,6 +28,8 @@ import { cos } from 'react-native-reanimated';
 
 import {AssessmentData} from '../AssessmentData'
 import {QuestionData} from '../QuestionData'
+
+import {filterQuestions} from '../filterQuestions'
 
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
@@ -39,8 +42,6 @@ const size = 43;
 const fontSize = 18;
 const borderWidth = 0;
 const title = 'A';
-
-// const questions = Database.LoadQuestions();
 
 
 export class TopicScreen extends Component
@@ -55,20 +56,20 @@ export class TopicScreen extends Component
       // topics:[ new Topic('WH Questions'), new Topic('Repeat After Me'), new Topic('Audiotoruim Memory'), new Topic('Repeating Utterances'),
       //  new Topic('Creating Utterances'), new Topic('Following Directions'), new Topic('Phonemes'), new Topic('Articulation')],
 
-      structures:[ new Assessment('WH Questions', [0,1,2,3,4,5]), new Assessment('Repeat After Me',[6,7,8,9,10]), new Assessment('Following Directions',[22,13,15,12,14])],
+      structures:[ new Structure("WH Questions", "wh"), new Structure("Repeat After Me", "repeat")],
 
-      content:["Complexity 1","Complexity 2","Complexity 3","Complexity 4","Complexity 5"],
+      complexity:["Complexity 1","Complexity 2","Complexity 3","Complexity 4"],
 
-      structureChecks:[false, false, false, false, false, false, false, false], //HARDCODED :)
-      contentChecks:[false, false, false, false, false, false, false, false], //Also HARDCODED :D
+      structureChecks:[true, false, false, false, false, false, false, false], //HARDCODED :)
+      complexityChecks:[true, false, false, false], //Also HARDCODED :D
 
-      numQuestions:'',
+      numQuestions:'5',
 
       questions:[],//Question IDS
 
 
-
-      selectedAssessment:0,
+      selectedStructure:0,
+      selectedComplexity:0,
     };
 
     
@@ -79,34 +80,25 @@ export class TopicScreen extends Component
   //HARDCODED
   init()
   {
-    // this.state.topics[0].assessments.push(new Assessment("SH- Prefix"));
-    // this.state.topics[1].assessments.push(new Assessment("Colors & Shapes"));
-    // this.state.topics[2].assessments.push(new Assessment("Single Syllable"));
-    // this.state.topics[2].assessments.push(new Assessment("Double Syllables"));
     global.parsedQuestions = Database.LoadQuestions();
-    //console.log(questions[ this.state.assessments[0].questions[0] ].text);
-
     global.questionIndex = 0;
-
-    console.log("LOADED!");
-
+    //console.log("LOADED!");
   }
 
-  selectTopic(index){
-    this.state.selectedAssessment = index;
 
-    this.setState({questions: []});
+  addQuestions(){
+    //ToDo: Remove duplicate questions
+    var num = parseInt(this.state.numQuestions);
 
-    var newQuestions = [];
+    var pastQuestions = this.state.questions.slice();
+    
+    var newQuestions = filterQuestions(num, this.state.structures[this.state.selectedStructure].tag, this.state.selectedComplexity+1, pastQuestions);
 
-    for (var i = 0; i < this.state.structures[this.state.selectedAssessment].questions.length; i++)
-      newQuestions.push(this.state.structures[this.state.selectedAssessment].questions[i]);
+    let copy = this.state.questions.slice();
+    copy = copy.concat(newQuestions);
 
-    this.setState({questions: newQuestions});
-
-
-    this.setStructureCheckbox(index);
-    //this.forceUpdate();
+    this.setState({questions: copy});
+    
   }
 
   setStructureCheckbox(index)
@@ -116,35 +108,20 @@ export class TopicScreen extends Component
       this.state.structureChecks[i] = false;
 
     this.state.structureChecks[index] = !this.state.structureChecks[index];
+    this.state.selectedStructure = index;
     this.forceUpdate();
   }
 
   setContentCheckbox(index)
   {
     //Clear
-    for (var i = 0; i < this.state.contentChecks.length; i++)
-      this.state.contentChecks[i] = false;
+    for (var i = 0; i < this.state.complexityChecks.length; i++)
+      this.state.complexityChecks[i] = false;
 
-    this.state.contentChecks[index] = !this.state.contentChecks[index];
+    this.state.selectedComplexity = index;
+    this.state.complexityChecks[index] = !this.state.complexityChecks[index];
     this.forceUpdate();
   }
-
-  // startAssessment(props)
-  // {
-  //   // var questions = this.state.assessments[this.state.selectedStructure].questions;
-
-  //   //console.log(this.state.assessments[this.state.selectedAssessment]);
-
-  //   global.questions = this.state.assessments[this.state.selectedAssessment];
-
-  //   //console.log(global.questions);
-  //   console.log(global.parsedQuestions[1].text);
-  //   // props.navigation.navigate('AssessmentScreen');
-
-  //   //Pass update student to update recent assessments panel
-  //   props.navigation.navigate('AssessmentScreen', {questions:questions, updateStudent: updateStudent.bind(this)});
-  // }
-
 
 // ------------ * RENDER * ------------------------
   render(){
@@ -165,13 +142,13 @@ export class TopicScreen extends Component
 
         <ScrollView style={[styles.structurePanel, globalStyles.flex3]}>
         {
-          this.state.structures.map((assessment,index) => (
+          this.state.structures.map((structure,index) => (
             <View key={"assessment"+index}>
             
             <TouchableOpacity
               // style={[styles.mainButton, (index == this.state.selectedTopic)? styles.selectedBG: styles.unselectedBG]}
               style={[styles.mainButton, styles.unselectedBG]}
-              onPress={() => this.selectTopic(index)}>
+              onPress={() => this.setStructureCheckbox(index)}>
 
               <View style={globalStyles.flexRow}>
               
@@ -187,7 +164,7 @@ export class TopicScreen extends Component
 
 
                 <View style={globalStyles.flexCol}>              
-                  <Text style={styles.h2}>{assessment.name}</Text>
+                  <Text style={styles.h2}>{structure.title}</Text>
                 </View>
 
               </View>
@@ -202,12 +179,12 @@ export class TopicScreen extends Component
 
         {/* CONTENT */}
         <View style={[styles.header]}>
-          <Text style={[styles.h1]}>Content</Text> 
+          <Text style={[styles.h1]}>Complexity</Text> 
         </View>
 
         <ScrollView style={[styles.contentPanel,globalStyles.flex1]}>
         {
-          this.state.content.map((content,index) => (
+          this.state.complexity.map((content,index) => (
             <View key={"topic"+index}>
             
             <TouchableOpacity
@@ -220,7 +197,7 @@ export class TopicScreen extends Component
 
               <View style={styles.checkboxBlock}>
                 <RadioButton
-                status={this.state.contentChecks[index] ? 'checked' : 'unchecked'}
+                status={this.state.complexityChecks[index] ? 'checked' : 'unchecked'}
                 onPress={() => {
                   this.setContentCheckbox(index);
                 }}
@@ -246,16 +223,7 @@ export class TopicScreen extends Component
             <TouchableOpacity
               style={styles.bottomButton}
               onPress={ () => {
-
-                let copy = student;
-                copy.firstName = "25fe";
-
-                 this.setState({student: copy})
-                //  student.firstName = "SDJLK"; 
-                updateStudent(copy); 
-                //updateHomeStudent(copy); 
-
-
+                this.addQuestions();
                 }}>
               <Text style={styles.buttonText}>Add</Text>
             </TouchableOpacity>
@@ -286,31 +254,54 @@ export class TopicScreen extends Component
             <View key={"assessment"+index}>
 
             
-            <TouchableOpacity
+            <View
               style={styles.mainButton}
               // onPress={ () => navigation.navigate('AssessmentScreen', {assessment} )}>
-              onPress={ () => 
-              {
-                  let copy = this.state.questions.slice(); //Create copy
-                  copy.splice(index, 1);
-                  this.setState({questions: copy});
-              } }>
+              // onPress={ () => 
+              // {
+              //     let copy = this.state.questions.slice(); //Create copy
+              //     copy.splice(index, 1);
+              //     this.setState({questions: copy});
+              // } }
+              >
 
               <View style={globalStyles.flexRow}>
 
+              {/* <TouchableOpacity
+              onPress={ () => 
+                {
+                    let copy = this.state.questions.slice(); //Create copy
+                    copy.splice(index, 1);
+                    this.setState({questions: copy});
+                } }
+              >
               <RoundedText
                     title = "-"
                     color = "black"
-                    backgroundColor = "#cccccc"
-                    fontSize={24}
+                    backgroundColor = "#ffaaaa"
+                    fontSize={36}
                     size={43}
                 />
+                </TouchableOpacity> */}
+
+                <TouchableOpacity
+                  style={[styles.removeButton, globalStyles.danger]}
+                  onPress={ () => 
+                    {
+                      let copy = this.state.questions.slice(); //Create copy
+                      copy.splice(index, 1);
+                      this.setState({questions: copy});
+                    } }>
+      
+                  <Text style={styles.buttonText}>Remove</Text>
+            </TouchableOpacity>
      
                   <Text style={styles.h2}>{global.parsedQuestions[questionID].text}</Text>
 
               </View>
 
-            </TouchableOpacity>     
+            </View>
+
             <Divider/>
             </View>
           ) )
@@ -342,8 +333,25 @@ export class TopicScreen extends Component
                   navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: updateStudent.bind(this), reviewMode:false});
                 } }>
   
-              <Text style={styles.buttonText}>Start</Text>
+              <Text style={styles.buttonText}>Start Assessment</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.bottomButton, globalStyles.danger]}
+              onPress={ () => 
+                {
+                  if (this.state.questions.length == 0)
+                  {
+                    alert("There is nothing to clear!");
+                    return;
+                  }
+
+                  this.setState({questions: []});
+                } }>
+  
+              <Text style={styles.buttonText}>Clear</Text>
+            </TouchableOpacity>
+
         </View>   
 
         </View>
@@ -371,6 +379,17 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginRight: 30,
     marginVertical: 12,
+    height: 25,
+    backgroundColor: "#00bcd4"
+  },
+
+  removeButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 5,
+    paddingVertical: 10,
+    marginRight: 20,
+    // marginVertical: 12,
     height: 25,
     backgroundColor: "#00bcd4"
   },
@@ -405,7 +424,7 @@ const styles = StyleSheet.create({
   },
 
   h2:{
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold'
   },
 
