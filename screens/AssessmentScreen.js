@@ -23,6 +23,8 @@ import { RoundedText } from '../components/RoundedText';
 import {AssessmentData} from '../AssessmentData'
 import {QuestionData} from '../QuestionData'
 
+import {sendEmail} from '../sendEmail'
+
 
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
@@ -66,7 +68,12 @@ export class AssessmentScreen extends Component
 
       totalScaffolding: 0,
 
-      score:0
+      score:0,
+
+      textEAddress:'',
+      modalVisible:false,
+
+      updatedAssessmentData:[]
 
 
     };
@@ -79,6 +86,11 @@ export class AssessmentScreen extends Component
     // this.setState({maxQuestions: global.questions.length})
     //this.state.maxQuestions = globa
   }
+
+  toggleModalEmail(visible) {
+    this.setState({ modalVisible: visible });
+    this.setState({textEAddress: ''})
+}
 
   componentDidMount()
   {
@@ -266,25 +278,6 @@ export class AssessmentScreen extends Component
             this.renderGradeButtons(questionsData, student, updateStudent, assessmentData, reviewMode)
           }
 
-          {/* <TouchableOpacity
-            style={styles.bottomButton}
-            onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
-            <Text style={styles.buttonText}>Next Question</Text>
-          </TouchableOpacity>          
-
-          {/* <TouchableOpacity
-            style={styles.bottomButton}
-            onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
-            <Text style={styles.buttonText}>Correct</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.bottomButton, globalStyles.danger]}
-            onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}            
-            >
-            <Text style={styles.buttonText}>Incorrect</Text>
-          </TouchableOpacity> */} 
-
         </View>
 
       </View>
@@ -367,6 +360,7 @@ export class AssessmentScreen extends Component
         var newAssessmentData = new AssessmentData(questionsCopy, assessmentData.dateTaken );
         // console.log(assessmentData);
         newAssessmentData.score = this.getPercent(grading);
+        this.state.updatedAssessmentData = newAssessmentData;
 
         //console.log(this.state.grading);
         this.state.score = this.getPercent(this.state.grading);
@@ -416,7 +410,7 @@ export class AssessmentScreen extends Component
     }
   }
 
-  renderResults = (props) =>
+  renderResults = (props, student, assessmentData) =>
   {
 
     if (this.state.resultsScreen == true)
@@ -424,7 +418,7 @@ export class AssessmentScreen extends Component
       var grading = this.state.grading;
 
       return(
-        <View style={styles.container}>
+      <View style={styles.container}>
 
  
         {/* QUESTIONS IMG & TEXT */}
@@ -437,39 +431,6 @@ export class AssessmentScreen extends Component
 
         {/* QUESTION BUBBLES */}
         <View style={[styles.chipContainer]}>
-
-
-        {
-          // this.state.grading.map((grade,index) => (
-          //   <View key={"grading"+index } style={[styles.chipContainer]}>
-          //     {/* <ScrollView> */}
-          //       <Chip style={[styles.chip, globalStyles.flex1, (grade)? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q{index+1}</Chip>
-
-          //     {/* </ScrollView> */}
-          //   </View>
-          // ) )
-        }
-
-
-
-
-
-
-          {/* <View style={globalStyles.flexRow}>
-            <Chip style={[styles.chip, (grading[0])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q1</Chip>
-            <Chip style={[styles.chip, (grading[1])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q2</Chip>
-            <Chip style={[styles.chip, (grading[2])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q3</Chip>
-            <Chip style={[styles.chip, (grading[3])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q4</Chip>
-            <Chip style={[styles.chip, (grading[4])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q5</Chip>
-          </View>
-
-          <View style={globalStyles.flexRow}>
-            <Chip style={[styles.chip, (grading[5])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q6</Chip>
-            <Chip style={[styles.chip, (grading[6])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q7</Chip>
-            <Chip style={[styles.chip, (grading[7])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q8</Chip>
-            <Chip style={[styles.chip, (grading[8])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q9</Chip>
-            <Chip style={[styles.chip, (grading[9])? styles.chipCorrect: styles.chipIncorrect]} textStyle={styles.chipText} onPress={() => console.log('Pressed')}>Q10</Chip> 
-          </View> */}
           
         </View>
 
@@ -486,13 +447,59 @@ export class AssessmentScreen extends Component
 
             <TouchableOpacity
               style={[styles.bottomButton]}
-              onPress={() => props.navigation.goBack()}>
+              onPress={() => this.toggleModalEmail(true)}>
               <Text style={styles.buttonText}>Email</Text>
             </TouchableOpacity>
 
           </View>
 
           </View>
+
+                {/* ********************** | EMAIL MODAL | ********************* */}
+      <Modal animationType="slide"  transparent={true} visible={this.state.modalVisible}  >
+
+      <View style={styles.container}>
+
+        <View style={styles.modalView}>
+
+          <Text style={styles.modalHeader}>Email Student Profile</Text> 
+          
+          <View style={globalStyles.flexRow}>
+            <TextInput style={[styles.textEInput, styles.emailAddress]} label="Email Address" value={this.state.textEAddress} onChangeText={text => this.setState( {textEAddress: text})}placeholder={"Email Address"}/>
+            
+          </View>
+
+          <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
+          <TouchableOpacity
+            style={[styles.bottomButton, styles.modalButton]}
+            onPress={() => {
+
+              var subject = "Dynamic Assessment Results for " + student.fullName;
+              var body = "";
+
+              body = "Score: " + this.state.updatedAssessmentData.score + " \t Total Scaffolding: " + this.state.totalScaffolding + '\n';
+
+              for (var i = 0; i < this.state.updatedAssessmentData.questionData.length; i++)
+              {                
+                body += global.parsedQuestions[this.state.updatedAssessmentData.questionData[i].id].text + " - Scaffolding Amount: " + this.state.updatedAssessmentData.questionData[i].scaffolding + '\t Notes: ' + this.state.updatedAssessmentData.questionData[i].notes+ '\n';
+              }
+
+              sendEmail(this.state.textEAddress, subject, body);
+
+              this.toggleModalEmail(false);
+            }}>
+            <Text style={styles.modalText}>Submit</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.bottomButton, styles.modalButton]}
+            onPress={() => this.toggleModalEmail(false)}>
+            <Text style={styles.modalText}>Cancel</Text>
+          </TouchableOpacity>
+        </View>   
+        </View>
+      </View>
+      </Modal>
 
       </View>
         
@@ -525,7 +532,7 @@ export class AssessmentScreen extends Component
       <View style={styles.container}>
         {this.renderAssessment(questionsData, student, updateStudent, assessmentData, reviewMode)}
 
-        {this.renderResults(this.props)}
+        {this.renderResults(this.props, student, assessmentData)}
       </View>
     );
   }
@@ -788,8 +795,77 @@ chipCorrect:{
 
 chipIncorrect:{
   backgroundColor: '#ff6f6b',
-}
+},
+////// MODAL STUFF 
 
+modalView: {
+  margin: 35,
+  backgroundColor: "white",
+  borderRadius: 7,
+  paddingVertical: 15,
+  paddingHorizontal: 150,
+  alignItems: "center",
+  shadowColor: "#000",
+  shadowOffset: {
+    width: 0,
+    height: 2
+},
+shadowOpacity: 0.25,
+shadowRadius: 3.84,
+elevation: 5,
+maxWidth: "80%",
+maxHeight:"80%",
+},
+
+textStyle: {
+  color: "white",
+  fontWeight: "bold",
+  textAlign: "center"
+},
+
+modalHeader: {
+  alignSelf: 'flex-start',
+  marginBottom: 50,
+  marginTop: 35,
+  fontSize: 22,
+  fontWeight: 'bold',
+  textAlign: "left"
+},
+
+textEInput:{
+  flex:1,
+  height: 50,
+  marginHorizontal: 10,
+  marginVertical: 20,
+  maxWidth: 350
+},
+
+emailAddress:{
+  maxWidth: 300,
+},
+
+textBox: {
+  marginVertical: 10,
+  borderLeftWidth: 10,
+  borderRightWidth: 10,
+  borderTopWidth: 10,
+  borderBottomWidth: 10,
+  borderColor: '#00bcd4',
+  height: 180,
+  width: '100%',
+  padding: 15
+},
+
+modalButton:{
+  backgroundColor: 'white',
+  marginTop: 35
+},
+
+modalText:{
+  fontSize: 18,
+  fontWeight: 'bold',
+  color: "#00bcd4"
+}
 
 
 });
