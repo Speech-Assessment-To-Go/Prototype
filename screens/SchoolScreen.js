@@ -278,7 +278,7 @@ export class SchoolScreen extends Component
 
 
                 <View style={globalStyles.flexCol}>              
-                  <Text style={styles.h2}>{school.name}</Text>
+                  <Text style={styles.h2}>{school.name} Elementary School</Text>
                   <Text>USD {school.id}</Text>
                 </View>
 
