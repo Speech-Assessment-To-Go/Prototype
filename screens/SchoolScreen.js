@@ -46,7 +46,9 @@ export class SchoolScreen extends Component
 
           this.state = {
 
-            schoolsObj:[  ],
+            schoolsObj:[  ],//DELETE!
+
+            studentsObjs:[],
     
             modalVisible:false,
             modalSchoolVisible:false,
@@ -60,7 +62,8 @@ export class SchoolScreen extends Component
             textBirth:'',
             textLanguage:'',
     
-            selectedSchool:0,
+            selectedSchool:-1,
+            selectedStudent:-1,
     
         }
 
@@ -76,16 +79,20 @@ export class SchoolScreen extends Component
   {
     // console.log("Loaded from init!");
     this.loadSchools();
+    this.loadStudents();
   }
 
   handlerUpdateStudent(studentData)
   {
     //this.forceUpdate();
-    let copy = this.state.schoolsObj.slice(); //Create copy
+    let copy = this.state.studentsObjs.slice(); //Create copy
 
-    copy[global.selectedSchool].students[selectedStudent] = studentData;
+    copy[global.selectedStudent] = studentData;
 
-    this.setState({schoolsObj: copy})
+    this.setState({studentsObjs: copy})
+
+    //Save assessments
+    //this.saveStudentsData(copy);
   }
 
   // componentDidMount()
@@ -145,21 +152,48 @@ export class SchoolScreen extends Component
   }
 
 
+  saveStudentsData(data)
+  {
+    //Save schools
+    var jsonData = JSON.stringify(data);
+    console.log(jsonData);
+    AsyncStorage.setItem('students', jsonData);
+  }
+
+  loadStudents()
+  {
+    AsyncStorage.getItem('students')
+    .then(
+      (students) => 
+      {
+        if (students != null)
+        {
+          //Schools
+          var parsedStudents = JSON.parse(students);
+          
+          this.setState({studentsObjs: parsedStudents})
+        }
+      })
+  }
+
+
   addStudent(firstName, lastName, ethnicity, school, birth, language, grade = 5){
 
 
     var student = new Student(firstName, lastName, ethnicity, school, birth, language, grade);
 
-    let copy = this.state.schoolsObj.slice(); //Create copy
-    copy[this.state.selectedSchool].students.push(student);
-    this.setState({schoolsObj: copy})
+    let copy = this.state.studentsObjs.slice(); //Create copy
+    copy.push(student);
+    this.setState({studentsObjs: copy})
 
-    this.saveSchoolData(copy);
+    this.saveStudentsData(copy);
     //this.state.schoolsObj[this.state.selectedSchool].students.push(student);
 
-
+    this.setState({selectedStudent: this.state.studentsObjs.length})
     //this.state.studentsObj.push(new Student(text));
     this.toggleModalStudent(false);
+
+
   }
 
   selectSchool(index){
@@ -168,6 +202,11 @@ export class SchoolScreen extends Component
 
     //this.state.selectedSchool = index;
     //this.forceUpdate();
+  }
+
+  selectStudent(index)
+  {
+    this.setState({selectedStudent: index});
   }
 
   clearInputs(){
@@ -186,52 +225,118 @@ export class SchoolScreen extends Component
     toModify = text;
   }
 
-  goToStudent(props, student, studentIndex)
-  {
-    global.selectedSchool = this.state.selectedSchool
-    global.selectedStudent = studentIndex;
+  // goToStudent(props, student, studentIndex)
+  // {
+  //   global.selectedSchool = this.state.selectedSchool
+  //   global.selectedStudent = studentIndex;
 
-    props.navigation.navigate('StudentScreen', {student: student, updateHomeStudent: this.handlerUpdateStudent.bind(this) });
-  }
+  //   props.navigation.navigate('StudentScreen', {student: student, updateHomeStudent: this.handlerUpdateStudent.bind(this) });
+  // }
 
-  renderStudentList = (props) =>
+  // renderStudentList = (props) =>
+  // {
+  //   if (this.state.schoolsObj.length == 0)
+  //   {  
+  //   }
+
+  //   else{
+
+  //     return(
+  //       this.state.schoolsObj[this.state.selectedSchool].students.map( (student,index) => (
+  //         <View key={"student"+index}>
+
+          
+  //         <TouchableOpacity
+  //           style={styles.mainButton}
+  //           onPress={ () => this.goToStudent(this.props, student, index) }>
+
+  //           <View style={globalStyles.flexRow}>
+
+  //           <RoundedText
+  //                 title = {student.firstName[0]}
+  //                 color = "black"
+  //                 backgroundColor = "#cccccc"
+  //                 fontSize={18}
+  //                 size={43}
+  //             />
+
+  //             <View style={globalStyles.flexCol}>              
+  //               <Text style={styles.h2}>{student.firstName}</Text>
+  //               <Text>{student.grade} Grader</Text>
+  //             </View>
+
+  //           </View>
+
+  //         </TouchableOpacity>     
+  //         <Divider/>
+  //         </View>
+  //       ) )
+  //     )
+  //   }
+  // }
+
+
+  renderRecentAssessments = (props) =>
   {
-    if (this.state.schoolsObj.length == 0)
+    //console.log(this.state.studentsObjs[this.state.selectedStudent]);
+
+    if (this.state.selectedStudent == -1) return;
+
+    if (this.state.studentsObjs[this.state.selectedStudent].assessmentData.length == 0)
     {  
+      return(
+        <Text style={[globalStyles.flexAlignCenter]}>No recent assessments</Text>
+      )
+
     }
+
+    // return(
+    //   <Text style={[globalStyles.flexAlignCenter]}>No recent assessments</Text>
+    // )
 
     else{
 
       return(
-        this.state.schoolsObj[this.state.selectedSchool].students.map( (student,index) => (
-          <View key={"student"+index}>
+        <ScrollView style={styles.assessmentsPanel}>
+          <Text style={[globalStyles.flexAlignCenter]}>ASSESSMENTS EXISTS!</Text>
 
-          
-          <TouchableOpacity
-            style={styles.mainButton}
-            onPress={ () => this.goToStudent(this.props, student, index) }>
 
-            <View style={globalStyles.flexRow}>
+        {       
+          //console.log(student.assessmentData[0].slp)   
+          // //this.state.recentAssessments.map((assessment,index) => (
+            this.state.studentsObjs[this.state.selectedStudent].assessmentData.map((assessment, index) => (
+            <View key={"assessment"+index}>
+            
 
-            <RoundedText
-                  title = {student.firstName[0]}
-                  color = "black"
-                  backgroundColor = "#cccccc"
-                  fontSize={18}
-                  size={43}
-              />
+            {/* <View style={styles.recentAssessments}>
 
-              <View style={globalStyles.flexCol}>              
-                <Text style={styles.h2}>{student.firstName}</Text>
-                <Text>{student.grade} Grader</Text>
-              </View>
+              <Text style={styles.h2}>{assessment.dateTaken} </Text>
 
+            </View> */}
+
+            
+            <TouchableOpacity
+              style={styles.recentAssessmentButton}
+              onPress={ () => {
+
+                //Get saved information of the assessmentData
+                //var assessmentData = this.state.studentsObjs[this.state.selectedStudent].assessmentData[index];
+                
+                props.navigation.navigate('AssessmentScreen', {assessmentData:assessment, student:this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this), reviewMode:true});
+
+                }}>
+              {/* <Text style={styles.buttonText}>Add</Text> */}
+              <Text style={styles.h2}>{assessment.dateTaken} </Text>
+            </TouchableOpacity>
+
+
+
+            <Divider/>
             </View>
+          ) )
+        }      
 
-          </TouchableOpacity>     
-          <Divider/>
-          </View>
-        ) )
+        </ScrollView>
       )
     }
   }
@@ -257,17 +362,17 @@ export class SchoolScreen extends Component
 
         {
          
-          this.state.schoolsObj.map((school,index) => (
-            <View key={"school"+index}>
+          this.state.studentsObjs.map((student,index) => (
+            <View key={"student"+index}>
             
             <TouchableOpacity
-              style={[styles.mainButton, (index == this.state.selectedSchool)? styles.selectedBG: styles.unselectedBG]}
-              onPress={() => this.selectSchool(index)}>
+              style={[styles.mainButton, (index == this.state.selectedStudent)? styles.selectedBG: styles.unselectedBG]}
+              onPress={() => this.selectStudent(index)}>
 
               <View style={globalStyles.flexRow}>
               
               <RoundedText
-                    title = {school.name[0]}
+                    title = {student.firstName[0]}
                     color = "black"
                     backgroundColor = "#cccccc"
                     fontSize={18}
@@ -278,8 +383,8 @@ export class SchoolScreen extends Component
 
 
                 <View style={globalStyles.flexCol}>              
-                  <Text style={styles.h2}>{school.name}</Text>
-                  <Text>USD {school.id}</Text>
+                  <Text style={styles.h2}>{student.firstName}</Text>
+                  <Text>Grade {student.grade}</Text>
                 </View>
 
               </View>
@@ -296,7 +401,8 @@ export class SchoolScreen extends Component
         {/* Bottom Buttons */}
 
           <View style={globalStyles.flexRow}>
-            <TouchableOpacity
+
+            {/* <TouchableOpacity
               style={styles.bottomButton}
               onPress={() => this.toggleModalSchool(true)}>
               <Text style={styles.buttonText}>Add School</Text>
@@ -306,26 +412,7 @@ export class SchoolScreen extends Component
               style={[styles.bottomButton, globalStyles.danger]}
               onPress={() => alert("Bottom!")}>
               <Text style={styles.buttonText}>Remove School</Text>
-            </TouchableOpacity>
-
-          </View>          
-        </View>
-
-
-        {/* Right | STUDENT PANEL*/}
-        <View style={styles.column}> 
-
-        <ScrollView style={styles.studentsPanel}>
-
-
-        {
-          this.renderStudentList(this.props)
-        }
-
-
-        </ScrollView>
-
-        <View style={globalStyles.flexRow}>
+            </TouchableOpacity> */}
 
             <TouchableOpacity
               style={styles.bottomButton}
@@ -338,6 +425,38 @@ export class SchoolScreen extends Component
               onPress={() => alert("Bottom!")}>
               <Text style={styles.buttonText}>Remove Student</Text>
             </TouchableOpacity>
+
+          </View>          
+        </View>
+
+
+        {/* Right | STUDENT PANEL*/}
+        <View style={styles.column}> 
+
+        <ScrollView style={styles.studentsPanel}>
+
+
+
+        {
+          this.renderRecentAssessments(this.props)
+        }
+
+
+        </ScrollView>
+
+        <View style={globalStyles.flexRow}>
+
+            <TouchableOpacity
+              style={styles.bottomButton}
+              onPress={ () => navigation.push('TopicScreen', {student: this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this) })}>
+              <Text style={styles.buttonText}>Take Assessment</Text>
+            </TouchableOpacity>
+
+            {/* <TouchableOpacity
+              style={[styles.bottomButton, globalStyles.danger]}
+              onPress={() => alert("Bottom!")}>
+              <Text style={styles.buttonText}>Remove Student</Text>
+            </TouchableOpacity> */}
 
           </View>   
 
@@ -373,7 +492,7 @@ export class SchoolScreen extends Component
           <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
             <TouchableOpacity
               style={[styles.bottomButton, styles.modalButton]}
-              onPress={() => this.addStudent(this.state.textFName, this.state.textLName,this.state.textEthnicity,this.state.schoolsObj[this.state.selectedSchool].name + " Elementary School",
+              onPress={() => this.addStudent(this.state.textFName, this.state.textLName,this.state.textEthnicity, "??? School",
                                               this.state.textBirth,this.state.textLanguage, this.state.textGrade)}>
               <Text style={styles.modalText}>Submit</Text>
             </TouchableOpacity>
@@ -390,7 +509,7 @@ export class SchoolScreen extends Component
       </Modal>
 
       {/* ********************** | SCHOOL MODAL | ********************* */}
-      <Modal animationType="slide"  transparent={true} visible={this.state.modalSchoolVisible}  >
+      {/* <Modal animationType="slide"  transparent={true} visible={this.state.modalSchoolVisible}  >
 
         <View style={styles.container}>
 
@@ -421,7 +540,7 @@ export class SchoolScreen extends Component
           </View>   
           </View>
         </View>
-      </Modal>
+      </Modal> */}
 
 
     </View>
@@ -515,6 +634,25 @@ const styles = StyleSheet.create({
     padding:0
   },
 
+  recentAssessments:{
+    justifyContent: "flex-end",
+    width: "100%",
+    height: 32,
+    backgroundColor: "red",
+    margin: 0,
+    padding: 0
+    // borderBottomWidth: 1
+  },
+
+  recentAssessmentButton:{
+    justifyContent: "flex-end",
+    width: "100%",
+    height: 32,
+    backgroundColor: "red",
+    margin: 0,
+    padding: 0
+    // borderBottomWidth: 1
+  },
 
   ////// MODAL STUFF : ToDo: Seperate component
 
