@@ -149,7 +149,7 @@ export class TopicScreen extends Component
 // ------------ * RENDER * ------------------------
   render(){
   const { route, navigation } = this.props;
-  const { student, updateStudent } = route.params;
+  const { student, updateHomeStudent, updateStudent } = route.params;
 
       return(      
 
@@ -253,7 +253,7 @@ export class TopicScreen extends Component
                  this.setState({student: copy})
                 //  student.firstName = "SDJLK"; 
                 updateStudent(copy); 
-                //updateHomeStudent(copy); 
+                updateHomeStudent(copy); 
 
 
                 }}>
