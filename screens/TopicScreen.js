@@ -159,7 +159,7 @@ export class TopicScreen extends Component
               
 
               <View style={styles.checkboxBlock}>
-                <RadioButton
+                <RadioButton.Android
                 status={this.state.structureChecks[index] ? 'checked' : 'unchecked'}
                 onPress={() => {
                   this.setStructureCheckbox(index);
@@ -202,7 +202,7 @@ export class TopicScreen extends Component
               
 
               <View style={styles.checkboxBlock}>
-                <RadioButton
+                <RadioButton.Android
                 status={this.state.complexityChecks[index] ? 'checked' : 'unchecked'}
                 onPress={() => {
                   this.setContentCheckbox(index);
