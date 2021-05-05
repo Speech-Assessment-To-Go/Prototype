@@ -172,7 +172,7 @@ export class SchoolScreen extends Component
     for (var i = 0; i < copy.length; i++)
       allStudentIds.push(i);
 
-    console.log(allStudentIds);
+    // console.log(allStudentIds);
 
     //this.setState({filteredStudents: allStudentIds})
     this.state.filteredStudents = allStudentIds;
@@ -210,7 +210,7 @@ export class SchoolScreen extends Component
         var selected = this.state.selectedStudent;
         //this.state.selectedStudent = -1;
     
-        console.log(selected);
+        // console.log(selected);
     
         let copy = this.state.studentsObjs.slice(); //Create copy
         copy.splice(selected, 1);
@@ -224,7 +224,7 @@ export class SchoolScreen extends Component
         for (var i = 0; i < copy.length; i++)
           allStudentIds.push(i);
 
-        console.log(allStudentIds);
+        // console.log(allStudentIds);
 
         //this.setState({filteredStudents: allStudentIds})
         this.state.filteredStudents = allStudentIds;
