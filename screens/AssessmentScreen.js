@@ -1092,7 +1092,7 @@ scoringTextContainer:
 chip:{
   flex:1,
   // backgroundColor: '#d4d4d4',
-  // backgroundColor: '#76db76',
+  // backgroundColor: '#6bc46b',
   justifyContent: 'center',
   maxWidth: 100,
   minWidth: 100,
@@ -1108,11 +1108,11 @@ chipText:{
 },
 
 chipCorrect:{
-  backgroundColor: '#76db76',
+  backgroundColor: '#6bc46b',
 },
 
 chipIncorrect:{
-  backgroundColor: '#ff6f6b',
+  backgroundColor: '#ff5c5c',
 },
 
 ////// MODAL STUFF 

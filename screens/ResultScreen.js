@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   chip:{
     flex:1,
     // backgroundColor: '#d4d4d4',
-    // backgroundColor: '#76db76',
+    // backgroundColor: '#6bc46b',
     justifyContent: 'center',
     maxWidth: 100,
     marginHorizontal: 10,
@@ -197,11 +197,11 @@ const styles = StyleSheet.create({
   },
 
   chipCorrect:{
-    backgroundColor: '#76db76',
+    backgroundColor: '#6bc46b',
   },
 
   chipIncorrect:{
-    backgroundColor: '#ff6f6b',
+    backgroundColor: '#ff5c5c',
   }
 
 
