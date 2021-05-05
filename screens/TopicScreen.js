@@ -9,13 +9,13 @@ import {
   TouchableOpacity,
   ScrollView,
   Modal,
-  LogBox
+  LogBox,
+  Button
 } from 'react-native';
 
-import {  TextInput, Checkbox, RadioButton  } from 'react-native-paper';
+import {  TextInput, Checkbox, RadioButton, Divider  } from 'react-native-paper';
 
 import { globalStyles } from '../globalStyles';
-import { Button, Divider,   } from 'react-native-paper';
 import { TemplateScreen } from './TemplateScreen';
 
 import { RoundedText } from '../components/RoundedText';
@@ -61,6 +61,7 @@ export class TopicScreen extends Component
       //  new Topic('Creating Utterances'), new Topic('Following Directions'), new Topic('Phonemes'), new Topic('Articulation')],
 
       structures:[ new Structure("WH Questions", "wh"), new Structure("Repeat After Me", "repeat")],
+      //structures:[ new Structure("WH Questions", "wh"), new Structure("Repeat After Me", "repeat"), new Structure("Creating Sounds", "repeat"), new Structure("Following Directions", "repeat"), new Structure("Meanings", "repeat"),  new Structure("Applying", "repeat")],
 
       complexity:["Complexity 1","Complexity 2","Complexity 3","Complexity 4"],
 
@@ -84,7 +85,7 @@ export class TopicScreen extends Component
   //HARDCODED
   init()
   {
-    global.parsedQuestions = Database.LoadQuestions();
+    //global.parsedQuestions = Database.LoadQuestions();
     global.questionIndex = 0;
     //console.log("LOADED!");
   }
@@ -149,7 +150,7 @@ export class TopicScreen extends Component
           this.state.structures.map((structure,index) => (
             <View key={"assessment"+index}>
             
-            <TouchableOpacity
+            <View
               // style={[styles.mainButton, (index == this.state.selectedTopic)? styles.selectedBG: styles.unselectedBG]}
               style={[styles.mainButton, styles.unselectedBG]}
               onPress={() => this.setStructureCheckbox(index)}>
@@ -173,7 +174,8 @@ export class TopicScreen extends Component
 
               </View>
 
-            </TouchableOpacity>     
+            </View>     
+
             <Divider/>
             </View>
           ) )
@@ -191,7 +193,7 @@ export class TopicScreen extends Component
           this.state.complexity.map((content,index) => (
             <View key={"topic"+index}>
             
-            <TouchableOpacity
+            <View
               // style={[styles.mainButton, (index == this.state.selectedTopic)? styles.selectedBG: styles.unselectedBG]}
               style={[styles.mainButton, styles.unselectedBG]}
               onPress={() => this.setContentCheckbox(index)}>
@@ -215,7 +217,7 @@ export class TopicScreen extends Component
 
               </View>
 
-            </TouchableOpacity>     
+            </View>     
             <Divider/>
             </View>
           ) )
@@ -224,13 +226,16 @@ export class TopicScreen extends Component
 
         <View style={[globalStyles.flexRowReverse, globalStyles.flexHoriCenter]}>
 
-            <TouchableOpacity
-              style={styles.bottomButton}
-              onPress={ () => {
-                this.addQuestions();
-                }}>
-              <Text style={styles.buttonText}>Add</Text>
-            </TouchableOpacity>
+        <View style={styles.bottomButton}>
+          <Button                
+                onPress={ () => {
+                  this.addQuestions();
+                  }}
+                  title="Add Questions"
+                  >
+              </Button>
+        </View>
+
 
             {/* <View style={[globalStyles.flexRow]}> */}
             <TextInput style={[styles.textInput]} keyboardType="number-pad" value={this.state.numQuestions} onChangeText={text => this.setState( {numQuestions: text})} />      
@@ -288,17 +293,20 @@ export class TopicScreen extends Component
                 />
                 </TouchableOpacity> */}
 
-                <TouchableOpacity
-                  style={[styles.removeButton, globalStyles.danger]}
-                  onPress={ () => 
-                    {
-                      let copy = this.state.questions.slice(); //Create copy
-                      copy.splice(index, 1);
-                      this.setState({questions: copy});
-                    } }>
-      
-                  <Text style={styles.buttonText}>Remove</Text>
-            </TouchableOpacity>
+                <View style={[styles.removeButton]}>
+                  <Button
+                     color="#ff5c5c"
+                    onPress={ () => 
+                      {
+                        let copy = this.state.questions.slice(); //Create copy
+                        copy.splice(index, 1);
+                        this.setState({questions: copy});
+                      } }
+                      title="Remove"
+                      >        
+                  </Button>
+                </View>
+
      
                   <Text style={styles.h2}>{global.parsedQuestions[questionID].text}</Text>
 
@@ -314,38 +322,40 @@ export class TopicScreen extends Component
         </ScrollView>
 
         <View style={globalStyles.flexRowReverse}>
-            <TouchableOpacity
-              style={styles.bottomButton}
-              onPress={ () => 
-                {
-                  if (this.state.questions.length == 0)
+          <View style={styles.bottomButton}>
+            <Button
+                title="Start Assessment"
+                onPress={ () => 
                   {
-                    alert("Cannot start without questions!");
-                    return;
-                  }
+                    if (this.state.questions.length == 0)
+                    {
+                      alert("Cannot start without questions!");
+                      return;
+                    }
 
-                  //Get questions from premade assessments
-                  global.questions = this.state.questions;
-  
-                  var questionsData = [];
-                  for (var i = 0; i < global.questions.length; i++)
-                    questionsData.push(new QuestionData(global.questions[i]));
-                  
-                  //Date Stuff
-                  var dateString =  new Date().toUTCString();
-                  dateString = dateString.slice(0, -13);
-                  
-                  var assessmentData = new AssessmentData(questionsData, dateString);
-              
-                  //Pass update student to update recent assessments panel
-                  navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: updateStudent, reviewMode:false});
-                } }>
-  
-              <Text style={styles.buttonText}>Start Assessment</Text>
-            </TouchableOpacity>
+                    //Get questions from premade assessments
+                    global.questions = this.state.questions;
+    
+                    var questionsData = [];
+                    for (var i = 0; i < global.questions.length; i++)
+                      questionsData.push(new QuestionData(global.questions[i]));
+                    
+                    //Date Stuff
+                    var dateString =  new Date().toUTCString();
+                    dateString = dateString.slice(0, -13);
+                    
+                    var assessmentData = new AssessmentData(questionsData, dateString);
+                
+                    //Pass update student to update recent assessments panel
+                    navigation.navigate('AssessmentScreen', {assessmentData:assessmentData, student:student, updateStudent: updateStudent.bind(this), reviewMode:false});
+                  } }>    
+              </Button>
+          </View>           
 
-            <TouchableOpacity
-              style={[styles.bottomButton, globalStyles.danger]}
+          <View style={[styles.bottomButton]}>
+            <Button
+              color="#ff5c5c"
+              title = "Clear"
               onPress={ () => 
                 {
                   if (this.state.questions.length == 0)
@@ -356,9 +366,9 @@ export class TopicScreen extends Component
 
                   this.setState({questions: []});
                 } }>
-  
-              <Text style={styles.buttonText}>Clear</Text>
-            </TouchableOpacity>
+            </Button>
+          </View>
+
 
         </View>   
 
@@ -385,10 +395,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 15,
-    marginRight: 30,
+    marginHorizontal: 10,
     marginVertical: 12,
-    height: 25,
-    backgroundColor: "#00bcd4"
+    // backgroundColor: "#00bcd4"
   },
 
   removeButton: {
@@ -399,7 +408,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     // marginVertical: 12,
     height: 25,
-    backgroundColor: "#00bcd4"
+    // backgroundColor: "#00bcd4"
   },
 
   icon:{

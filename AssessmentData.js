@@ -16,12 +16,14 @@ export class AssessmentData
 
         this.totalScaffolding = 0;
 
+        this.grading=[];
+
         //Scoring
-        this.attention;
-        this.performance;
-        this.planning;
-        this.awareness;
-        this.motivation;
-        this.interaction;
+        this.attention = '1';
+        this.performance = '1';
+        this.planning = '1';
+        this.awareness = '1';
+        this.motivation = '1';
+        this.interaction = '1';
     }   
 }

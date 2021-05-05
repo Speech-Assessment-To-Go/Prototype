@@ -10,12 +10,15 @@ import {
   ScrollView,
   Image,
   Modal,
+  Button,
+  Alert,
+  TextInput
 } from 'react-native';
 
-import {  TextInput  } from 'react-native-paper';
+import {  RadioButton  } from 'react-native-paper';
 
 import { globalStyles } from '../globalStyles';
-import { Button, Avatar, Divider, Chip  } from 'react-native-paper';
+import { Avatar, Divider, Chip  } from 'react-native-paper';
 import { TemplateScreen } from './TemplateScreen';
 import { Question } from '../Question.js'
 import { RoundedText } from '../components/RoundedText';
@@ -73,9 +76,14 @@ export class AssessmentScreen extends Component
       textEAddress:'',
       modalVisible:false,
 
-      updatedAssessmentData:[]
+      updatedAssessmentData:[],
 
-
+      radioBtnAttention: '1',
+      radioBtnPerformance: '1',
+      radioBtnPlanning: '1',
+      radioBtnAwareness: '1',
+      radioBtnMotivation: '1',
+      radioBtnInteraction: '1',
     };
 
     this.init();
@@ -87,15 +95,20 @@ export class AssessmentScreen extends Component
     //this.state.maxQuestions = globa
   }
 
-  toggleModalEmail(visible) {
-    this.setState({ modalVisible: visible });
-    this.setState({textEAddress: ''})
-}
-
   componentDidMount()
   {
     //this.setState({maxQuestions: global.questions.length})
   }
+
+  // setRadioAttention(val)
+  // {
+  //   this.setState({radioBtnAttention: val});
+  // }
+
+  toggleModalEmail(visible) {
+    this.setState({ modalVisible: visible });
+    this.setState({textEAddress: ''})
+}
 
   modifyScaffolding(val){
 
@@ -157,30 +170,36 @@ export class AssessmentScreen extends Component
     {
       return(
         <View style={[globalStyles.flexRow]}>
-          <TouchableOpacity
-              style={styles.bottomButton}
-              onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
-              <Text style={styles.buttonText}>Next Question</Text>
-          </TouchableOpacity>    
+          <View style={styles.bottomButton}>
+            <Button
+                title="Next Question"
+                onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
+            </Button>    
+          </View>
         </View>        
       )
     }    
 
     else{
       return(
-        <View style={[globalStyles.flexRow]}>   
-          <TouchableOpacity
-            style={styles.bottomButton}
-            onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
-            <Text style={styles.buttonText}>Correct</Text>
-          </TouchableOpacity>
+        <View style={[globalStyles.flexRow]}>
 
-          <TouchableOpacity
-            style={[styles.bottomButton, globalStyles.danger]}
-            onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}            
-            >
-            <Text style={styles.buttonText}>Incorrect</Text>
-          </TouchableOpacity>
+          <View style={styles.bottomButton}>
+            <Button
+                title="Correct"
+                onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
+            </Button>    
+          </View>
+             
+          <View style={styles.bottomButton}>
+            <Button
+                color="#ff5c5c"
+                title="Incorrect"
+                onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}
+                >
+            </Button>    
+          </View>
+
         </View>
       )
     }
@@ -204,12 +223,14 @@ export class AssessmentScreen extends Component
               </View>
 
 
-              <View style={[globalStyles.flex1, globalStyles.flexHoriCenter]}>
-                <TouchableOpacity
-                    style={styles.topButton}
-                    onPress={() => this.toggleModalNotes(true)}>
-                    <Text style={styles.buttonText}>Notes</Text>
-                  </TouchableOpacity>
+              <View style={[globalStyles.flexHoriCenter]}>
+                <View style={styles.topButton}>
+                  <Button
+                      title="Notes"
+                      onPress={() => this.toggleModalNotes(true)}>
+                    </Button>
+                </View>
+
               </View>
 
               {/* Display Review Mode Text */}
@@ -224,7 +245,7 @@ export class AssessmentScreen extends Component
 
 
       {/* QUESTIONS IMG & TEXT & SIDES*/}
-      <View style={[globalStyles.flexRow, globalStyles.flex10]}>
+      <View style={[globalStyles.flexRow, globalStyles.flex4]}>
 
           {/* LEFT SIDE */}
         <View style={[styles.flexCol, globalStyles.flex1]}>
@@ -246,23 +267,28 @@ export class AssessmentScreen extends Component
         {/* Right SIDE */}
         <View style={[globalStyles.flexCol, globalStyles.flex1, globalStyles.center]}>
 
-          <TouchableOpacity
-              style={[styles.sideButton]}
-              onPress={() => this.modifyScaffolding(1)}
-              disabled={reviewMode}
-              >
-              <Text style={styles.buttonText}>+</Text>
-          </TouchableOpacity>
+        <View style={[styles.sideButton]}>
+          <Button
+                title="  +  "
+                color='#6600cc'
+                onPress={() => this.modifyScaffolding(1)}
+                disabled={reviewMode}
+                >
+          </Button>
+        </View>
+
 
           <Text style={styles.number}>{this.state.scaffolding}</Text>
 
-          <TouchableOpacity
-              style={[styles.sideButton]}
-              onPress={() => this.modifyScaffolding(-1)}
-              disabled={reviewMode}
-              >
-              <Text style={styles.buttonText}>-</Text>
-          </TouchableOpacity>
+          <View style={[styles.sideButton]}>
+          <Button
+                title="  -  "
+                color='#6600cc'
+                onPress={() => this.modifyScaffolding(-1)}
+                disabled={reviewMode}
+                >
+          </Button>
+        </View>
 
         </View>
 
@@ -309,18 +335,22 @@ export class AssessmentScreen extends Component
           </View>
 
 
-          <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
-          <TouchableOpacity
-            style={[styles.bottomButton, styles.modalButton]}
-            onPress={() => this.toggleModalNotes(false)}>
-            <Text style={styles.modalText}>Submit</Text>
-          </TouchableOpacity>
+        <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
 
-          <TouchableOpacity
-            style={[styles.bottomButton, styles.modalButton]}
-            onPress={() => this.toggleModalNotes(false)}>
-            <Text style={styles.modalText}>Cancel</Text>
-          </TouchableOpacity>
+          <View style={[styles.bottomButton, styles.modalButton]}>
+            <Button
+              title="Submit"
+              onPress={() => this.toggleModalNotes(false)}>
+            </Button>
+          </View>
+
+          <View style={[styles.bottomButton, styles.modalButton]}>
+            <Button
+              color="#ff5c5c"
+              title="Cancel"
+              onPress={() => this.toggleModalNotes(false)}>
+            </Button>
+          </View>
 
         </View>   
         </View>
@@ -340,14 +370,17 @@ export class AssessmentScreen extends Component
 
   grade(val, questionID, student, updateStudent, assessmentData, reviewMode)
   {
-      this.state.grading.push(val);
-
     var grading = this.state.grading;
+
+    if (reviewMode == false)
+    {
+      this.state.grading.push(val);      
+    }
 
     //If last question!
     if ((this.state.currentQuestion+1) >= assessmentData.questionData.length)
     {
-      if (reviewMode != true)
+      if (reviewMode == false)
       {
         //Refactor : copied from else
         var questionData = new QuestionData( questionID, val, this.state.notes, this.state.scaffolding);
@@ -356,21 +389,25 @@ export class AssessmentScreen extends Component
         //Record to student Data!
         var questionsCopy = this.state.questionsData.slice();
 
-        // console.log(this.state.questionsData);
+        // Create Assessment Data
         var newAssessmentData = new AssessmentData(questionsCopy, assessmentData.dateTaken );
-        // console.log(assessmentData);
+
+        // Push data into new assessment data
         newAssessmentData.score = this.getPercent(grading);
+        newAssessmentData.grading = this.state.grading.slice();
+
+
         this.state.updatedAssessmentData = newAssessmentData;
 
         //console.log(this.state.grading);
         this.state.score = this.getPercent(this.state.grading);
 
-        var copyStudent = student;
-        // var copyStudent = Object.assign({}, student);
-        copyStudent.assessmentData.push( newAssessmentData);
+        // var copyStudent = student;
+        // // var copyStudent = Object.assign({}, student);
+        // copyStudent.assessmentData.push( newAssessmentData);
 
-        this.setState({student: copyStudent});
-        updateStudent(copyStudent); 
+        // this.setState({student: copyStudent});
+        // updateStudent(copyStudent); 
 
         //Clear
         this.setState({questionsData: [] });
@@ -410,7 +447,192 @@ export class AssessmentScreen extends Component
     }
   }
 
-  renderResults = (props, student, assessmentData) =>
+
+  renderScoringSection = (reviewMode) =>
+  {
+    return(
+      <View>
+          {/* ATTENTION */}
+          <RadioButton.Group style={[globalStyles.scrollView]} onValueChange={newValue => this.setState({radioBtnAttention: newValue})} value={this.state.radioBtnAttention}>
+          <View style={globalStyles.center, globalStyles.flexRow}>
+            <View style={styles.scoringTextContainer}>
+              <Text style={styles.h2}>Attention:</Text>
+            </View>
+
+            <View style={styles.radioContainer}>
+                <Text>1</Text>
+                <RadioButton disabled={reviewMode} value="1" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>2</Text>
+              <RadioButton disabled={reviewMode} value="2" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>3</Text>
+              <RadioButton disabled={reviewMode} value="3" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>4</Text>
+              <RadioButton disabled={reviewMode} value="4" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>5</Text>
+              <RadioButton disabled={reviewMode} value="5" />
+            </View>
+          </View>
+          </RadioButton.Group>
+
+          {/* ATTENTION */}
+          <RadioButton.Group style={[globalStyles.scrollView]} onValueChange={newValue => this.setState({radioBtnPerformance: newValue})} value={this.state.radioBtnPerformance}>
+          <View style={globalStyles.center, globalStyles.flexRow}>
+            <View style={styles.scoringTextContainer}>
+              <Text style={styles.h2}>Performance:</Text>
+            </View>
+            <View style={styles.radioContainer}>
+                <Text>1</Text>
+                <RadioButton disabled={reviewMode} value="1" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>2</Text>
+              <RadioButton disabled={reviewMode} value="2" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>3</Text>
+              <RadioButton disabled={reviewMode} value="3" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>4</Text>
+              <RadioButton disabled={reviewMode} value="4" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>5</Text>
+              <RadioButton disabled={reviewMode} value="5" />
+            </View>
+          </View>
+          </RadioButton.Group>
+
+          {/* Planning */}
+          <RadioButton.Group style={[globalStyles.scrollView]} onValueChange={newValue => this.setState({radioBtnPlanning: newValue})} value={this.state.radioBtnPlanning}>
+          <View style={globalStyles.center, globalStyles.flexRow}>
+            <View style={styles.scoringTextContainer}>
+              <Text style={styles.h2}>Planning:</Text>
+            </View>
+            <View style={styles.radioContainer}>
+                <Text>1</Text>
+                <RadioButton disabled={reviewMode} value="1" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>2</Text>
+              <RadioButton disabled={reviewMode} value="2" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>3</Text>
+              <RadioButton disabled={reviewMode} value="3" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>4</Text>
+              <RadioButton disabled={reviewMode} value="4" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>5</Text>
+              <RadioButton disabled={reviewMode} value="5" />
+            </View>
+          </View>
+          </RadioButton.Group>
+
+          {/* Awareness */}
+          <RadioButton.Group style={[globalStyles.scrollView]} onValueChange={newValue => this.setState({radioBtnAwareness: newValue})} value={this.state.radioBtnAwareness}>
+          <View style={globalStyles.center, globalStyles.flexRow}>
+            <View style={styles.scoringTextContainer}>
+              <Text style={styles.h2}>Awareness:</Text>
+            </View>
+            <View style={styles.radioContainer}>
+                <Text>1</Text>
+                <RadioButton disabled={reviewMode} value="1" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>2</Text>
+              <RadioButton disabled={reviewMode} value="2" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>3</Text>
+              <RadioButton disabled={reviewMode} value="3" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>4</Text>
+              <RadioButton disabled={reviewMode} value="4" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>5</Text>
+              <RadioButton disabled={reviewMode} value="5" />
+            </View>
+          </View>
+          </RadioButton.Group>
+
+          {/* Motivation */}
+          <RadioButton.Group style={[globalStyles.scrollView]} onValueChange={newValue => this.setState({radioBtnMotivation: newValue})} value={this.state.radioBtnMotivation}>
+          <View style={globalStyles.center, globalStyles.flexRow}>
+            <View style={styles.scoringTextContainer}>
+              <Text style={styles.h2}>Motivation:</Text>
+            </View>
+            <View style={styles.radioContainer}>
+                <Text>1</Text>
+                <RadioButton disabled={reviewMode} value="1" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>2</Text>
+              <RadioButton disabled={reviewMode} value="2" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>3</Text>
+              <RadioButton disabled={reviewMode} value="3" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>4</Text>
+              <RadioButton disabled={reviewMode} value="4" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>5</Text>
+              <RadioButton disabled={reviewMode} value="5" />
+            </View>
+          </View>
+          </RadioButton.Group>
+
+          {/* Interaction */}
+          <RadioButton.Group style={[globalStyles.scrollView]} onValueChange={newValue => this.setState({radioBtnInteraction: newValue})} value={this.state.radioBtnInteraction}>
+          <View style={globalStyles.center, globalStyles.flexRow}>
+            <View style={styles.scoringTextContainer}>
+              <Text style={styles.h2}>Interaction:</Text>
+            </View>
+            <View style={styles.radioContainer}>
+                <Text>1</Text>
+                <RadioButton disabled={reviewMode} value="1" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>2</Text>
+              <RadioButton disabled={reviewMode} value="2" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>3</Text>
+              <RadioButton disabled={reviewMode} value="3" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>4</Text>
+              <RadioButton disabled={reviewMode} value="4" />
+            </View>
+            <View style={styles.radioContainer}>
+              <Text>5</Text>
+              <RadioButton disabled={reviewMode} value="5" />
+            </View>
+          </View>
+          </RadioButton.Group>
+
+      </View>    
+    )
+
+  }
+
+  renderResults = (props, student, updateStudent, reviewMode) =>
   {
 
     if (this.state.resultsScreen == true)
@@ -418,88 +640,137 @@ export class AssessmentScreen extends Component
       var grading = this.state.grading;
 
       return(
-      <View style={styles.container}>
+        <View style={styles.container}>
 
  
         {/* QUESTIONS IMG & TEXT */}
         <View style={[styles.container, globalStyles.flex3]}>
 
-      <Text style={styles.percentText}>{this.state.score}%</Text>
-      <Text style={styles.scaffoldingText}>{this.state.totalScaffolding + " scaffoldings used"}</Text>
+        <Text style={styles.percentText}>{this.state.score}%</Text>
+        <Text style={styles.scaffoldingText}>{this.state.totalScaffolding + " scaffoldings used"}</Text>
 
         </View>
 
         {/* QUESTION BUBBLES */}
-        <View style={[styles.chipContainer]}>
-          
-        </View>
+
+        {/* <View style={[styles.scrollView]}> */}
+
+
+          {this.renderScoringSection(reviewMode)}
+
+
+        {/* </View> */}
+        
 
        {/* Bottom Buttons */}
         <View style={[globalStyles.flexVertEnd, globalStyles.flex1]}>        
 
           <View style={[globalStyles.flexRow]}>
 
-            <TouchableOpacity
-              style={[styles.bottomButton]}
-              onPress={() => props.navigation.goBack()}>
-              <Text style={styles.buttonText}>Back</Text>
-            </TouchableOpacity>
+            <View style={[styles.bottomButton]}>
+              <Button
+                title="Complete"
+                onPress={() => 
+                  {
+                    if (reviewMode == true)
+                      return;
 
-            <TouchableOpacity
-              style={[styles.bottomButton]}
-              onPress={() => this.toggleModalEmail(true)}>
-              <Text style={styles.buttonText}>Email</Text>
-            </TouchableOpacity>
+                    var copyStudent = student;
+                    
+                    //Add scores to assessment data
+                    this.state.updatedAssessmentData.attention = this.state.radioBtnAttention;
+                    this.state.updatedAssessmentData.performance = this.state.radioBtnPerformance;
+                    this.state.updatedAssessmentData.planning = this.state.radioBtnPlanning;
+                    this.state.updatedAssessmentData.awareness = this.state.radioBtnAwareness;
+                    this.state.updatedAssessmentData.motivation = this.state.radioBtnMotivation;
+                    this.state.updatedAssessmentData.interaction = this.state.radioBtnInteraction;
 
-          </View>
 
-          </View>
-
-                {/* ********************** | EMAIL MODAL | ********************* */}
-      <Modal animationType="slide"  transparent={true} visible={this.state.modalVisible}  >
-
-      <View style={styles.container}>
-
-        <View style={styles.modalView}>
-
-          <Text style={styles.modalHeader}>Email Student Profile</Text> 
-          
-          <View style={globalStyles.flexRow}>
-            <TextInput style={[styles.textEInput, styles.emailAddress]} label="Email Address" value={this.state.textEAddress} onChangeText={text => this.setState( {textEAddress: text})}placeholder={"Email Address"}/>
+                    copyStudent.assessmentData.push( this.state.updatedAssessmentData);
             
+                    this.setState({student: copyStudent});
+                    updateStudent(copyStudent); 
+
+                    Alert.alert(
+                      "Saved!",
+                      "The assessment has been saved!",
+                      [
+                        { text: "OK", onPress: () => props.navigation.goBack() }
+                      ]
+                    );
+
+                    //props.navigation.goBack()
+                  }
+
+                }>
+              </Button>
+            </View>
+
+            <View style={[styles.bottomButton]}>
+              <Button
+                title="Email"
+                style={[styles.bottomButton]}
+                onPress={() => this.toggleModalEmail(true)}>
+              </Button>
+            </View>
+
+
           </View>
 
-          <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
-          <TouchableOpacity
-            style={[styles.bottomButton, styles.modalButton]}
-            onPress={() => {
+          </View>
 
-              var subject = "Dynamic Assessment Results for " + student.fullName;
-              var body = "";
+          {/* ********************** | EMAIL MODAL | ********************* */}
+          <Modal animationType="slide"  transparent={true} visible={this.state.modalVisible}  >
 
-              body = "Score: " + this.state.updatedAssessmentData.score + " \t Total Scaffolding: " + this.state.totalScaffolding + '\n';
+          <View style={styles.container}>
 
-              for (var i = 0; i < this.state.updatedAssessmentData.questionData.length; i++)
-              {                
-                body += global.parsedQuestions[this.state.updatedAssessmentData.questionData[i].id].text + " - Scaffolding Amount: " + this.state.updatedAssessmentData.questionData[i].scaffolding + '\t Notes: ' + this.state.updatedAssessmentData.questionData[i].notes+ '\n';
-              }
+            <View style={styles.modalView}>
 
-              sendEmail(this.state.textEAddress, subject, body);
+              <Text style={styles.modalHeader}>Email Student Profile</Text> 
+              
+              <View style={globalStyles.flexRow}>
+                <TextInput style={[styles.textEInput, styles.emailAddress]} label="Email Address" value={this.state.textEAddress} onChangeText={text => this.setState( {textEAddress: text})}placeholder={"Email Address"}/>
+                
+              </View>
 
-              this.toggleModalEmail(false);
-            }}>
-            <Text style={styles.modalText}>Submit</Text>
-          </TouchableOpacity>
+              <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
+              
+              <View style={[styles.bottomButton, styles.modalButton]}>
+                <Button
+                  title="Submit"
+                  onPress={() => {
 
-          <TouchableOpacity
-            style={[styles.bottomButton, styles.modalButton]}
-            onPress={() => this.toggleModalEmail(false)}>
-            <Text style={styles.modalText}>Cancel</Text>
-          </TouchableOpacity>
-        </View>   
-        </View>
-      </View>
-      </Modal>
+                    var subject = "Dynamic Assessment Results for " + student.fullName;
+                    var body = "";
+
+                    body = "Score: " + this.state.updatedAssessmentData.score + " \t Total Scaffolding: " + this.state.totalScaffolding + '\n';
+
+                    for (var i = 0; i < this.state.updatedAssessmentData.questionData.length; i++)
+                    {                
+                      body += global.parsedQuestions[this.state.updatedAssessmentData.questionData[i].id].text + " - Scaffolding Amount: " + this.state.updatedAssessmentData.questionData[i].scaffolding + '\t Notes: ' + this.state.updatedAssessmentData.questionData[i].notes+ '\n';
+                    }
+
+                    sendEmail(this.state.textEAddress, subject, body);
+
+                    this.toggleModalEmail(false);
+                  }}>
+                </Button>
+              </View>
+
+
+              <View style={[styles.bottomButton, styles.modalButton]}>
+                <Button
+                  title = "Cancel"
+                  color="#ff5c5c"
+                  onPress={() => this.toggleModalEmail(false)}>
+                </Button>
+              </View>
+
+            </View>   
+            </View>
+          </View>
+          </Modal>
+
 
       </View>
         
@@ -521,10 +792,21 @@ export class AssessmentScreen extends Component
     //For first question, make sure to set up notes and scafolding value for loading
     if (reviewMode == true && this.state.firstRun == true)
     {      
-      this.setState({totalScaffolding: assessmentData.totalScaffolding});
-      this.setState({score: assessmentData.score});
-      this.setState({ notes: questionsData[this.state.currentQuestion].notes });
-      this.setState({ scaffolding: questionsData[this.state.currentQuestion].scaffolding });
+      // this.setState({totalScaffolding: assessmentData.totalScaffolding});
+      this.state.totalScaffolding = assessmentData.totalScaffolding;      
+      this.state.score = assessmentData.score;
+      this.state.grading = assessmentData.grading.slice();
+
+      //Load Scores
+      this.state.radioBtnAttention = assessmentData.attention;
+      this.state.radioBtnPerformance = assessmentData.performance;
+      this.state.radioBtnPlanning = assessmentData.planning;
+      this.state.radioBtnAwareness = assessmentData.awareness;
+      this.state.radioBtnMotivation = assessmentData.motivation;
+      this.state.radioBtnInteraction = assessmentData.interaction;
+
+      this.state.notes = questionsData[this.state.currentQuestion].notes;
+      this.state.scaffolding = questionsData[this.state.currentQuestion].scaffolding;
       this.state.firstRun = false;
     }
 
@@ -532,7 +814,7 @@ export class AssessmentScreen extends Component
       <View style={styles.container}>
         {this.renderAssessment(questionsData, student, updateStudent, assessmentData, reviewMode)}
 
-        {this.renderResults(this.props, student, assessmentData)}
+        {this.renderResults(this.props, student, updateStudent, reviewMode)}
       </View>
     );
   }
@@ -551,20 +833,27 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
-  chipContainer: {
-    // flexGrow: 5,
-    // backgroundColor: 'red',
+  scrollView:{
     // flex: 1,
-    // justifyContent: "space-evenly",
-    // alignItems: "center",
-    // width: 700,
-    // height: 200,
-    // minHeight: 200,
-    // flexBasis: 150,
-    // // justifyContent: 'center',
-    // // alignItems:  "center",
-    // flexDirection: "row",
-    // flexWrap: "wrap"
+    // width: '45%',
+    // paddingVertical: 5,
+    // // height: '100%',
+    // // justifyContent: "center",
+    // // alignItems: "center",
+    // // flexDirection: 'column',
+    borderWidth : 2,
+    borderColor: "#00bcd4"
+  },
+
+  chipContainer: {
+    flexGrow: 1, 
+    justifyContent: 'center',
+    // flex: 1,
+    // width: '100%',
+    // height: '100%',
+    // // justifyContent: "center",
+    alignItems: "center",
+    // flexDirection: 'column',
   },
 
   reviewModeText:{
@@ -579,29 +868,37 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
 
+  radioContainer:
+  {
+    // flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    backgroundColor: "#e6e6e6"
+  },
+
 
   bottomButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 44,
-    paddingVertical: 30,
-    marginHorizontal: 140,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    marginHorizontal: 10,
     marginVertical: 12,
-    height: 25,
-    backgroundColor: "#00bcd4"
-
+    // backgroundColor: "#00bcd4"
   },
 
   topButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 44,
-    paddingVertical: 30,
+    // paddingHorizontal: 44,
+    // paddingVertical: 30,
     marginHorizontal: 140,
     marginTop: 12,
-    height: 25,
-    maxWidth: 200,
-    backgroundColor: "#ffbcd4"
+    // width: "20%",
+    // height: 25,
+    // maxWidth: 200,
+    // backgroundColor: "#00bcd4"
 
   },
 
@@ -640,7 +937,17 @@ const styles = StyleSheet.create({
   sideButton:{
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "#6600cc",
+    // backgroundColor: "#6600cc",
+    width: 60,
+    height: 60,
+    padding: 14,
+    marginVertical: 10
+  },
+
+  sideDisabledButton:{
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: "white",
     width: 60,
     height: 60,
     padding: 14,
@@ -687,11 +994,11 @@ const styles = StyleSheet.create({
  ////// MODAL STUFF : ToDo: Seperate component
 
  modalView: {
-  margin: 35,
+  margin: 25,
   backgroundColor: "white",
   borderRadius: 7,
   paddingVertical: 0,
-  paddingHorizontal: 55,
+  paddingHorizontal: 25,
   alignItems: "center",
   shadowColor: "#000",
   shadowOffset: {
@@ -701,8 +1008,8 @@ const styles = StyleSheet.create({
   shadowOpacity: 0.25,
   shadowRadius: 3.84,
   elevation: 5,
-  maxWidth: "80%",
-  maxHeight:"80%",
+  maxWidth: "60%",
+  maxHeight:"60%",
 },
 
 textStyle: {
@@ -723,11 +1030,13 @@ modalHeader: {
 textInput:{
   textAlignVertical: "top",
   flex:1,
-  height: 220,
-  marginHorizontal: 10,
-  marginVertical: 20,
+  height: 200,
+  marginHorizontal: 7,
+  marginVertical: 7,
   maxWidth: "90%",
-  fontSize: 25
+  fontSize: 25,
+  padding: 25,
+  backgroundColor: "#e6e6e6"
 },
 
 schoolID:{
@@ -748,11 +1057,11 @@ textBox: {
 
 modalButton:{
   backgroundColor: 'white',
-  marginTop: 19
+  marginTop: 3
 },
 
 modalText:{
-  fontSize: 18,
+  fontSize: 15,
   fontWeight: 'bold',
   color: "#00bcd4"
 },
@@ -766,9 +1075,18 @@ percentText:{
 },
 
 scaffoldingText:{
-  fontSize: 85,
+  fontSize: 25,
   fontWeight: '100',
-  color: '#6bc46b'
+  color: '#262626'
+},
+
+scoringTextContainer:
+{
+  width: 170,
+  backgroundColor: "#bababa",
+  paddingLeft: 20,
+  justifyContent: "flex-start",
+  // alignItems: "flex-end"
 },
 
 chip:{
@@ -796,6 +1114,7 @@ chipCorrect:{
 chipIncorrect:{
   backgroundColor: '#ff6f6b',
 },
+
 ////// MODAL STUFF 
 
 modalView: {
@@ -866,6 +1185,8 @@ modalText:{
   fontWeight: 'bold',
   color: "#00bcd4"
 }
+
+
 
 
 });

@@ -59,6 +59,18 @@ export const globalStyles = StyleSheet.create({
         flex: 12,
       },
 
+      flex13: {
+        flex: 13,
+      },
+
+      flex14: {
+        flex: 14,
+      },
+
+      flex15: {
+        flex: 15,
+      },
+
       flexRow: {
         flexDirection: "row"
       },
