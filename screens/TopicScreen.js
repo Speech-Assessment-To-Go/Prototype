@@ -439,7 +439,9 @@ const styles = StyleSheet.create({
   h1:{
     fontSize: 24,
     fontWeight: 'bold',
-    color: "white"
+    color: "#ffffff",
+    // width: "100%",
+    height: 34
   },
 
   h2:{
