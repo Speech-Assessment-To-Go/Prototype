@@ -203,18 +203,20 @@ export class SchoolScreen extends Component
         //Clear filtered students
 
         this.setState({filteredStudents: []})
-        // this.setState({selectedStudent: -1})
+        this.state.filteredStudents = [];
+
 
 
         //Begin removal
         var selected = this.state.selectedStudent;
-        //this.state.selectedStudent = -1;
+
     
-        // console.log(selected);
+
     
         let copy = this.state.studentsObjs.slice(); //Create copy
         copy.splice(selected, 1);
-        this.setState({studentsObjs: copy});
+        // this.setState({studentsObjs: copy});
+        this.state.studentsObjs = copy;
         
     
         this.saveStudentsData(this.state.studentsObjs);
@@ -228,6 +230,7 @@ export class SchoolScreen extends Component
 
         //this.setState({filteredStudents: allStudentIds})
         this.state.filteredStudents = allStudentIds;
+        // this.state.selectedStudent = -1;
         this.setState({selectedStudent: -1})
       } }
       ]
