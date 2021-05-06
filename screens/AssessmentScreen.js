@@ -156,8 +156,9 @@ export class AssessmentScreen extends Component
     if (reviewMode == true)
     {
       return(
-        <View style={[globalStyles.flex1, globalStyles.flexHoriEnd]}>
-          <Text style={[styles.reviewModeText, globalStyles.dangerText]}> {"REVIEW MODE"}</Text>
+        <View styles={globalStyles.flexVertStart}>
+          {/* <Text style={[styles.h2, globalStyles.flexAlignStart]}> { "ALOT OF Questions!"}</Text> */}
+          <Text style={[styles.reviewModeText, globalStyles.dangerText]}> {"REVIEW MODE!"}</Text>
         </View>
         
       )
@@ -170,14 +171,24 @@ export class AssessmentScreen extends Component
     {
       return(
         <View style={[globalStyles.flexRow]}>
+
           <View style={styles.bottomButton}>
             <Button
-                title="Next Question"
-                color="#1e90ff"
+                color="#ff5c5c"
+                title="Previous Question"
                 onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
             </Button>    
           </View>
-        </View>        
+             
+          <View style={styles.bottomButton}>
+            <Button
+                title="Next Question"
+                onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}
+                >
+            </Button>    
+          </View>
+
+        </View>   
       )
     }    
 
@@ -232,13 +243,15 @@ export class AssessmentScreen extends Component
                       onPress={() => this.toggleModalNotes(true)}>
                     </Button>
                 </View>
-
               </View>
 
-              {/* Display Review Mode Text */}
-              {
-                this.renderReviewModeText(reviewMode)
-              }
+
+              <View style={[globalStyles.flex1, globalStyles.flexHoriEnd]}>
+                {/* Display Review Mode Text */}
+                {
+                  this.renderReviewModeText(reviewMode)
+                }
+              </View>
 
         </View>
 
@@ -881,7 +894,7 @@ const styles = StyleSheet.create({
   },
 
   reviewModeText:{
-    fontSize: 36,
+    fontSize: 26,
     fontWeight: 'bold',
     margin: 5,
     marginRight: 35

@@ -323,22 +323,30 @@ export class SchoolScreen extends Component
               
               {/* <Text style={styles.buttonText}>Add</Text> */}
               <View style={[globalStyles.flexRow]}>
+                  <View style={[styles.reviewButton, globalStyles.blue]}>
+                    <Button 
+                    color="#ffffff"
+                    title = "Review"
+                    onPress={ () => {                
+                      props.navigation.navigate('AssessmentScreen', {assessmentData:assessment, student:this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this), reviewMode:true});
+                      }}>
+                    </Button>
+                  </View>
 
-                  <TouchableOpacity style={[styles.reviewButton]}
-                  onPress={ () => {                
-                    props.navigation.navigate('AssessmentScreen', {assessmentData:assessment, student:this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this), reviewMode:true});
-                    }}>
-                      <Text style={styles.buttonText}>Review</Text>
-                  </TouchableOpacity>
+                  <View style={[styles.retakeButton, globalStyles.danger, globalStyles.flexAlignEnd]}>
+                    <Button 
+                    color="#ffffff"
+                    title="Retake"
+                    onPress={ () => {                
+                      props.navigation.navigate('AssessmentScreen', {assessmentData:assessment, student:this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this), reviewMode:false});
+                      }}>
+                    </Button>
+                  </View>
 
-                  <TouchableOpacity style={[styles.retakeButton, globalStyles.danger, globalStyles.flexAlignEnd]}
-                  onPress={ () => {                
-                    props.navigation.navigate('AssessmentScreen', {assessmentData:assessment, student:this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this), reviewMode:false});
-                    }}>
-                      <Text style={styles.buttonText}>Retake</Text>
-                  </TouchableOpacity>
+                  <View style={globalStyles.center}>
+                    <Text style={styles.h2}>{assessment.dateTaken + " - " + assessment.questionData.length + " Questions - " + assessment.score + "%"} </Text>
+                  </View>
 
-                  <Text style={styles.h2}>{assessment.dateTaken + " \t-\t " + assessment.questionData.length + " Questions \t-\t " + assessment.score + "%"} </Text>
 
 
                   
@@ -434,30 +442,6 @@ export class SchoolScreen extends Component
         {/* Bottom Buttons */}
 
           <View style={globalStyles.flexRow}>
-
-            {/* <TouchableOpacity
-              style={styles.bottomButton}
-              onPress={() => this.toggleModalSchool(true)}>
-              <Text style={styles.buttonText}>Add School</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[styles.bottomButton, globalStyles.danger]}
-              onPress={() => alert("Bottom!")}>
-              <Text style={styles.buttonText}>Remove School</Text>
-            </TouchableOpacity> */}
-
-            {/* <Button
-              style={styles.bottomButton}
-              mode="contained" 
-              onPress={() => this.toggleModalStudent(true)}>
-              Add Student
-            </Button> */}
-
-            {/* <Button
-              title="Press me"
-              onPress={() => Alert.alert('Simple Button pressed')}/>
-            </Button> */}
 
             <View style={styles.bottomButton}>
               <Button
@@ -706,26 +690,27 @@ const styles = StyleSheet.create({
   retakeButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 7,
-    paddingVertical: 12,
-    marginLeft: 5,
-    marginRight: 10,
-    marginBottom: 8,
+    // paddingHorizontal: 7,
+    // paddingVertical: 12,
+    marginLeft: 3,
+    marginRight: 5,
+    // marginBottom: 8,
     // marginVertical: 12,
-    height: 25,
-    backgroundColor: "#ff5c5c"
+    // height: 25,
+    // backgroundColor: "#ff5c5c"
   },
 
   reviewButton: {
+    color: "white",
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 7,
-    paddingVertical: 12,
-    marginLeft: 10,
-    marginRight: 5,
+    // paddingHorizontal: 7,
+    // paddingVertical: 12,
+    marginLeft: 5,
+    marginRight: 3,
     // marginVertical: 12,
-    height: 25,
-    backgroundColor: "#1e90ff"
+    // height: 25,
+    // backgroundColor: "#1e90ff"
   },
 
   ////// MODAL STUFF : ToDo: Seperate component

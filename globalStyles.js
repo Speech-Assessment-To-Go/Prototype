@@ -91,6 +91,9 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: "#ff6666"
       },
 
+      blue:{
+        backgroundColor:"#1e90ff"
+      },
       
       primaryText:{
         color: "#00bcd4"
