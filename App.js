@@ -65,7 +65,7 @@ const optionStyle = {
 
   headerStyle: 
   {
-    backgroundColor: '#7f53ed',
+    backgroundColor: '#0a2ea3',
   },
 
   headerTitleStyle: 

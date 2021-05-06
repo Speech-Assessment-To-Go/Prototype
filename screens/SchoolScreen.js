@@ -462,7 +462,8 @@ export class SchoolScreen extends Component
                 //styleDisabled={{color: 'red'}}
                 onPress={() => this.toggleModalStudent(true)}
                 title="Add Student"
-              >
+                color="#1e90ff"
+                >
                 Press Me
               </Button>
             </View>
@@ -510,6 +511,7 @@ export class SchoolScreen extends Component
                   navigation.push('TopicScreen', {student: this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this) })
                 } }
                 title="Take Assessment"
+                color="#1e90ff"
                 >
 
               </Button>
@@ -560,6 +562,7 @@ export class SchoolScreen extends Component
                 onPress={() => this.addStudent(this.state.textFName, this.state.textLName,this.state.textEthnicity, "??? School",
                                                 this.state.textBirth,this.state.textLanguage, this.state.textGrade)}
                 title="Submit"
+                color="#1e90ff"
                 >
               </Button>
             </View>
@@ -608,7 +611,7 @@ const styles = StyleSheet.create({
     marginVertical: 12,
     // width: "25%"
     // height: 25,
-    // backgroundColor: "#00bcd4"
+    // backgroundColor: "#1e90ff"
   },
 
   icon:{
@@ -654,7 +657,7 @@ const styles = StyleSheet.create({
     flex:2,
     // backgroundColor: "red",
     height: "100%",
-    borderRightColor: '#00bcd4',
+    borderRightColor: '#1e90ff',
     borderRightWidth: 3,
 
   },
@@ -663,13 +666,13 @@ const styles = StyleSheet.create({
     flex:5,
     height: "100%",
     // backgroundColor: "blue",
-    // borderLeftColor: '#00bcd4',
+    // borderLeftColor: '#1e90ff',
     // borderLeftWidth: 1,
 
   },
   
   selectedBG:{
-    backgroundColor: "cyan"
+    backgroundColor: "#1e90ff"
   },
 
   unselectedBG:{
@@ -707,7 +710,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     // marginVertical: 12,
     height: 25,
-    backgroundColor: "#00bcd4"
+    backgroundColor: "#ff5c5c"
   },
 
   reviewButton: {
@@ -719,7 +722,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
     // marginVertical: 12,
     height: 25,
-    backgroundColor: "#00bcd4"
+    backgroundColor: "#1e90ff"
   },
 
   ////// MODAL STUFF : ToDo: Seperate component
@@ -789,7 +792,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 4,
     borderTopWidth: 4,
     borderBottomWidth: 4,
-    borderColor: '#00bcd4',
+    borderColor: '#1e90ff',
     height: 180,
     width: '100%',
     padding: 15
@@ -803,7 +806,7 @@ const styles = StyleSheet.create({
   modalText:{
     fontSize: 18,
     fontWeight: 'bold',
-    color: "#00bcd4"
+    color: "#1e90ff"
   }
 
 

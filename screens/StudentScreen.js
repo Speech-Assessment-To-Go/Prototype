@@ -343,7 +343,7 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginVertical: 12,
     height: 25,
-    backgroundColor: "#00bcd4"
+    backgroundColor: "#1e90ff"
 
   },
 
@@ -364,7 +364,7 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginVertical: 1,
     width: "55%",
-    // backgroundColor: "cyan"
+    // backgroundColor: "#1e90ff"
   },
 
   column:{
@@ -394,7 +394,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     // backgroundColor: "red",
     height: "100%",
-    borderRightColor: '#00bcd4',
+    borderRightColor: '#1e90ff',
     borderRightWidth: 3,
     // backgroundColor: 'red',
     padding: 15,
@@ -421,7 +421,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     // backgroundColor: "blue",
     height: "100%",
-    // borderLeftColor: '#00bcd4',
+    // borderLeftColor: '#1e90ff',
     // borderLeftWidth: 1,
     width: '100%',
     padding: 40
@@ -434,7 +434,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 4,
     borderTopWidth: 4,
     borderBottomWidth: 4,
-    borderColor: '#00bcd4',
+    borderColor: '#1e90ff',
     width: "100%",
     // padding: 15,
 
@@ -445,7 +445,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 4,
     borderTopWidth: 4,
     borderBottomWidth: 4,
-    borderColor: '#00bcd4',
+    borderColor: '#1e90ff',
     height: 280,
     padding: 15
   },
@@ -537,7 +537,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 10,
     borderTopWidth: 10,
     borderBottomWidth: 10,
-    borderColor: '#00bcd4',
+    borderColor: '#1e90ff',
     height: 180,
     width: '100%',
     padding: 15
@@ -551,6 +551,6 @@ const styles = StyleSheet.create({
   modalText:{
     fontSize: 18,
     fontWeight: 'bold',
-    color: "#00bcd4"
+    color: "#1e90ff"
   }
 });

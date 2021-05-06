@@ -232,6 +232,7 @@ export class TopicScreen extends Component
                   this.addQuestions();
                   }}
                   title="Add Questions"
+                  color="#1e90ff"
                   >
               </Button>
         </View>
@@ -325,6 +326,7 @@ export class TopicScreen extends Component
           <View style={styles.bottomButton}>
             <Button
                 title="Start Assessment"
+                color="#1e90ff"
                 onPress={ () => 
                   {
                     if (this.state.questions.length == 0)
@@ -397,7 +399,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginHorizontal: 10,
     marginVertical: 12,
-    // backgroundColor: "#00bcd4"
+    // backgroundColor: "#1e90ff"
   },
 
   removeButton: {
@@ -408,7 +410,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     // marginVertical: 12,
     height: 25,
-    // backgroundColor: "#00bcd4"
+    // backgroundColor: "#1e90ff"
   },
 
   icon:{
@@ -452,7 +454,7 @@ const styles = StyleSheet.create({
   },
 
   header:{
-    backgroundColor: '#00bcd4',
+    backgroundColor: '#1e90ff',
     width:'100%',
     height:36,
     paddingVertical: 24,
@@ -462,7 +464,7 @@ const styles = StyleSheet.create({
   },
 
   footer:{
-    // backgroundColor: '#00bcd4',
+    // backgroundColor: '#1e90ff',
     // width:'100%',
     // height:3,
   },
@@ -500,7 +502,7 @@ const styles = StyleSheet.create({
     flex:1,
     // backgroundColor: "red",
     height: "100%",
-    borderRightColor: '#00bcd4',
+    borderRightColor: '#1e90ff',
     borderRightWidth: 3,
 
   },
@@ -509,7 +511,7 @@ const styles = StyleSheet.create({
     flex:1,
     // backgroundColor: "red",
     height: "100%",
-    borderRightColor: '#00bcd4',
+    borderRightColor: '#1e90ff',
     borderRightWidth: 3,
 
 
@@ -518,13 +520,13 @@ const styles = StyleSheet.create({
   assessmentsPanel:{
     flex:1,
     height: "100%",
-    // borderLeftColor: '#00bcd4',
+    // borderLeftColor: '#1e90ff',
     // borderLeftWidth: 1,
 
   },
   
   selectedBG:{
-    backgroundColor: "cyan"
+    backgroundColor: "#1e90ff"
   },
 
   unselectedBG:{

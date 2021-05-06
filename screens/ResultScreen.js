@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 140,
     marginBottom: 12,
     height: 22,
-    backgroundColor: "#00bcd4"
+    backgroundColor: "#1e90ff"
 
   },
 
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 4,
     borderTopWidth: 4,
     borderBottomWidth: 4,
-    borderColor: '#00bcd4',
+    borderColor: '#1e90ff',
     width: "55%",
     padding: 15,
     marginBottom: 40
