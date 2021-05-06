@@ -173,6 +173,7 @@ export class AssessmentScreen extends Component
           <View style={styles.bottomButton}>
             <Button
                 title="Next Question"
+                color="#1e90ff"
                 onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
             </Button>    
           </View>
@@ -227,6 +228,7 @@ export class AssessmentScreen extends Component
                 <View style={styles.topButton}>
                   <Button
                       title="Notes"
+                      color="#1e90ff"
                       onPress={() => this.toggleModalNotes(true)}>
                     </Button>
                 </View>
@@ -270,7 +272,7 @@ export class AssessmentScreen extends Component
         <View style={[styles.sideButton]}>
           <Button
                 title="  +  "
-                color='#6600cc'
+                color='#1e90ff'
                 onPress={() => this.modifyScaffolding(1)}
                 disabled={reviewMode}
                 >
@@ -283,7 +285,7 @@ export class AssessmentScreen extends Component
           <View style={[styles.sideButton]}>
           <Button
                 title="  -  "
-                color='#6600cc'
+                color='#1e90ff'
                 onPress={() => this.modifyScaffolding(-1)}
                 disabled={reviewMode}
                 >
@@ -340,6 +342,7 @@ export class AssessmentScreen extends Component
           <View style={[styles.bottomButton, styles.modalButton]}>
             <Button
               title="Submit"
+              color="#1e90ff"
               onPress={() => this.toggleModalNotes(false)}>
             </Button>
           </View>
@@ -673,6 +676,7 @@ export class AssessmentScreen extends Component
             <View style={[styles.bottomButton]}>
               <Button
                 title="Complete"
+                color="#1e90ff"
                 onPress={() => 
                   {
                     if (reviewMode == true)
@@ -723,6 +727,7 @@ export class AssessmentScreen extends Component
             <View style={[styles.bottomButton]}>
               <Button
                 title="Email"
+                color="#1e90ff"
                 style={[styles.bottomButton]}
                 onPress={() => this.toggleModalEmail(true)}>
               </Button>
@@ -752,6 +757,7 @@ export class AssessmentScreen extends Component
               <View style={[styles.bottomButton, styles.modalButton]}>
                 <Button
                   title="Submit"
+                  color="#1e90ff"
                   onPress={() => {
 
                     var subject = "Dynamic Assessment Results for " + student.fullName;
