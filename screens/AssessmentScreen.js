@@ -76,7 +76,7 @@ export class AssessmentScreen extends Component
       textEAddress:'',
       modalVisible:false,
 
-      updatedAssessmentData:[],
+      localAssessmentData:[],
 
       radioBtnAttention: '-1',
       radioBtnPerformance: '-1',
@@ -400,7 +400,7 @@ export class AssessmentScreen extends Component
         newAssessmentData.grading = this.state.grading.slice();
 
 
-        this.state.updatedAssessmentData = newAssessmentData;
+        this.state.localAssessmentData = newAssessmentData;
 
         //console.log(this.state.grading);
         this.state.score = this.getPercent(this.state.grading);
@@ -696,15 +696,15 @@ export class AssessmentScreen extends Component
                     var copyStudent = student;
                     
                     //Add scores to assessment data
-                    this.state.updatedAssessmentData.attention = this.state.radioBtnAttention;
-                    this.state.updatedAssessmentData.performance = this.state.radioBtnPerformance;
-                    this.state.updatedAssessmentData.planning = this.state.radioBtnPlanning;
-                    this.state.updatedAssessmentData.awareness = this.state.radioBtnAwareness;
-                    this.state.updatedAssessmentData.motivation = this.state.radioBtnMotivation;
-                    this.state.updatedAssessmentData.interaction = this.state.radioBtnInteraction;
+                    this.state.localAssessmentData.attention = this.state.radioBtnAttention;
+                    this.state.localAssessmentData.performance = this.state.radioBtnPerformance;
+                    this.state.localAssessmentData.planning = this.state.radioBtnPlanning;
+                    this.state.localAssessmentData.awareness = this.state.radioBtnAwareness;
+                    this.state.localAssessmentData.motivation = this.state.radioBtnMotivation;
+                    this.state.localAssessmentData.interaction = this.state.radioBtnInteraction;
 
 
-                    copyStudent.assessmentData.push( this.state.updatedAssessmentData);
+                    copyStudent.assessmentData.push( this.state.localAssessmentData);
             
                     this.setState({student: copyStudent});
                     updateStudent(copyStudent); 
@@ -763,11 +763,11 @@ export class AssessmentScreen extends Component
                     var subject = "Dynamic Assessment Results for " + student.fullName;
                     var body = "";
 
-                    body = "Score: " + this.state.updatedAssessmentData.score + " \t Total Scaffolding: " + this.state.totalScaffolding + '\n';
+                    body = "Score: " + this.state.localAssessmentData.score + " \t Total Scaffolding: " + this.state.totalScaffolding + '\n';
 
-                    for (var i = 0; i < this.state.updatedAssessmentData.questionData.length; i++)
+                    for (var i = 0; i < this.state.localAssessmentData.questionData.length; i++)
                     {                
-                      body += global.parsedQuestions[this.state.updatedAssessmentData.questionData[i].id].text + " - Scaffolding Amount: " + this.state.updatedAssessmentData.questionData[i].scaffolding + '\t Notes: ' + this.state.updatedAssessmentData.questionData[i].notes+ '\n';
+                      body += global.parsedQuestions[this.state.localAssessmentData.questionData[i].id].text + " - Scaffolding Amount: " + this.state.localAssessmentData.questionData[i].scaffolding + '\t Notes: ' + this.state.localAssessmentData.questionData[i].notes+ '\n';
                     }
 
                     sendEmail(this.state.textEAddress, subject, body);
@@ -825,8 +825,12 @@ export class AssessmentScreen extends Component
       this.state.radioBtnMotivation = assessmentData.motivation;
       this.state.radioBtnInteraction = assessmentData.interaction;
 
+      //Load first questions notes and scaffolding. Others get updated when calling grade
       this.state.notes = questionsData[this.state.currentQuestion].notes;
       this.state.scaffolding = questionsData[this.state.currentQuestion].scaffolding;
+
+
+      this.state.localAssessmentData = assessmentData;
       this.state.firstRun = false;
     }
 
