@@ -78,12 +78,12 @@ export class AssessmentScreen extends Component
 
       updatedAssessmentData:[],
 
-      radioBtnAttention: '1',
-      radioBtnPerformance: '1',
-      radioBtnPlanning: '1',
-      radioBtnAwareness: '1',
-      radioBtnMotivation: '1',
-      radioBtnInteraction: '1',
+      radioBtnAttention: '-1',
+      radioBtnPerformance: '-1',
+      radioBtnPlanning: '-1',
+      radioBtnAwareness: '-1',
+      radioBtnMotivation: '-1',
+      radioBtnInteraction: '-1',
     };
 
     this.init();
@@ -452,6 +452,9 @@ export class AssessmentScreen extends Component
   {
     return(
       <View>
+
+          <Text style={styles.h2}>Please score the student.</Text>
+
           {/* ATTENTION */}
           <RadioButton.Group style={[globalStyles.scrollView]} onValueChange={newValue => this.setState({radioBtnAttention: newValue})} value={this.state.radioBtnAttention}>
           <View style={globalStyles.center, globalStyles.flexRow}>
@@ -461,23 +464,23 @@ export class AssessmentScreen extends Component
 
             <View style={styles.radioContainer}>
                 <Text>1</Text>
-                <RadioButton disabled={reviewMode} value="1" />
+                <RadioButton.Android disabled={reviewMode} value="1" />
             </View>
             <View style={styles.radioContainer}>
               <Text>2</Text>
-              <RadioButton disabled={reviewMode} value="2" />
+              <RadioButton.Android disabled={reviewMode} value="2" />
             </View>
             <View style={styles.radioContainer}>
               <Text>3</Text>
-              <RadioButton disabled={reviewMode} value="3" />
+              <RadioButton.Android disabled={reviewMode} value="3" />
             </View>
             <View style={styles.radioContainer}>
               <Text>4</Text>
-              <RadioButton disabled={reviewMode} value="4" />
+              <RadioButton.Android disabled={reviewMode} value="4" />
             </View>
             <View style={styles.radioContainer}>
               <Text>5</Text>
-              <RadioButton disabled={reviewMode} value="5" />
+              <RadioButton.Android disabled={reviewMode} value="5" />
             </View>
           </View>
           </RadioButton.Group>
@@ -490,23 +493,23 @@ export class AssessmentScreen extends Component
             </View>
             <View style={styles.radioContainer}>
                 <Text>1</Text>
-                <RadioButton disabled={reviewMode} value="1" />
+                <RadioButton.Android disabled={reviewMode} value="1" />
             </View>
             <View style={styles.radioContainer}>
               <Text>2</Text>
-              <RadioButton disabled={reviewMode} value="2" />
+              <RadioButton.Android disabled={reviewMode} value="2" />
             </View>
             <View style={styles.radioContainer}>
               <Text>3</Text>
-              <RadioButton disabled={reviewMode} value="3" />
+              <RadioButton.Android disabled={reviewMode} value="3" />
             </View>
             <View style={styles.radioContainer}>
               <Text>4</Text>
-              <RadioButton disabled={reviewMode} value="4" />
+              <RadioButton.Android disabled={reviewMode} value="4" />
             </View>
             <View style={styles.radioContainer}>
               <Text>5</Text>
-              <RadioButton disabled={reviewMode} value="5" />
+              <RadioButton.Android disabled={reviewMode} value="5" />
             </View>
           </View>
           </RadioButton.Group>
@@ -519,23 +522,23 @@ export class AssessmentScreen extends Component
             </View>
             <View style={styles.radioContainer}>
                 <Text>1</Text>
-                <RadioButton disabled={reviewMode} value="1" />
+                <RadioButton.Android disabled={reviewMode} value="1" />
             </View>
             <View style={styles.radioContainer}>
               <Text>2</Text>
-              <RadioButton disabled={reviewMode} value="2" />
+              <RadioButton.Android disabled={reviewMode} value="2" />
             </View>
             <View style={styles.radioContainer}>
               <Text>3</Text>
-              <RadioButton disabled={reviewMode} value="3" />
+              <RadioButton.Android disabled={reviewMode} value="3" />
             </View>
             <View style={styles.radioContainer}>
               <Text>4</Text>
-              <RadioButton disabled={reviewMode} value="4" />
+              <RadioButton.Android disabled={reviewMode} value="4" />
             </View>
             <View style={styles.radioContainer}>
               <Text>5</Text>
-              <RadioButton disabled={reviewMode} value="5" />
+              <RadioButton.Android disabled={reviewMode} value="5" />
             </View>
           </View>
           </RadioButton.Group>
@@ -548,23 +551,23 @@ export class AssessmentScreen extends Component
             </View>
             <View style={styles.radioContainer}>
                 <Text>1</Text>
-                <RadioButton disabled={reviewMode} value="1" />
+                <RadioButton.Android disabled={reviewMode} value="1" />
             </View>
             <View style={styles.radioContainer}>
               <Text>2</Text>
-              <RadioButton disabled={reviewMode} value="2" />
+              <RadioButton.Android disabled={reviewMode} value="2" />
             </View>
             <View style={styles.radioContainer}>
               <Text>3</Text>
-              <RadioButton disabled={reviewMode} value="3" />
+              <RadioButton.Android disabled={reviewMode} value="3" />
             </View>
             <View style={styles.radioContainer}>
               <Text>4</Text>
-              <RadioButton disabled={reviewMode} value="4" />
+              <RadioButton.Android disabled={reviewMode} value="4" />
             </View>
             <View style={styles.radioContainer}>
               <Text>5</Text>
-              <RadioButton disabled={reviewMode} value="5" />
+              <RadioButton.Android disabled={reviewMode} value="5" />
             </View>
           </View>
           </RadioButton.Group>
@@ -577,23 +580,23 @@ export class AssessmentScreen extends Component
             </View>
             <View style={styles.radioContainer}>
                 <Text>1</Text>
-                <RadioButton disabled={reviewMode} value="1" />
+                <RadioButton.Android disabled={reviewMode} value="1" />
             </View>
             <View style={styles.radioContainer}>
               <Text>2</Text>
-              <RadioButton disabled={reviewMode} value="2" />
+              <RadioButton.Android disabled={reviewMode} value="2" />
             </View>
             <View style={styles.radioContainer}>
               <Text>3</Text>
-              <RadioButton disabled={reviewMode} value="3" />
+              <RadioButton.Android disabled={reviewMode} value="3" />
             </View>
             <View style={styles.radioContainer}>
               <Text>4</Text>
-              <RadioButton disabled={reviewMode} value="4" />
+              <RadioButton.Android disabled={reviewMode} value="4" />
             </View>
             <View style={styles.radioContainer}>
               <Text>5</Text>
-              <RadioButton disabled={reviewMode} value="5" />
+              <RadioButton.Android disabled={reviewMode} value="5" />
             </View>
           </View>
           </RadioButton.Group>
@@ -606,23 +609,23 @@ export class AssessmentScreen extends Component
             </View>
             <View style={styles.radioContainer}>
                 <Text>1</Text>
-                <RadioButton disabled={reviewMode} value="1" />
+                <RadioButton.Android disabled={reviewMode} value="1" />
             </View>
             <View style={styles.radioContainer}>
               <Text>2</Text>
-              <RadioButton disabled={reviewMode} value="2" />
+              <RadioButton.Android disabled={reviewMode} value="2" />
             </View>
             <View style={styles.radioContainer}>
               <Text>3</Text>
-              <RadioButton disabled={reviewMode} value="3" />
+              <RadioButton.Android disabled={reviewMode} value="3" />
             </View>
             <View style={styles.radioContainer}>
               <Text>4</Text>
-              <RadioButton disabled={reviewMode} value="4" />
+              <RadioButton.Android disabled={reviewMode} value="4" />
             </View>
             <View style={styles.radioContainer}>
               <Text>5</Text>
-              <RadioButton disabled={reviewMode} value="5" />
+              <RadioButton.Android disabled={reviewMode} value="5" />
             </View>
           </View>
           </RadioButton.Group>
@@ -673,7 +676,18 @@ export class AssessmentScreen extends Component
                 onPress={() => 
                   {
                     if (reviewMode == true)
+                    {
+                      props.navigation.goBack();
                       return;
+                    }
+
+                    if (this.state.radioBtnAttention == '-1') { alert("Please fill in the score!"); return;}
+                    if (this.state.radioBtnPerformance == '-1') { alert("Please fill in the score!"); return;}
+                    if (this.state.radioBtnPlanning == '-1') { alert("Please fill in the score!"); return;}
+                    if (this.state.radioBtnAwareness == '-1') { alert("Please fill in the score!"); return;}
+                    if (this.state.radioBtnMotivation == '-1') { alert("Please fill in the score!"); return;}
+                    if (this.state.radioBtnInteraction == '-1') { alert("Please fill in the score!"); return;}
+                    
 
                     var copyStudent = student;
                     
