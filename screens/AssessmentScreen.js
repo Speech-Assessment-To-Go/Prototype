@@ -12,7 +12,8 @@ import {
   Modal,
   Button,
   Alert,
-  TextInput
+  TextInput,
+  KeyboardAvoidingView
 } from 'react-native';
 
 import {  RadioButton  } from 'react-native-paper';
@@ -333,7 +334,9 @@ export class AssessmentScreen extends Component
     {/* ********************** | NOTES MODAL | ********************* */}
     <Modal animationType="slide"  transparent={true} visible={this.state.modalNotesVisible}  >
 
-      <View style={styles.container}>
+      <  KeyboardAvoidingView 
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}>
 
         <View style={styles.modalView}>
 
@@ -372,7 +375,7 @@ export class AssessmentScreen extends Component
 
         </View>   
         </View>
-      </View>
+      </  KeyboardAvoidingView>
     </Modal>
 
 

@@ -12,6 +12,7 @@ import {
   Modal,
   Alert,
   Button,
+  KeyboardAvoidingView
   // TextInput
 } from 'react-native';
 
@@ -39,6 +40,8 @@ const size = 43;
 const fontSize = 18;
 const borderWidth = 0;
 const title = 'A';
+
+const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
 
 export class SchoolScreen extends Component
@@ -509,7 +512,7 @@ export class SchoolScreen extends Component
       {/* ********************** | STUDENT MODAL | ********************* */}
       <Modal animationType="slide"  transparent={true} visible={this.state.modalVisible}  >
 
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
 
           <View style={styles.modalView}>
 
@@ -518,15 +521,15 @@ export class SchoolScreen extends Component
             <View style={globalStyles.flexRow}>
               <TextInput style={styles.textInput} label="First Name" value={this.state.textFName} onChangeText={text => this.setState( {textFName: text.replace(/[^A-Za-z]/g, ''),})}/>
               <TextInput style={styles.textInput} label="Last Name" value={this.state.textLName} onChangeText={text => this.setState( {textLName: text.replace(/[^A-Za-z]/g, '')})}/>
-              {/* <TextInput style={styles.textInput} label="Ethnicity" value={this.state.textEthnicity} onChangeText={text => this.setState( {textEthnicity: text.replace(/[^A-Za-z\s]/g, '')})}/> */}
+              
               <TextInput style={styles.textInput} keyboardType="number-pad" label="Grade" value={this.state.textGrade} onChangeText={text => this.setState( {textGrade: text})}/>
             </View>
 
-            {/* <View style={globalStyles.flexRow}>
-              <TextInput style={styles.textInput} label="Grade" value={this.state.textGrade} onChangeText={text => this.setState( {textGrade: text})}/>
+            <View style={globalStyles.flexRow}>
+              <TextInput style={styles.textInput} label="Ethnicity" value={this.state.textEthnicity} onChangeText={text => this.setState( {textEthnicity: text.replace(/[^A-Za-z\s]/g, '')})}/>
               <TextInput style={styles.textInput} label="Birth Year" value={this.state.textBirth} keyboardType="number-pad" onChangeText={text => this.setState( {textBirth: text})}/>
               <TextInput style={styles.textInput} label="Language" value={this.state.textLanguage} onChangeText={text => this.setState( {textLanguage: text.replace(/[^A-Za-z]/g, ''),})}/>
-            </View> */}
+            </View>
 
             {/* <View style={globalStyles.flexRow}>
               <TextInput style={styles.textBox} 
@@ -563,7 +566,7 @@ export class SchoolScreen extends Component
           </View>   
 
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </Modal>
 
     
