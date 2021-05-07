@@ -198,14 +198,15 @@ export class AssessmentScreen extends Component
 
           <View style={styles.bottomButton}>
             <Button
+                color="#ffffff"
                 title="Correct"
                 onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
             </Button>    
           </View>
              
-          <View style={styles.bottomButton}>
+          <View style={[styles.bottomButton, styles.redBackground]}>
             <Button
-                color="#ff5c5c"
+                color="#ffffff"
                 title="Incorrect"
                 onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}
                 >
@@ -225,37 +226,38 @@ export class AssessmentScreen extends Component
       return(
         <View style={[styles.container]}>
      
-        <View style={[globalStyles.flexRow]}>
+      
 
-            {/* NOTES BUTTON */}
-            <View style={globalStyles.flexRow, globalStyles.flex1}>
+              {/* NOTES BUTTON */}
+              <View style={globalStyles.flexRow}>
 
-              <View style={[globalStyles.flex1]}>
-                  <Text style={[styles.h2, globalStyles.flexAlignStart]}> { (this.state.currentQuestion+1) + " of " + assessmentData.questionData.length + " Questions"}</Text>
-              </View>
+            
+                <Text style={[globalStyles.flex1, styles.h2, globalStyles.flexAlignStart]}> { (this.state.currentQuestion+1) + " of " + assessmentData.questionData.length + " Questions"}</Text>
+                    
 
 
-              <View style={[globalStyles.flexHoriCenter]}>
+
+              <View style={[globalStyles.flex1,globalStyles.flexHoriCenter]}>
                 <View style={styles.topButton}>
                   <Button
                       title="Notes"
-                      color="#1e90ff"
+                      color="#ffffff"
                       onPress={() => this.toggleModalNotes(true)}>
                     </Button>
                 </View>
               </View>
 
+              <View style={[globalStyles.flex1,globalStyles.flexVertStart, globalStyles.flexHoriEnd]}>
+                  {/* Display Review Mode Text */}
+                  {
+                    this.renderReviewModeText(reviewMode)
+                  }
+                </View>
 
-              <View style={[globalStyles.flex1, globalStyles.flexHoriEnd]}>
-                {/* Display Review Mode Text */}
-                {
-                  this.renderReviewModeText(reviewMode)
-                }
-              </View>
 
-        </View>
+          </View>
 
-        </View>     
+         
 
 
 
@@ -284,8 +286,8 @@ export class AssessmentScreen extends Component
 
         <View style={[styles.sideButton]}>
           <Button
-                title="  +  "
-                color='#1e90ff'
+                title="+"
+                color='#ffffff'
                 onPress={() => this.modifyScaffolding(1)}
                 disabled={reviewMode}
                 >
@@ -295,10 +297,10 @@ export class AssessmentScreen extends Component
 
           <Text style={styles.number}>{this.state.scaffolding}</Text>
 
-          <View style={[styles.sideButton]}>
+          <View style={[styles.sideButton, styles.redBackground]}>
           <Button
-                title="  -  "
-                color='#1e90ff'
+                title="-"
+                color='#ffffff'
                 onPress={() => this.modifyScaffolding(-1)}
                 disabled={reviewMode}
                 >
@@ -894,10 +896,10 @@ const styles = StyleSheet.create({
   },
 
   reviewModeText:{
-    fontSize: 26,
+    fontSize: 18,
     fontWeight: 'bold',
-    margin: 5,
-    marginRight: 35
+    margin: 0,
+    marginRight: 10
   },
 
   h2:{
@@ -914,28 +916,39 @@ const styles = StyleSheet.create({
     backgroundColor: "#e6e6e6"
   },
 
+  sideButton:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 60,
+    height: 60,
+    padding: 14,
+    marginVertical: 10,
+    backgroundColor: (Platform.OS === 'ios') ? "#1e90ff" : "#000000"
+  },
 
   bottomButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 7,
     marginHorizontal: 10,
     marginVertical: 12,
-    // backgroundColor: "#00bcd4"
+    backgroundColor: (Platform.OS === 'ios') ? "#1e90ff" : "#000000" 
+  },
+
+  redBackground:{
+    backgroundColor: "#ff5c5c"
   },
 
   topButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    // paddingHorizontal: 44,
-    // paddingVertical: 30,
-    marginHorizontal: 140,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    marginHorizontal: 10,
+    marginVertical: 12,
     marginTop: 12,
-    // width: "20%",
-    // height: 25,
-    // maxWidth: 200,
-    // backgroundColor: "#00bcd4"
+    backgroundColor: (Platform.OS === 'ios') ? "#1e90ff" : "#000000" 
 
   },
 
@@ -969,26 +982,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: "white",
     // fontFamily: 'tahoma'
-  },
-
-  sideButton:{
-    alignItems: 'center',
-    justifyContent: 'center',
-    // backgroundColor: "#6600cc",
-    width: 60,
-    height: 60,
-    padding: 14,
-    marginVertical: 10
-  },
-
-  sideDisabledButton:{
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: "white",
-    width: 60,
-    height: 60,
-    padding: 14,
-    marginVertical: 10
   },
 
   imgContainer:{
