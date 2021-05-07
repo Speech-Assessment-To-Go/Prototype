@@ -71,9 +71,7 @@ export class SchoolScreen extends Component
             textBirth:'',
             textLanguage:'',
     
-            // selectedSchool:-1,
             selectedStudent:-1,
-
 
             textStudent:'',
 
@@ -83,8 +81,6 @@ export class SchoolScreen extends Component
             textNotes:''//for text input
     
         }
-
-        // this.handlerUpdateStudentData = this.handlerUpdateStudentData.bind(this)
 
         this.init();
 
@@ -325,49 +321,47 @@ export class SchoolScreen extends Component
     if (this.state.selectedStudent == -1) return;
 
       return(
-      <View style={styles.studentInfo}>
-        <Text style={styles.h2}>Name:           {this.state.studentsObjs[this.state.selectedStudent].fullName}</Text>
-        <Text style={styles.h2}>Ethnicity:     {this.state.studentsObjs[this.state.selectedStudent].ethnicity}</Text>
-        <Text style={styles.h2}>Birth:             {this.state.studentsObjs[this.state.selectedStudent].birth}</Text>
-        <Text style={styles.h2}>Language:   {this.state.studentsObjs[this.state.selectedStudent].language}</Text>
-      </View>
+
+          <View style={[styles.studentInfo, globalStyles.flexRow]}>
+
+            <View style={[globalStyles.flexCol, globalStyles.flex3]}>
+              <Text style={styles.h2}>Name:           {this.state.studentsObjs[this.state.selectedStudent].fullName}</Text>
+              <Text style={styles.h2}>Ethnicity:     {this.state.studentsObjs[this.state.selectedStudent].ethnicity}</Text>
+              <Text style={styles.h2}>Birth:             {this.state.studentsObjs[this.state.selectedStudent].birth}</Text>
+              <Text style={styles.h2}>Language:   {this.state.studentsObjs[this.state.selectedStudent].language}</Text>
+            </View>
+
+            <View style={[globalStyles.flexCol, globalStyles.center, globalStyles.flex1]}>
+              <View style={[ styles.notesButton,  globalStyles.flexAlignEnd]}>
+                    <Button 
+                    color="#ffffff"
+                    title="Notes"
+                    onPress={() => {
+                      this.toggleModalNotes(true, this.state.selectedStudent);
+                    }
+                    }>
+                    </Button>
+                </View>
+                
+            </View>
+            
+          </View>
+
       )
   }
 
 
   renderRecentAssessments = (props) =>
   {
-    //console.log(this.state.studentsObjs[this.state.selectedStudent]);
-    // return(
-    // <Text style={[globalStyles.flexAlignCenter]}>Recent Assessments</Text>
-    // )
-
     if (this.state.selectedStudent == -1) return;
 
     if (this.state.studentsObjs[this.state.selectedStudent].assessmentData.length == 0)
-    {  
-      // return(
-      // <View style={styles.studentInfo}>
-      //   <Text style={styles.h2}>Name:           {this.state.studentsObjs[this.state.selectedStudent].fullName}</Text>
-      //   <Text style={styles.h2}>Ethnicity:     {this.state.studentsObjs[this.state.selectedStudent].ethnicity}</Text>
-      //   <Text style={styles.h2}>Birth:             {this.state.studentsObjs[this.state.selectedStudent].birth}</Text>
-      //   <Text style={styles.h2}>Language:   {this.state.studentsObjs[this.state.selectedStudent].language}</Text>
-      // </View>
-      // )
-
-    }
+    { /*DO NOTHING*/ }
 
     else{
 
       return(
         <View style={styles.assessmentsPanel}>
-
-          {/* <View style={styles.studentInfo}>
-            <Text style={styles.h2}>Name:           {this.state.studentsObjs[this.state.selectedStudent].fullName}</Text>
-            <Text style={styles.h2}>Ethnicity:     {this.state.studentsObjs[this.state.selectedStudent].ethnicity}</Text>
-            <Text style={styles.h2}>Birth:             {this.state.studentsObjs[this.state.selectedStudent].birth}</Text>
-            <Text style={styles.h2}>Language:   {this.state.studentsObjs[this.state.selectedStudent].language}</Text>
-          </View> */}
 
           <ScrollView>
             <Text style={[globalStyles.flexAlignCenter]}> {this.state.studentsObjs[this.state.selectedStudent].assessmentData.length + " Assessments Taken"}</Text>
@@ -405,15 +399,10 @@ export class SchoolScreen extends Component
                     <View style={globalStyles.center}>
                       <Text style={styles.h2}>{assessment.dateTaken + " - " + assessment.questionData.length + " Questions - " + assessment.score + "%"} </Text>
                     </View>
-
-
-
                     
                 </View>
 
               </View>
-
-
 
               <Divider/>
               </View>
@@ -426,7 +415,6 @@ export class SchoolScreen extends Component
     }
   }
   
-
 
 // ------------ * RENDER * ------------------------
   render(){
@@ -484,18 +472,6 @@ export class SchoolScreen extends Component
                   <Text style={styles.h2}>{this.state.studentsObjs[index].firstName + " " + this.state.studentsObjs[index].lastName}</Text>
                   <Text>Grade {this.state.studentsObjs[index].grade}</Text>
 
-                </View>
-
-                <View style={[ styles.notesButton,  globalStyles.flexAlignEnd]}>
-                      <Button 
-                      color="#ffffff"
-                      title="Notes"
-                      onPress={() => {
-                        this.selectStudent(index);
-                        this.toggleModalNotes(true, index);
-                      }
-                      }>
-                      </Button>
                 </View>
 
               </View>
@@ -607,16 +583,6 @@ export class SchoolScreen extends Component
               <TextInput style={styles.textInput} label="Language" value={this.state.textLanguage} onChangeText={text => this.setState( {textLanguage: text})}/>
             </View>
 
-            {/* <View style={globalStyles.flexRow}>
-              <TextInput style={styles.textBox} 
-              value={this.state.textbox} 
-              onChangeText={text => this.setState( {textbox: text})}
-              label="Notes"
-              multiline={true}
-              numberOfLines={5}
-              placeholder={"Notes"}/>
-            </View> */}
-
           <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
 
             <View style={[styles.bottomButton, styles.modalButton]}>
@@ -680,14 +646,6 @@ export class SchoolScreen extends Component
                     onPress={() => this.toggleModalNotes(false)}>
                   </Button>
                 </View>
-
-                {/* <View style={[styles.bottomButton, styles.modalButton, styles.redBackground]}>
-                  <Button
-                    color="#ffffff"
-                    title="Cancel"
-                    onPress={() => this.toggleModalNotes(false)}>
-                  </Button>
-                </View> */}
 
               </View>   
               </View>
@@ -770,7 +728,6 @@ const styles = StyleSheet.create({
 
   schoolsPanel:{
     flex:2,
-    // backgroundColor: "red",
     height: "100%",
     borderRightColor: '#1e90ff',
     borderRightWidth: 3,
@@ -780,9 +737,6 @@ const styles = StyleSheet.create({
   studentsPanel:{
     flex:5,
     height: "100%",
-    // backgroundColor: "blue",
-    // borderLeftColor: '#1e90ff',
-    // borderLeftWidth: 1,
 
   },
   
@@ -818,14 +772,8 @@ const styles = StyleSheet.create({
   retakeButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    // paddingHorizontal: 7,
-    // paddingVertical: 12,
     marginLeft: 3,
     marginRight: 5,
-    // marginBottom: 8,
-    // marginVertical: 12,
-    // height: 25,
-    // backgroundColor: "#ff5c5c"
   },
 
   notesButton: {
@@ -833,7 +781,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 3,
     marginRight: 5,
-    backgroundColor: (Platform.OS === 'ios') ? "#ff6666" : "#000000",
+    backgroundColor: (Platform.OS === 'ios') ? "#6bc46b" : "#000000",
     width: 65,
  
   },
@@ -842,13 +790,8 @@ const styles = StyleSheet.create({
     color: "white",
     justifyContent: 'center',
     alignItems: 'center',
-    // paddingHorizontal: 7,
-    // paddingVertical: 12,
     marginLeft: 5,
     marginRight: 3,
-    // marginVertical: 12,
-    // height: 25,
-    // backgroundColor: "#1e90ff"
   },
 
   ////// MODAL STUFF : ToDo: Seperate component
@@ -933,7 +876,7 @@ const styles = StyleSheet.create({
   studentInfo:{
     margin: 9,
     padding: 5,
-    backgroundColor: "#e6e6e6"
+    backgroundColor: "#e6e6e6",
   },
 
   textBox: {
@@ -949,7 +892,6 @@ const styles = StyleSheet.create({
   },
   
   modalButton:{
-    // backgroundColor: 'white',
     marginTop: 3,
     paddingHorizontal: 5,
     paddingVertical: 3,
