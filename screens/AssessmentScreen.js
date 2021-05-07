@@ -691,7 +691,7 @@ export class AssessmentScreen extends Component
             <View style={[styles.bottomButton]}>
               <Button
                 title="Complete"
-                color="#1e90ff"
+                color="#ffffff"
                 onPress={() => 
                   {
                     if (reviewMode == true)
@@ -742,7 +742,7 @@ export class AssessmentScreen extends Component
             <View style={[styles.bottomButton]}>
               <Button
                 title="Email"
-                color="#1e90ff"
+                color="#ffffff"
                 style={[styles.bottomButton]}
                 onPress={() => this.toggleModalEmail(true)}>
               </Button>
