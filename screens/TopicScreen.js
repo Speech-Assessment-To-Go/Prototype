@@ -232,7 +232,7 @@ export class TopicScreen extends Component
                   this.addQuestions();
                   }}
                   title="Add Questions"
-                  color="#1e90ff"
+                  color="#ffffff"
                   >
               </Button>
         </View>
@@ -296,20 +296,22 @@ export class TopicScreen extends Component
 
                 <View style={[styles.removeButton]}>
                   <Button
-                     color="#ff5c5c"
+                     color="#ffffff"
+                     title="Remove"
                     onPress={ () => 
                       {
                         let copy = this.state.questions.slice(); //Create copy
                         copy.splice(index, 1);
                         this.setState({questions: copy});
-                      } }
-                      title="Remove"
+                      } }                      
                       >        
                   </Button>
+
                 </View>
 
-     
+                <View style={globalStyles.center}>
                   <Text style={styles.h2}>{global.parsedQuestions[questionID].text}</Text>
+                </View>     
 
               </View>
 
@@ -326,7 +328,7 @@ export class TopicScreen extends Component
           <View style={styles.bottomButton}>
             <Button
                 title="Start Assessment"
-                color="#1e90ff"
+                color="#ffffff"
                 onPress={ () => 
                   {
                     if (this.state.questions.length == 0)
@@ -354,9 +356,9 @@ export class TopicScreen extends Component
               </Button>
           </View>           
 
-          <View style={[styles.bottomButton]}>
+          <View style={[styles.bottomButton, styles.redBackground]}>
             <Button
-              color="#ff5c5c"
+              color="#ffffff"
               title = "Clear"
               onPress={ () => 
                 {
@@ -395,22 +397,26 @@ const styles = StyleSheet.create({
   bottomButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 7,
     marginHorizontal: 10,
     marginVertical: 12,
-    // backgroundColor: "#1e90ff"
+    backgroundColor: "#1e90ff"
+  },
+
+  redBackground:{
+    backgroundColor: "#ff5c5c"
   },
 
   removeButton: {
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 5,
-    paddingVertical: 10,
+    paddingVertical: 5,
     marginRight: 20,
     // marginVertical: 12,
-    height: 25,
-    // backgroundColor: "#1e90ff"
+    // height: 25,
+    backgroundColor: "#ff5c5c"
   },
 
   icon:{

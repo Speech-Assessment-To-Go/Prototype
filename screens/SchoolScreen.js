@@ -445,20 +445,19 @@ export class SchoolScreen extends Component
 
             <View style={styles.bottomButton}>
               <Button
-                // style={styles.bottomButton}
-                //styleDisabled={{color: 'red'}}
+
                 onPress={() => this.toggleModalStudent(true)}
                 title="Add Student"
-                color="#1e90ff"
+                color="#ffffff"
                 >
                 Press Me
               </Button>
             </View>
 
-            <View style={styles.bottomButton}>
+            <View style={[styles.bottomButton, styles.redBackground]}>
               <Button
                 // style={{fontSize: 35}}
-                color="#ff5c5c"
+                color= {(Platform.OS === 'ios')? "#ffffff" : "00bcd4"}
                 onPress={() => 
                   this.removeStudent()
                 }
@@ -485,8 +484,7 @@ export class SchoolScreen extends Component
         <View style={globalStyles.flexRow}>
 
           <View style={styles.bottomButton}>
-              <Button
-                
+              <Button                
                 onPress={ () => {
 
                   if (this.state.selectedStudent == -1)
@@ -498,7 +496,7 @@ export class SchoolScreen extends Component
                   navigation.push('TopicScreen', {student: this.state.studentsObjs[this.state.selectedStudent], updateStudent: this.handlerUpdateStudent.bind(this) })
                 } }
                 title="Take Assessment"
-                color="#1e90ff"
+                color="#ffffff"
                 >
 
               </Button>
@@ -549,15 +547,15 @@ export class SchoolScreen extends Component
                 onPress={() => this.addStudent(this.state.textFName, this.state.textLName,this.state.textEthnicity, "??? School",
                                                 this.state.textBirth,this.state.textLanguage, this.state.textGrade)}
                 title="Submit"
-                color="#1e90ff"
+                color="#ffffff"
                 >
               </Button>
             </View>
 
 
-            <View style={[styles.bottomButton, styles.modalButton]}>
+            <View style={[styles.bottomButton, styles.modalButton, styles.redBackground]}>
               <Button
-                color="#ff5c5c"
+                color="#ffffff"
                 onPress={() => this.toggleModalStudent(false)}
                 title="Cancel"
                 >
@@ -592,13 +590,15 @@ const styles = StyleSheet.create({
   bottomButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    marginLeft: 30,
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+    marginHorizontal: 10,
     marginVertical: 12,
-    // width: "25%"
-    // height: 25,
-    // backgroundColor: "#1e90ff"
+    backgroundColor: (Platform.OS === 'ios') ? "#1e90ff" : "#000000" 
+  },
+
+  redBackground:{
+    backgroundColor: "#ff5c5c"
   },
 
   icon:{
