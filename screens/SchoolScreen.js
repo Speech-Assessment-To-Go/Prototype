@@ -381,21 +381,19 @@ export class SchoolScreen extends Component
         {/* LEFT | SCHOOL PANEL */}      
       <View style={styles.column}>
 
+        <View style={styles.textInputBox}>
+          <TextInput style={[styles.textInputStudent]} label="Student Name" value={this.state.textStudent} onChangeText={
+            text => 
+            {
+              this.setState( {textStudent: text});
+              this.searchStudents(text);
+            }
+              }/>
+          <Divider/>
+        </View>
+
 
         <ScrollView style={styles.schoolsPanel}>
-
-        <TextInput style={[styles.textInputStudent]} label="Student Name" value={this.state.textStudent} onChangeText={
-          text => 
-          {
-            this.setState( {textStudent: text});
-            this.searchStudents(text);
-          }
-
-
-
-            }/>
-        <Divider/>
-
 
         {
          
@@ -757,6 +755,12 @@ const styles = StyleSheet.create({
     maxWidth: 350,
     backgroundColor: "#e6e6e6",
     paddingLeft: 15,
+  },
+
+  textInputBox:{
+    height: 90,
+    borderRightColor: '#1e90ff',
+    borderRightWidth: 3,
   },
 
   textInputStudent:{
