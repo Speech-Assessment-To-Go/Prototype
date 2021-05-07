@@ -10,7 +10,8 @@ import {
   ScrollView,
   Modal,
   LogBox,
-  Button
+  Button,
+  KeyboardAvoidingView
 } from 'react-native';
 
 import {  TextInput, Checkbox, RadioButton, Divider  } from 'react-native-paper';
@@ -224,7 +225,7 @@ export class TopicScreen extends Component
         }             
         </ScrollView>
 
-        <View style={[globalStyles.flexRowReverse, globalStyles.flexHoriCenter]}>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 0} style={[globalStyles.flexRowReverse, globalStyles.flexHoriCenter]}>
 
         <View style={styles.bottomButton}>
           <Button                
@@ -238,12 +239,15 @@ export class TopicScreen extends Component
         </View>
 
 
+ 
+
             {/* <View style={[globalStyles.flexRow]}> */}
             <TextInput style={[styles.textInput]} keyboardType="number-pad" value={this.state.numQuestions} onChangeText={text => this.setState( {numQuestions: text})} />      
               <Text style={styles.textBottom}>Number: </Text>
             {/* </View> */}
 
-        </View>   
+
+        </KeyboardAvoidingView>   
 
         {/* END OF COLUMN */}
         </View> 

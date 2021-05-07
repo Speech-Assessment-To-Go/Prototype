@@ -320,6 +320,20 @@ export class SchoolScreen extends Component
     //console.log(filteredStudents);
   }
 
+  renderStudentInfo = () =>
+  {
+    if (this.state.selectedStudent == -1) return;
+
+      return(
+      <View style={styles.studentInfo}>
+        <Text style={styles.h2}>Name:           {this.state.studentsObjs[this.state.selectedStudent].fullName}</Text>
+        <Text style={styles.h2}>Ethnicity:     {this.state.studentsObjs[this.state.selectedStudent].ethnicity}</Text>
+        <Text style={styles.h2}>Birth:             {this.state.studentsObjs[this.state.selectedStudent].birth}</Text>
+        <Text style={styles.h2}>Language:   {this.state.studentsObjs[this.state.selectedStudent].language}</Text>
+      </View>
+      )
+  }
+
 
   renderRecentAssessments = (props) =>
   {
@@ -332,14 +346,14 @@ export class SchoolScreen extends Component
 
     if (this.state.studentsObjs[this.state.selectedStudent].assessmentData.length == 0)
     {  
-      return(
-        <View style={styles.studentInfo}>
-        <Text style={styles.h2}>Name:           {this.state.studentsObjs[this.state.selectedStudent].fullName}</Text>
-        <Text style={styles.h2}>Ethnicity:     {this.state.studentsObjs[this.state.selectedStudent].ethnicity}</Text>
-        <Text style={styles.h2}>Birth:             {this.state.studentsObjs[this.state.selectedStudent].birth}</Text>
-        <Text style={styles.h2}>Language:   {this.state.studentsObjs[this.state.selectedStudent].language}</Text>
-      </View>
-      )
+      // return(
+      // <View style={styles.studentInfo}>
+      //   <Text style={styles.h2}>Name:           {this.state.studentsObjs[this.state.selectedStudent].fullName}</Text>
+      //   <Text style={styles.h2}>Ethnicity:     {this.state.studentsObjs[this.state.selectedStudent].ethnicity}</Text>
+      //   <Text style={styles.h2}>Birth:             {this.state.studentsObjs[this.state.selectedStudent].birth}</Text>
+      //   <Text style={styles.h2}>Language:   {this.state.studentsObjs[this.state.selectedStudent].language}</Text>
+      // </View>
+      // )
 
     }
 
@@ -348,12 +362,12 @@ export class SchoolScreen extends Component
       return(
         <View style={styles.assessmentsPanel}>
 
-          <View style={styles.studentInfo}>
+          {/* <View style={styles.studentInfo}>
             <Text style={styles.h2}>Name:           {this.state.studentsObjs[this.state.selectedStudent].fullName}</Text>
             <Text style={styles.h2}>Ethnicity:     {this.state.studentsObjs[this.state.selectedStudent].ethnicity}</Text>
             <Text style={styles.h2}>Birth:             {this.state.studentsObjs[this.state.selectedStudent].birth}</Text>
             <Text style={styles.h2}>Language:   {this.state.studentsObjs[this.state.selectedStudent].language}</Text>
-          </View>
+          </View> */}
 
           <ScrollView>
             <Text style={[globalStyles.flexAlignCenter]}> {this.state.studentsObjs[this.state.selectedStudent].assessmentData.length + " Assessments Taken"}</Text>
@@ -529,6 +543,13 @@ export class SchoolScreen extends Component
         {/* Right | STUDENT PANEL*/}
         <View style={styles.column}> 
 
+        {
+          this.renderStudentInfo()
+        }
+
+        <Divider/>
+
+
         <ScrollView style={styles.studentsPanel}>
 
         {
@@ -631,7 +652,7 @@ export class SchoolScreen extends Component
 
           <KeyboardAvoidingView 
             behavior={Platform.OS === "ios" ? "padding" : "height"}
-            keyboardVerticalOffset={Platform.OS === "ios" ? 104 : 0}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 65 : 0}
             style={styles.container}>
 
             <View style={styles.modalView}>
