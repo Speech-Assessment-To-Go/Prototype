@@ -144,7 +144,7 @@ export class AssessmentScreen extends Component
     {
       return(
         <View style={styles.imgContainer}>
-          <Image style={styles.img} resizeMode={'cover'} source={{uri: imgVal}}  />
+          <Image style={styles.img} source={{uri: imgVal}}  />
         </View>
         
       )
@@ -172,9 +172,9 @@ export class AssessmentScreen extends Component
       return(
         <View style={[globalStyles.flexRow]}>
 
-          <View style={styles.bottomButton}>
+          <View style={[styles.bottomButton, styles.redBackground]}>
             <Button
-                color="#ff5c5c"
+                color="#ffffff"
                 title="Previous Question"
                 onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
             </Button>    
@@ -182,6 +182,7 @@ export class AssessmentScreen extends Component
              
           <View style={styles.bottomButton}>
             <Button
+                color="#ffffff"
                 title="Next Question"
                 onPress={() => this.grade(false, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}
                 >
@@ -253,7 +254,6 @@ export class AssessmentScreen extends Component
                     this.renderReviewModeText(reviewMode)
                   }
                 </View>
-
 
           </View>
 
@@ -357,14 +357,14 @@ export class AssessmentScreen extends Component
           <View style={[styles.bottomButton, styles.modalButton]}>
             <Button
               title="Submit"
-              color="#1e90ff"
+              color="#ffffff"
               onPress={() => this.toggleModalNotes(false)}>
             </Button>
           </View>
 
-          <View style={[styles.bottomButton, styles.modalButton]}>
+          <View style={[styles.bottomButton, styles.modalButton, styles.redBackground]}>
             <Button
-              color="#ff5c5c"
+              color="#ffffff"
               title="Cancel"
               onPress={() => this.toggleModalNotes(false)}>
             </Button>
@@ -772,7 +772,7 @@ export class AssessmentScreen extends Component
               <View style={[styles.bottomButton, styles.modalButton]}>
                 <Button
                   title="Submit"
-                  color="#1e90ff"
+                  color="#ffffff"
                   onPress={() => {
 
                     var subject = "Dynamic Assessment Results for " + student.fullName;
@@ -793,10 +793,10 @@ export class AssessmentScreen extends Component
               </View>
 
 
-              <View style={[styles.bottomButton, styles.modalButton]}>
+              <View style={[styles.bottomButton, styles.modalButton, styles.redBackground]}>
                 <Button
                   title = "Cancel"
-                  color="#ff5c5c"
+                  color="#ffffff"
                   onPress={() => this.toggleModalEmail(false)}>
                 </Button>
               </View>
@@ -991,15 +991,10 @@ const styles = StyleSheet.create({
   },
 
   img:{
-    // maxWidth: 256*scale,
-    // maxHeight: 192*scale,
-    // aspectRatio: (256*scale)/(192*scale),
-    // width: 256*scale,
-    // height: 192*scale
-    width: '100%',
-    height: undefined,
-    aspectRatio: (256*scale)/(192*scale),
-    resizeMode: 'contain',
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'contain'
   },
 
   side:{
@@ -1119,40 +1114,14 @@ scoringTextContainer:
   // alignItems: "flex-end"
 },
 
-chip:{
-  flex:1,
-  // backgroundColor: '#d4d4d4',
-  // backgroundColor: '#6bc46b',
-  justifyContent: 'center',
-  maxWidth: 100,
-  minWidth: 100,
-  marginHorizontal: 10,
-  marginBottom: 20,  
-},
-
-chipText:{
-  fontWeight: 'bold',
-  textAlign: 'center',
-  width: '90%'
-  // paddingHorizontal: 10
-},
-
-chipCorrect:{
-  backgroundColor: '#6bc46b',
-},
-
-chipIncorrect:{
-  backgroundColor: '#ff5c5c',
-},
-
 ////// MODAL STUFF 
 
 modalView: {
-  margin: 35,
+  margin: 25,
   backgroundColor: "white",
   borderRadius: 7,
-  paddingVertical: 15,
-  paddingHorizontal: 150,
+  paddingVertical: 8,
+  paddingHorizontal: 20,
   alignItems: "center",
   shadowColor: "#000",
   shadowOffset: {
@@ -1174,9 +1143,9 @@ textStyle: {
 
 modalHeader: {
   alignSelf: 'flex-start',
-  marginBottom: 50,
-  marginTop: 35,
-  fontSize: 22,
+  marginBottom: 5,
+  marginTop: 5,
+  fontSize: 25,
   fontWeight: 'bold',
   textAlign: "left"
 },
@@ -1186,7 +1155,7 @@ textEInput:{
   height: 50,
   marginHorizontal: 10,
   marginVertical: 20,
-  maxWidth: 350
+  maxWidth: 290
 },
 
 emailAddress:{
@@ -1207,7 +1176,8 @@ textBox: {
 
 modalButton:{
   backgroundColor: 'white',
-  marginTop: 35
+  marginTop: 8,
+  backgroundColor: (Platform.OS === 'ios') ? "#1e90ff" : "#000000" 
 },
 
 modalText:{
