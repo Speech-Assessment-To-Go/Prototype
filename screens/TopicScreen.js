@@ -377,6 +377,11 @@ export class TopicScreen extends Component
             </Button>
           </View>
 
+          <View style={[globalStyles.center, globalStyles.flexCol, styles.questionBox]}>
+            <Text style={styles.questionText}>{this.state.questions.length}</Text>
+            <Text style={styles.questionText}>Questions</Text>
+          </View>
+  
 
         </View>   
 
@@ -452,6 +457,15 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     // width: "100%",
     height: 34
+  },
+
+  questionText:{
+    fontSize: 14,
+  },
+
+  questionBox:{
+    flex:1,
+    marginRight: 11
   },
 
   h2:{
