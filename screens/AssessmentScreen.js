@@ -718,8 +718,8 @@ export class AssessmentScreen extends Component
                     this.state.localAssessmentData.motivation = this.state.radioBtnMotivation;
                     this.state.localAssessmentData.interaction = this.state.radioBtnInteraction;
 
-
-                    copyStudent.assessmentData.push( this.state.localAssessmentData);
+                    //Put in front of array
+                    copyStudent.assessmentData.unshift(this.state.localAssessmentData);
             
                     this.setState({student: copyStudent});
                     updateStudent(copyStudent); 
@@ -980,11 +980,11 @@ const styles = StyleSheet.create({
   },
 
   question:{
-    fontSize: 80,
-    fontWeight: '100',
+    fontSize: 70,
+    fontWeight: '200',
     color: '#a1a1a1',
     marginBottom: 25,
-    marginTop: 5
+    marginTop: 10,
   },
 
   buttonText:{
