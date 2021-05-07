@@ -14,6 +14,7 @@ export class Student
         this.id = -1;
         this.middleName;
         this.fullName = firstName + ' ' + lastName;
+        this.notes = '';
         
         this.assessmentData = [];
         

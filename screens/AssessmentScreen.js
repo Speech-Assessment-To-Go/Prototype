@@ -335,8 +335,8 @@ export class AssessmentScreen extends Component
     <Modal animationType="slide"  transparent={true} visible={this.state.modalNotesVisible}  >
 
       <  KeyboardAvoidingView 
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}>
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+       style={styles.container}>
 
         <View style={styles.modalView}>
 
@@ -359,19 +359,19 @@ export class AssessmentScreen extends Component
 
           <View style={[styles.bottomButton, styles.modalButton]}>
             <Button
-              title="Submit"
+              title="Confirm"
               color="#ffffff"
               onPress={() => this.toggleModalNotes(false)}>
             </Button>
           </View>
 
-          <View style={[styles.bottomButton, styles.modalButton, styles.redBackground]}>
+          {/* <View style={[styles.bottomButton, styles.modalButton, styles.redBackground]}>
             <Button
               color="#ffffff"
               title="Cancel"
               onPress={() => this.toggleModalNotes(false)}>
             </Button>
-          </View>
+          </View> */}
 
         </View>   
         </View>

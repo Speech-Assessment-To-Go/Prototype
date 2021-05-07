@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 
 // export const hello = "Hello World!";
 
-export const redColor = "00bcd4";       
-export const blueColor = "ff6666";        
+export const blueColor = "1e90ff";       
+export const redColor = "ff6666";        
 
 export const globalStyles = StyleSheet.create({
 
