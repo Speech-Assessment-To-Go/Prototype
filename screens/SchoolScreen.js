@@ -16,6 +16,8 @@ import {
   // TextInput
 } from 'react-native';
 
+import * as ScreenOrientation from 'expo-screen-orientation';
+
 import {TextInput as ReactTextInput} from 'react-native';
 
 import { globalStyles } from '../globalStyles';
@@ -92,6 +94,9 @@ export class SchoolScreen extends Component
   //Initialize
   init ()
   {
+  //Force Screen Orientation to Landscape
+  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+
     // console.log("Loaded from init!");
     // this.loadSchools();
     global.parsedQuestions = Database.LoadQuestions();

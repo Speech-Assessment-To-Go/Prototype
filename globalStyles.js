@@ -102,6 +102,10 @@ export const globalStyles = StyleSheet.create({
         color: "#00bcd4"
       },
 
+      greenText:{
+        color: "#6bc46b"
+      },
+
       dangerText:{
         color: "#ff6666"
       },

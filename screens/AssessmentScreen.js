@@ -166,20 +166,47 @@ export class AssessmentScreen extends Component
     }    
   }
 
+  renderGradeResult = () =>
+  {
+    //If answered correct
+    if (this.state.grading[this.state.currentQuestion] == true)
+    {
+      return(
+        <View>
+          <Text style={globalStyles.greenText}>Answered Correctly!</Text>
+        </View>
+      )
+    }
+
+  //If answered wrong
+    else
+    {
+      return(
+        <View>
+          <Text style={globalStyles.dangerText}>Answered Wrong!</Text>
+        </View>
+      )
+    }
+  }
+
   renderGradeButtons = (questionsData, student, updateStudent, assessmentData, reviewMode) =>
   {
     if (reviewMode == true)
     {
       return(
-        <View style={[globalStyles.flexRow]}>
+        <View style={[globalStyles.center, globalStyles.flexCol]}>
 
-          <View style={[styles.bottomButton, styles.redBackground]}>
+          {/* <View style={[styles.bottomButton, styles.redBackground]}>
             <Button
                 color="#ffffff"
                 title="Previous Question"
                 onPress={() => this.grade(true, questionsData[this.state.currentQuestion].id, student, updateStudent, assessmentData, reviewMode)}>
             </Button>    
-          </View>
+          </View> */}
+
+          {
+            this.renderGradeResult()
+          }
              
           <View style={styles.bottomButton}>
             <Button
