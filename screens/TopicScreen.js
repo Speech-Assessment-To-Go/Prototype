@@ -242,7 +242,7 @@ export class TopicScreen extends Component
  
 
             {/* <View style={[globalStyles.flexRow]}> */}
-            <TextInput style={[styles.textInput]} keyboardType="number-pad" value={this.state.numQuestions} onChangeText={text => this.setState( {numQuestions: text})} />      
+            <TextInput style={[styles.textInput]} keyboardType="number-pad" value={this.state.numQuestions} onChangeText={text => this.setState( {numQuestions: text.replace(/[^0-9]/g, ''),})} />      
               <Text style={styles.textBottom}>Number: </Text>
             {/* </View> */}
 
