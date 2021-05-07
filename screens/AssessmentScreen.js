@@ -284,7 +284,7 @@ export class AssessmentScreen extends Component
         {/* Right SIDE */}
         <View style={[globalStyles.flexCol, globalStyles.flex1, globalStyles.center]}>
 
-        <View style={[styles.sideButton]}>
+        <View style={(reviewMode)? styles.disabledSideButton : styles.sideButton}>
           <Button
                 title="+"
                 color='#ffffff'
@@ -297,7 +297,7 @@ export class AssessmentScreen extends Component
 
           <Text style={styles.number}>{this.state.scaffolding}</Text>
 
-          <View style={[styles.sideButton, styles.redBackground]}>
+          <View style={(reviewMode)? styles.disabledSideButton : styles.sideButton}>
           <Button
                 title="-"
                 color='#ffffff'
@@ -926,6 +926,16 @@ const styles = StyleSheet.create({
     backgroundColor: (Platform.OS === 'ios') ? "#1e90ff" : "#000000"
   },
 
+  disabledSideButton:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 60,
+    height: 60,
+    padding: 14,
+    marginVertical: 10,
+    backgroundColor: (Platform.OS === 'ios') ? "#c4c4c4" : "#000000"
+  },
+
   bottomButton: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -947,7 +957,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     marginHorizontal: 10,
     marginVertical: 12,
-    marginTop: 12,
+    marginVertical: 12,
     backgroundColor: (Platform.OS === 'ios') ? "#1e90ff" : "#000000" 
 
   },
@@ -970,11 +980,11 @@ const styles = StyleSheet.create({
   },
 
   question:{
-    fontSize: 85,
+    fontSize: 80,
     fontWeight: '100',
     color: '#a1a1a1',
-    marginBottom: 55,
-    marginTop: 0
+    marginBottom: 25,
+    marginTop: 5
   },
 
   buttonText:{
