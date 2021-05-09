@@ -36,6 +36,8 @@ function alertFunc(msg)
   alert(msg);
 }
 
+const testString = "Repeat after me: 20%\nComplexity 1: 20%\nComplexity 2: 20%\nComplexity 3: 20%"
+
 
 export class AssessmentScreen extends Component
 {
@@ -499,7 +501,7 @@ export class AssessmentScreen extends Component
   renderScoringSection = (reviewMode) =>
   {
     return(
-      <View>
+      <View styles={globalStyles.flex3}>
 
           <Text style={styles.h2}>Please score the student.</Text>
 
@@ -697,17 +699,35 @@ export class AssessmentScreen extends Component
         {/* QUESTIONS IMG & TEXT */}
         <View style={[styles.container, globalStyles.flex3]}>
 
-        <Text style={styles.percentText}>{this.state.score}%</Text>
-        <Text style={styles.scaffoldingText}>{this.state.totalScaffolding + " scaffoldings used"}</Text>
+          <View style={globalStyles.flexRow}>
+            
+            <View style={[globalStyles.flexCol,globalStyles.center]}>
+              <Text style={styles.percentText}>Total Score: {this.state.score}%</Text>
+
+              <Text style={styles.tagResultsText}>{testString}</Text>
+              <Text style={styles.tagResultsText}>{this.state.totalScaffolding + " scaffoldings used"}</Text>
+            </View>
+
+          </View>
+          
+
+
 
         </View>
 
         {/* QUESTION BUBBLES */}
 
-        {/* <View style={[styles.scrollView]}> */}
+        {/* <View style={[globalStyles.flexRow]}> */}
+
+          {/* <View style={globalStyles.flex1}> */}
+            {this.renderScoringSection(reviewMode)}
+          {/* </View> */}
 
 
-          {this.renderScoringSection(reviewMode)}
+          {/* <View style={[globalStyles.flexCol, globalStyles.flex1]}>
+            <Text>{testString}</Text>
+
+          </View> */}
 
 
         {/* </View> */}
@@ -1134,15 +1154,29 @@ modalText:{
 ///RESULTS SCREEN
 
 percentText:{
-  fontSize: 155,
-  fontWeight: '100',
+  marginBottom: 20,
+  fontSize: 44,
+  fontWeight: 'bold',
   color: '#6bc46b'
 },
 
+tagResultsText:{
+  textAlign: 'center',
+  // marginLeft: 45,
+  // marginTop: 50,
+  fontSize: 18,
+  // borderRightColor: '#1e90ff',
+  // borderRightWidth: 3,
+},
+
+tagScrollBox:{
+  
+},
+
 scaffoldingText:{
-  fontSize: 25,
-  fontWeight: '100',
-  color: '#262626'
+  fontSize: 18,
+  // fontWeight: '100',
+  // color: '#262626'
 },
 
 scoringTextContainer:
