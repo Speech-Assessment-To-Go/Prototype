@@ -123,7 +123,7 @@ export class SchoolScreen extends Component
     this.clearInputs();
   }
 
-  toggleModalNotes(visible, index = -1) {
+  toggleModalNotes(visible) {
     this.setState({ modalNotesVisible: visible });
 
     //Load notes for this student
@@ -131,7 +131,7 @@ export class SchoolScreen extends Component
     {
       // console.log(this.state.studentsObjs);
       // console.log(this.state.studentsObjs[index]);
-      var notes = this.state.studentsObjs[index].notes;
+      var notes = this.state.studentsObjs[this.state.selectStudent].notes;
       this.setState({textNotes: notes});
     }
 
@@ -278,6 +278,7 @@ export class SchoolScreen extends Component
 
   selectStudent(index)
   {
+    this.state.selectStudent = index;
     this.setState({selectedStudent: index});
   }
 
@@ -337,7 +338,8 @@ export class SchoolScreen extends Component
                     color="#ffffff"
                     title="Notes"
                     onPress={() => {
-                      this.toggleModalNotes(true, this.state.selectedStudent);
+                      // this.selectStudent(index);
+                      this.toggleModalNotes(true);
                     }
                     }>
                     </Button>
