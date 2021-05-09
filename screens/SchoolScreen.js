@@ -32,6 +32,8 @@ import Database from '../Database.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {filterStudents} from '../filterStudents';
 
+import {sendEmail} from '../sendEmail'
+
 
 //------------ * FUNCTIONS/VAR * ------------------------  
 function alertFunc(msg)
@@ -78,7 +80,11 @@ export class SchoolScreen extends Component
             filteredStudents:[],
 
             modalNotesVisible:false,
-            textNotes:''//for text input
+            textNotes:'',//for text input
+
+
+            textEAddress:'',
+            modalEmailVisible:false,
     
         }
 
@@ -344,6 +350,18 @@ export class SchoolScreen extends Component
                     }>
                     </Button>
                 </View>
+
+                <View style={[ styles.notesButton,  globalStyles.flexAlignEnd]}>
+                    <Button 
+                    color="#ffffff"
+                    title="Export"
+                    onPress={() => {
+                      // this.selectStudent(index);
+                      this.setState({modalEmailVisible: true})
+                    }
+                    }>
+                    </Button>
+                </View>
                 
             </View>
             
@@ -602,7 +620,9 @@ export class SchoolScreen extends Component
             <View style={[styles.bottomButton, styles.modalButton, styles.redBackground]}>
               <Button
                 color="#ffffff"
-                onPress={() => this.toggleModalStudent(false)}
+                onPress={() => {
+                  this.setState({modalVisible: false})
+                }}
                 title="Cancel"
                 >
               </Button>
@@ -654,6 +674,70 @@ export class SchoolScreen extends Component
             </  KeyboardAvoidingView>
           </Modal>
 
+
+          {/* ********************** | EMAIL MODAL | ********************* */}
+          <Modal animationType="slide"  transparent={true} visible={this.state.modalEmailVisible}  >
+
+          <View style={styles.container}>
+
+            <View style={styles.modalView}>
+
+              <Text style={styles.modalHeader}>Email Student Profile</Text> 
+              
+              <View style={globalStyles.flexRow}>
+                <TextInput style={[styles.textEInput, styles.emailAddress]} label="Email Address" value={this.state.textEAddress} onChangeText={text => this.setState( {textEAddress: text})}placeholder={"Email Address"}/>
+                
+              </View>
+
+              <View style={[globalStyles.flexRow, globalStyles.flexAlignEnd]}>
+              
+              <View style={[styles.bottomButton, styles.modalButton]}>
+                <Button
+                  title="Submit"
+                  color="#ffffff"
+                  onPress={() => {
+
+                    var student = this.state.studentsObjs[this.state.selectedStudent];
+
+                    var subject = "Dynamic Assessment Results for " + student.fullName;
+                    var body = "";
+
+
+                    for (var i = 0; i < student.assessmentData.length; i++)
+                    { 
+                      var assessmentData = student.assessmentData[i];
+
+                      body += "Score: " + assessmentData.score + " \t Total Scaffolding: " + assessmentData.totalScaffolding + '\n';
+                      for (var k = 0; k < assessmentData.questionData.length; k++)
+                      {
+                        var questionData = assessmentData.questionData[k];
+
+                        body += global.parsedQuestions[questionData.id].text + " - Scaffolding Amount: " + questionData.scaffolding + '\t Notes: ' + questionData.notes+ '\n';
+                      }               
+                    }
+
+                    sendEmail(this.state.textEAddress, subject, body);
+
+                    this.setState({modalEmailVisible: false});
+                  }}>
+                </Button>
+              </View>
+
+
+              <View style={[styles.bottomButton, styles.modalButton, styles.redBackground]}>
+                <Button
+                  title = "Cancel"
+                  color="#ffffff"
+                  onPress={() => {
+                    this.setState({modalEmailVisible: false})
+                  }}>
+                </Button>
+              </View>
+
+            </View>   
+            </View>
+          </View>
+          </Modal>
     
 
 
@@ -784,7 +868,8 @@ const styles = StyleSheet.create({
     marginLeft: 3,
     marginRight: 5,
     backgroundColor: (Platform.OS === 'ios') ? "#6bc46b" : "#000000",
-    width: 65,
+    width: 75,
+    marginVertical: 5
  
   },
 
@@ -905,7 +990,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: "#1e90ff"
-  }
+  },
+
+  //EMAIL
+  textEInput:{
+    flex:1,
+    height: 50,
+    marginHorizontal: 10,
+    marginVertical: 20,
+    maxWidth: 290
+  },
+
+  emailAddress:{
+    maxWidth: 300,
+  },
 
 
 });

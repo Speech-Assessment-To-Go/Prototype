@@ -834,6 +834,8 @@ export class AssessmentScreen extends Component
                     {                
                       body += global.parsedQuestions[this.state.localAssessmentData.questionData[i].id].text + " - Scaffolding Amount: " + this.state.localAssessmentData.questionData[i].scaffolding + '\t Notes: ' + this.state.localAssessmentData.questionData[i].notes+ '\n';
                     }
+                    
+                    body += testString;
 
                     sendEmail(this.state.textEAddress, subject, body);
 
